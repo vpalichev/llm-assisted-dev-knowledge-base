@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sharepoint PnP/Practicalities.md",
+                "file": "Databases/PostgreSQL/PostgreSQL usage.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Practicalities"
+              "title": "PostgreSQL usage"
             }
           }
         ],
@@ -226,10 +226,14 @@
       "bases:Create new base": false
     }
   },
-  "active": "54ca0a8b7e32b1fe",
+  "active": "92e94d32ca81f4de",
   "lastOpenFiles": [
-    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
+    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
+    "Databases/PostgreSQL/PostgreSQL usage.md",
     "Sharepoint PnP/Practicalities.md",
+    "Programming languages/PowerShell/One-liners, tips and tricks.md",
+    "Programming languages/PowerShell/PowerShell technical questions.md",
+    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
     "Small but important notes.md",
     "Web-related/Fetch and async/Fetch timeline.md",
     "Web-related/Fetch and async/ClojureScript Fetch Guide.md",
@@ -251,7 +255,6 @@
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476980287",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476974912",
-    "Programming languages/PowerShell/PowerShell technical questions.md",
     "KB Improvement prompts for LLMs.md",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476786599",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476782039",
@@ -260,9 +263,6 @@
     "Sharepoint PnP/SharePoint Client List Identifier Comparison.md.tmp.21048.1768475133106",
     "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md.tmp.21048.1768475113058",
     "Programming languages/PowerShell/PowerShell technical questions.md.tmp.21048.1768475088108",
-    "Programming languages/Untitled.md",
-    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.21048.1768475068927",
-    "Databases/PostgreSQL/PostgreSQL usage.md",
-    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md"
+    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.21048.1768475068927"
   ]
 }

@@ -45,6 +45,8 @@ SELECT current_database();
 psql -U postgres -d sharepoint_metadata
 ```
 
+
+
 ## Bulk Data Loading
 
 ### COPY Command with CSV
@@ -68,6 +70,44 @@ WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 -- Alternative: psql meta-command (same performance)
 \copy files(file_name, file_path, file_size, modified_date, created_by) FROM 'C:\data\sharepoint_files.csv' WITH CSV HEADER
 ```
+
+## Line-by-Line Breakdown
+
+### Line 1: Command and Target
+
+```sql
+COPY files(file_name, file_path, file_size, modified_date, created_by)
+```
+
+- **COPY** - Bulk load command for fast data import
+- **files** - Target table (database object)
+- **Column list** - Specifies which table columns receive data and their mapping order from the CSV
+
+### Line 2: Source File
+
+```sql
+FROM 'C:\data\sharepoint_files.csv'
+```
+
+- **FROM** - Indicates data source location
+- **File path** - Windows absolute path to CSV file
+
+**Windows note**: Single backslashes work in PostgreSQL/DuckDB string literals. If using escape syntax (`E'...'`), you'd need `C:\\data\\sharepoint_files.csv`
+
+### Line 3: Import Options
+
+```sql
+WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+```
+
+- **FORMAT csv** - Treat file as CSV with standard parsing rules
+- **HEADER true** - Skip first row (contains column names, not data)
+- **DELIMITER ','** - Field separator character
+- **ENCODING 'UTF8'** - Character encoding for interpreting file bytes
+
+## How It Works
+
+The database reads the CSV file, skips the header row, splits each line by commas, and inserts values into the specified columns in order. COPY is much faster than INSERT statements because it bypasses per-row parsing overhead and uses optimized batch loading.
 
 **Sample CSV format** (`sharepoint_files.csv`):
 
