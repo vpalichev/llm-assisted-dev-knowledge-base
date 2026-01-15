@@ -46,7 +46,7 @@ Here's a generic prompt for cleaning any LLM chat transcript:
 
 **Input:** Verbatim copy of web-based chat with LLM containing valuable content mixed with conversational artifacts.
 
-**Goal:** Extract clean, readable documentation by removing all chat-specific elements while preserving the core valuable information.
+**Goal:** Extract clean, readable documentation in Obsidian-compatible format by removing all chat-specific elements while preserving the core valuable information.
 
 **Extraneous Elements to Remove:**
 
@@ -94,6 +94,8 @@ Here's a generic prompt for cleaning any LLM chat transcript:
 - **Maintain Technical Accuracy:** Preserve all technical details and examples
 - **Create Flow:** Ensure content reads as continuous documentation
 - **Be technical**: Avoid vacuous statements and pleasantries like "Sorting a list is crucial for having list organized"
+- **Look out for Obsidian-related formatting nuances:** For example, Obsidian requires a blank line before tables for proper rendering.
+
 
 ------------
 
