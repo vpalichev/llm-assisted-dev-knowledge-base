@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tooling/Git/Git Usage Guide - Windows.md",
+                "file": "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Git Usage Guide - Windows"
+              "title": "PostgreSQL Guide for Complete Beginners (Windows)"
             }
           }
         ],
@@ -214,8 +214,19 @@
   },
   "active": "42f9e03ff0a20d0d",
   "lastOpenFiles": [
-    "Tooling/Git/Git code snippets.md",
+    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
+    "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
+    "Databases/PostgreSQL",
+    "Databases/Datomic/Datomic Pro Peer Integration Guide for Windows.md",
+    "Programming languages",
+    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md",
+    "Databases/Datomic/Datomic Pro concrete instructions.md",
+    "Databases/Datomic/Datomic for Clojure Developers - A Practical Guide.md",
+    "Running Powershell and service monitoring/Clojure-PowerShell Integration Specification.md",
+    "Running Powershell and service monitoring/WinSW + PowerShell 7 Integration Guide.md",
+    "Reporting general design ideas/Dialogue from mcp.md",
     "Tooling/Git/Git Usage Guide - Windows.md",
+    "Tooling/Git/Git code snippets.md",
     "Tooling/IDEs/VS Code/Main VS Code Reference (with focus on Clojure ClojureScript PowerShell on Windows).md",
     "Tooling/Git",
     "Welcome.md",
@@ -229,8 +240,6 @@
     "Tooling/Claude Code & Desktop/Claude prompt improvers etc",
     "Tooling/Claude Code & Desktop/Claude User settings.md",
     "Tooling/Claude Code & Desktop/Anthropic Claude Product Taxonomy.md",
-    "Running Powershell and service monitoring/WinSW + PowerShell 7 Integration Guide.md",
-    "Running Powershell and service monitoring/Clojure-PowerShell Integration Specification.md",
     "Service-runner (first version, bad)/Deployment folder.md",
     "Databases",
     "Service-runner (first version, bad)/What is build-and-package.bat.md",
@@ -239,16 +248,7 @@
     "Web-related",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
     "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md",
-    "Tooling/MCP/Dual Backend Frontend Setup (Corrected).md",
-    "Tooling/MCP/Clojure-MCP Quick Setup (grok).md",
-    "Tooling/MCP/MCP-light setup.md",
     "Sharepoint PnP",
-    "Service-runner (first version, bad)",
-    "Web-related/HTTP/CORS preflight error.md",
-    "Tooling/Claude Code & Desktop",
-    "Databases/Datomic/Datomic Pro concrete instructions.md",
-    "Databases/Datomic/Datomic for Clojure Developers - A Practical Guide.md",
-    "Reporting general design ideas/Dialogue from mcp.md",
-    "Reporting general design ideas"
+    "Service-runner (first version, bad)"
   ]
 }
