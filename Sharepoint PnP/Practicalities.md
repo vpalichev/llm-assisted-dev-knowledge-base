@@ -1,15 +1,29 @@
-## How to get list of all list items for library, folders, files, etc 
+# Table of Contents
+
+- [[#How to get list of all list items for library, folders, files, etc]]
+- [[#Export to CSV]]
+- [[#Connect with Certificate Authentication]]
+- [[#Parameters]]
+
+---
+
+## How to get list of all list items for library, folders, files, etc
+
+[[#Table of Contents|Back to TOC]]
+
 ```powershell
-Measure-Command { 
-  $all_list_items_for_library =  Get-PnPListItem -List $params.libraryName -PageSize 5000 -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor"
+Measure-Command {
+  $all_list_items_for_library =  Get-PnPListItem -List $params.libraryName -PageSize 5000 -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor"
 }
 ```
 
-## Export to CSV 
+## Export to CSV
+
+[[#Table of Contents|Back to TOC]]
 
 ```powershell
 $items = Get-PnPListItem -List $params.libraryName -PageSize 5000 `
-    -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor"
+    -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor","FSObjType"
 
 $csvData = $items | ForEach-Object {
     [PSCustomObject]@{
@@ -25,8 +39,11 @@ $csvData = $items | ForEach-Object {
 
 $csvData | Export-Csv -Path "sharepoint_items.csv" -NoTypeInformation -Encoding UTF8 -UseQuotes AsNeeded
 ```
+
 **Note:** If using Windows PowerShell 5.1 (not PowerShell 7), remove `-UseQuotes AsNeeded` — it's not supported. The default quoting should work fine for this data.
+
 **PostgreSQL table (with timezone-aware timestamp):**
+
 ```sql
 CREATE TABLE sharepoint_files (
     file_name    TEXT,
@@ -42,7 +59,11 @@ CREATE TABLE sharepoint_files (
 ```
 
 # SharePoint PnP Connection
+
 ## Connect with Certificate Authentication
+
+[[#Table of Contents|Back to TOC]]
+
 ```powershell
 Connect-PnPOnline `
     -Url $params.siteUrl `
@@ -51,12 +72,21 @@ Connect-PnPOnline `
     -CertificatePath (Join-Path $PSScriptRoot "..\config\certs\SillenoProjectControl.pfx") `
     -CertificatePassword (ConvertTo-SecureString $params.clientSecret -AsPlainText -Force)
 ```
+
 ## Parameters
+
+[[#Table of Contents|Back to TOC]]
+
 ### `siteUrl`
+
 SharePoint site URL.
+
 **Example:** `https://exampledotorg.sharepoint.com/sites/TheSiteLikeProjectControl`
+
 ### `clientId`
+
 Azure AD Application (Client) ID — a GUID from your app registration.
+
 **How to obtain:**
 - **Azure Portal:** App registrations → your app → Overview → Application (client) ID
 - **PowerShell:**
@@ -64,7 +94,11 @@ Azure AD Application (Client) ID — a GUID from your app registration.
   Connect-AzAccount
   Get-AzADApplication | Select-Object DisplayName, AppId
   ```
+
 **Example:** `a1b2c3d4-e5f6-7890-abcd-ef1234567890`
+
 ### `tenant`
+
 Microsoft 365 tenant domain.
+
 **Example:** `exampledotorg.onmicrosoft.com`

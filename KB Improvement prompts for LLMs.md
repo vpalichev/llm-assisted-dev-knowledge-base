@@ -11,6 +11,7 @@ For a given Markdown file with `##` headings:
 
 1. **Create TOC at top:** Add `# Table of Contents` with nested list of `[[#Heading Name]]` links for all `##` headings
 2. **Add back links:** After each `##` heading, add `[[#Table of Contents|Back to TOC]]` on new line
+3. **Look out for Obsidian-related formatting nuances:** For example, Obsidian requires a blank line before tables for proper rendering.
 
 **Format:**
 ```

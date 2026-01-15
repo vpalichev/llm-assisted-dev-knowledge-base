@@ -1,5 +1,22 @@
- 
+# Table of Contents
+
+- [[#Quick Open (Primary Method)]]
+- [[#Go to Symbol in Workspace]]
+- [[#File Explorer Navigation]]
+- [[#Search Across Files]]
+- [[#Breadcrumb Navigation]]
+- [[#Go to Definition]]
+- [[#Recent Files]]
+- [[#Terminal Integration]]
+- [[#Calva Namespace Navigation]]
+- [[#Advanced: Custom Keybinding for Project File Search]]
+- [[#Performance Optimization]]
+
+---
+
 ## Quick Open (Primary Method)
+
+[[#Table of Contents|Back to TOC]]
 
 `Ctrl+P` - Fuzzy file search across workspace. Type partial filename. Supports:
 
@@ -9,17 +26,23 @@
 
 ## Go to Symbol in Workspace
 
+[[#Table of Contents|Back to TOC]]
+
 `Ctrl+T` - Search functions, vars, defns across all files. Queries clj-kondo's symbol index.
 
 Prefix with `@` after `Ctrl+P` for same functionality: `Ctrl+P` then `@symbolName`
 
 ## File Explorer Navigation
 
+[[#Table of Contents|Back to TOC]]
+
 `Ctrl+Shift+E` - Focus sidebar Explorer. Arrow keys + `Enter` to open.
 
 Right-click → "Reveal in File Explorer" opens Windows Explorer at file location.
 
 ## Search Across Files
+
+[[#Table of Contents|Back to TOC]]
 
 `Ctrl+Shift+F` - Full-text search with regex support.
 
@@ -38,11 +61,15 @@ Exclude: **/target/**, **/node_modules/**
 
 ## Breadcrumb Navigation
 
+[[#Table of Contents|Back to TOC]]
+
 File path breadcrumbs at editor top. Click segments for dropdown of siblings. Navigate hierarchy without leaving editor.
 
 Toggle: `Ctrl+Shift+.`
 
 ## Go to Definition
+
+[[#Table of Contents|Back to TOC]]
 
 `F12` - Jump to definition of symbol under cursor. Works for:
 
@@ -55,13 +82,15 @@ Toggle: `Ctrl+Shift+.`
 
 ## Recent Files
 
+[[#Table of Contents|Back to TOC]]
+
 `Ctrl+R` - Recent files dropdown (workspace context)
 
 `Ctrl+Tab` - Cycle through editor tab history (MRU order)
 
 ## Terminal Integration
 
-bash
+[[#Table of Contents|Back to TOC]]
 
 ```bash
 # Open file from integrated terminal (Ctrl+`)
@@ -70,13 +99,15 @@ code filename.clj
 
 ## Calva Namespace Navigation
 
+[[#Table of Contents|Back to TOC]]
+
 `Ctrl+Alt+C N` followed by namespace selection - Load and navigate to namespace file.
 
 ## Advanced: Custom Keybinding for Project File Search
 
-`keybindings.json`:
+[[#Table of Contents|Back to TOC]]
 
-json
+`keybindings.json`:
 
 ```json
 {
@@ -88,9 +119,9 @@ json
 
 ## Performance Optimization
 
-Exclude build artifacts from indexing in `settings.json`:
+[[#Table of Contents|Back to TOC]]
 
-json
+Exclude build artifacts from indexing in `settings.json`:
 
 ```json
 {

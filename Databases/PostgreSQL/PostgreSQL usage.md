@@ -1,8 +1,22 @@
+# Table of Contents
+
+- [[#Connecting to PostgreSQL]]
+- [[#Database Management]]
+- [[#Bulk Data Loading]]
+- [[#Line-by-Line Breakdown]]
+- [[#CSV Format Specification]]
+- [[#SharePoint Export Schema]]
+- [[#PowerShell Integration]]
+
+---
+
 # PostgreSQL Usage Guide
 
 Techniques for connecting to PostgreSQL, managing databases, and importing data from various sources.
 
 ## Connecting to PostgreSQL
+
+[[#Table of Contents|Back to TOC]]
 
 ### Default User Login
 
@@ -20,6 +34,8 @@ psql -U postgres -d postgres
 **Windows note:** You'll be prompted for password after running the command. Use `-W` flag to force password prompt explicitly: `psql -U postgres -W`
 
 ## Database Management
+
+[[#Table of Contents|Back to TOC]]
 
 ### Creating Databases
 
@@ -45,9 +61,9 @@ SELECT current_database();
 psql -U postgres -d sharepoint_metadata
 ```
 
-
-
 ## Bulk Data Loading
+
+[[#Table of Contents|Back to TOC]]
 
 ### COPY Command with CSV
 
@@ -72,6 +88,8 @@ WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 ```
 
 ## Line-by-Line Breakdown
+
+[[#Table of Contents|Back to TOC]]
 
 ### Line 1: Command and Target
 
@@ -105,7 +123,7 @@ WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 - **DELIMITER ','** - Field separator character
 - **ENCODING 'UTF8'** - Character encoding for interpreting file bytes
 
-## How It Works
+### How It Works
 
 The database reads the CSV file, skips the header row, splits each line by commas, and inserts values into the specified columns in order. COPY is much faster than INSERT statements because it bypasses per-row parsing overhead and uses optimized batch loading.
 
@@ -132,6 +150,8 @@ psql -U postgres -d sharepoint_metadata -c "\copy files FROM 'C:\\data\\sharepoi
 - Use CSV for bulk imports
 
 ## CSV Format Specification
+
+[[#Table of Contents|Back to TOC]]
 
 ### SharePoint Metadata Schema
 
@@ -176,6 +196,8 @@ CREATE TABLE sharepoint_files (
 
 ## SharePoint Export Schema
 
+[[#Table of Contents|Back to TOC]]
+
 ### Matching SharePoint CSV Fields
 
 ```sql
@@ -209,6 +231,8 @@ CREATE TABLE sharepoint_files (
 ```
 
 ## PowerShell Integration
+
+[[#Table of Contents|Back to TOC]]
 
 ### Loading PSCustomObject Arrays
 
@@ -268,7 +292,7 @@ foreach ($obj in $objects) {
     $cmd.Parameters.AddWithValue("p5", [DateTime]::Parse($obj.Modified))
     $cmd.Parameters.AddWithValue("p6", $obj.Author)
     $cmd.Parameters.AddWithValue("p7", $obj.Editor)
-    
+
     [void]$cmd.ExecuteNonQuery()
 }
 
@@ -284,7 +308,7 @@ $sqlValues = $objects | ForEach-Object {
     $fileRef = $_.FileRef -replace "'", "''"
     $author = $_.Author -replace "'", "''"
     $editor = $_.Editor -replace "'", "''"
-    
+
     "('$fileLeafRef', '$fileRef', $($_.File_x0020_Size), '$($_.Created)', '$($_.Modified)', '$author', '$editor')"
 }
 

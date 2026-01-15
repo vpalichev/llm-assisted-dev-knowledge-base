@@ -1,10 +1,21 @@
+# Table of Contents
+
+- [[#1. Add nREPL to Your Project]]
+- [[#2. Install Clojure-MCP]]
+- [[#3. Configure Your MCP Client]]
+- [[#4. Run]]
+- [[#Key Tools]]
+- [[#Example Prompt]]
+
+---
+
 # Clojure-MCP Quick Setup
 
 ## 1. Add nREPL to Your Project
 
-**deps.edn:**
+[[#Table of Contents|Back to TOC]]
 
-clojure
+**deps.edn:**
 
 ```clojure
 {:aliases
@@ -16,9 +27,9 @@ clojure
 
 ## 2. Install Clojure-MCP
 
-Add to `~/.clojure/deps.edn`:
+[[#Table of Contents|Back to TOC]]
 
-clojure
+Add to `~/.clojure/deps.edn`:
 
 ```clojure
 {:aliases
@@ -33,9 +44,9 @@ clojure
 
 ## 3. Configure Your MCP Client
 
-**For Cline** (`.vscode/mcp.json` or Cline MCP settings):
+[[#Table of Contents|Back to TOC]]
 
-json
+**For Cline** (`.vscode/mcp.json` or Cline MCP settings):
 
 ```json
 {
@@ -50,8 +61,6 @@ json
 
 **For Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 
-json
-
 ```json
 {
   "mcpServers": {
@@ -65,7 +74,7 @@ json
 
 ## 4. Run
 
-bash
+[[#Table of Contents|Back to TOC]]
 
 ```bash
 # Terminal 1: Start nREPL in your project
@@ -77,13 +86,17 @@ clojure -X:mcp :port 7888
 
 ## Key Tools
 
-|Tool|Use|
-|---|---|
-|`clojure_eval`|Evaluate code in REPL|
-|`clojure_edit`|Structure-aware file edits|
-|`read_file`|View files with collapsed forms|
+[[#Table of Contents|Back to TOC]]
+
+| Tool           | Use                              |
+| -------------- | -------------------------------- |
+| `clojure_eval` | Evaluate code in REPL            |
+| `clojure_edit` | Structure-aware file edits       |
+| `read_file`    | View files with collapsed forms  |
 
 ## Example Prompt
+
+[[#Table of Contents|Back to TOC]]
 
 > "Use clojure_eval to test `(+ 1 2 3)`, then create a function that doubles a number and validate it works."
 

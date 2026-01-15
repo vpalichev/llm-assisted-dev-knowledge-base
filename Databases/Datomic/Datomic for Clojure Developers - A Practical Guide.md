@@ -1,7 +1,24 @@
+# Table of Contents
+
+- [[#1. Introduction to Datomic]]
+- [[#2. Setting Up Datomic]]
+- [[#3. Connection Management]]
+- [[#4. Defining Schema]]
+- [[#5. CRUD Operations]]
+- [[#6. Datomic Queries]]
+- [[#7. Migration from EDN]]
+- [[#8. Time-Travel Queries]]
+- [[#9. Production Considerations]]
+- [[#10. Troubleshooting]]
+- [[#Next Steps]]
+
+---
 
 This guide teaches Datomic fundamentals through a real-world reporting application. You'll learn how to model data, define schemas, execute queries, and migrate existing data—all using concrete examples from a production codebase.
 
 ## 1. Introduction to Datomic
+
+[[#Table of Contents|Back to TOC]]
 
 ### What Makes Datomic Different
 
@@ -27,11 +44,11 @@ When you "update" a value, Datomic adds a new datom with `added? = true` and ret
 
 ### Datomic Editions
 
-|Edition|Use Case|Storage|
-|---|---|---|
-|**Datomic Pro**|Production, commercial use|DynamoDB, PostgreSQL, Cassandra, etc.|
-|**Datomic Dev-Local**|Development, testing|Local filesystem|
-|**Datomic Free**|Discontinued|Was: local H2/filesystem|
+| Edition | Use Case | Storage |
+| --- | --- | --- |
+| **Datomic Pro** | Production, commercial use | DynamoDB, PostgreSQL, Cassandra, etc. |
+| **Datomic Dev-Local** | Development, testing | Local filesystem |
+| **Datomic Free** | Discontinued | Was: local H2/filesystem |
 
 This guide uses Datomic Pro with the `dev` protocol for local development. The code patterns apply to all editions.
 
@@ -67,6 +84,8 @@ Datomic solves all of these while keeping Clojure's data-oriented philosophy.
 ---
 
 ## 2. Setting Up Datomic
+
+[[#Table of Contents|Back to TOC]]
 
 ### Prerequisites
 
@@ -123,10 +142,10 @@ System started datomic:dev://localhost:4334/<DB-NAME>
 
 ```clojure
 {:paths ["src/clj" "resources"]
- 
+
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         com.datomic/datomic-pro {:mvn/version "1.0.7187"}}
- 
+
  :mvn/repos {"my.datomic.com" {:url "https://my.datomic.com/repo"}}}
 ```
 
@@ -153,6 +172,8 @@ System started datomic:dev://localhost:4334/<DB-NAME>
 ---
 
 ## 3. Connection Management
+
+[[#Table of Contents|Back to TOC]]
 
 ### The Connection Pattern
 
@@ -213,6 +234,8 @@ Datomic connections are thread-safe and long-lived. Create once, reuse everywher
 ---
 
 ## 4. Defining Schema
+
+[[#Table of Contents|Back to TOC]]
 
 ### Mapping EDN to Datomic Attributes
 
@@ -296,12 +319,12 @@ Becomes this schema:
 
 ### Schema Attribute Properties
 
-|Property|Values|Purpose|
-|---|---|---|
-|`:db/valueType`|`:db.type/string`, `:db.type/long`, `:db.type/instant`, `:db.type/ref`, etc.|Data type|
-|`:db/cardinality`|`:db.cardinality/one`, `:db.cardinality/many`|Single value vs set|
-|`:db/unique`|`:db.unique/identity`, `:db.unique/value`|Uniqueness constraint|
-|`:db/index`|`true`|Enable fast lookup (automatic for `:db/unique`)|
+| Property | Values | Purpose |
+| --- | --- | --- |
+| `:db/valueType` | `:db.type/string`, `:db.type/long`, `:db.type/instant`, `:db.type/ref`, etc. | Data type |
+| `:db/cardinality` | `:db.cardinality/one`, `:db.cardinality/many` | Single value vs set |
+| `:db/unique` | `:db.unique/identity`, `:db.unique/value` | Uniqueness constraint |
+| `:db/index` | `true` | Enable fast lookup (automatic for `:db/unique`) |
 
 ### Identity vs Value Uniqueness
 
@@ -323,6 +346,8 @@ Call this at connection time; it's safe to run on every startup.
 ---
 
 ## 5. CRUD Operations
+
+[[#Table of Contents|Back to TOC]]
 
 ### Create: Transacting New Reports
 
@@ -466,6 +491,8 @@ Note: Retraction removes the entity from current view but preserves it in histor
 
 ## 6. Datomic Queries
 
+[[#Table of Contents|Back to TOC]]
+
 ### Datalog Basics
 
 Query structure:
@@ -536,6 +563,8 @@ Pull retrieves multiple attributes in one operation:
 ---
 
 ## 7. Migration from EDN
+
+[[#Table of Contents|Back to TOC]]
 
 ### Reading Legacy Data
 
@@ -630,6 +659,8 @@ The serialization approach:
 
 ## 8. Time-Travel Queries
 
+[[#Table of Contents|Back to TOC]]
+
 ### Querying Historical States
 
 ```clojure
@@ -675,6 +706,8 @@ The serialization approach:
 
 ## 9. Production Considerations
 
+[[#Table of Contents|Back to TOC]]
+
 ### Connection Lifecycle
 
 ```clojure
@@ -719,10 +752,10 @@ Renaming/removing attributes requires migration. Use `:db/ident` rename:
         (cond
           (instance? IllegalArgumentException cause)
           {:success false :error :validation :message (.getMessage cause)}
-          
+
           (instance? java.lang.IllegalStateException cause)
           {:success false :error :conflict :message (.getMessage cause)}
-          
+
           :else
           {:success false :error :unknown :message (.getMessage e)})))))
 ```
@@ -730,6 +763,8 @@ Renaming/removing attributes requires migration. Use `:db/ident` rename:
 ---
 
 ## 10. Troubleshooting
+
+[[#Table of Contents|Back to TOC]]
 
 ### Connection Failures
 
@@ -761,11 +796,11 @@ ExceptionInfo Unable to connect to localhost:4334
 
 ### Windows-Specific Issues
 
-|Symptom|Fix|
-|---|---|
-|Transactor silently fails|Check properties file encoding (UTF-8, no BOM)|
-|"Address in use"|Another process on port 4334; change port or kill process|
-|Path errors|Use forward slashes in properties: `storage-data-dir=C:/datomic/data`|
+| Symptom | Fix |
+| --- | --- |
+| Transactor silently fails | Check properties file encoding (UTF-8, no BOM) |
+| "Address in use" | Another process on port 4334; change port or kill process |
+| Path errors | Use forward slashes in properties: `storage-data-dir=C:/datomic/data` |
 
 ### REPL Diagnostics
 
@@ -788,6 +823,8 @@ ExceptionInfo Unable to connect to localhost:4334
 ---
 
 ## Next Steps
+
+[[#Table of Contents|Back to TOC]]
 
 Once you have basic CRUD working:
 

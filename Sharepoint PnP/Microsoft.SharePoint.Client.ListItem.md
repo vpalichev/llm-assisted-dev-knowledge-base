@@ -1,3 +1,14 @@
+# Table of Contents
+
+- [[#How the -Fields Parameter Works]]
+- [[#Complete Reference: SharePoint Internal Field Names]]
+- [[#How to Discover Fields in Your Specific List]]
+- [[#Important Notes]]
+- [[#SharePoint Field Types]]
+- [[#Practical Implications]]
+- [[#Example from Your Codebase]]
+
+---
 
 ```powershell
 Get-PnPListItem -List $params.libraryName -PageSize 5000 -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor"
@@ -6,6 +17,8 @@ Get-PnPListItem -List $params.libraryName -PageSize 5000 -Fields "FileLeafRef","
 Based on my research, I've compiled comprehensive information about the fields that `Get-PnPListItem` can accept in the `-Fields` parameter.
 
 ## How the -Fields Parameter Works
+
+[[#Table of Contents|Back to TOC]]
 
 The `-Fields` parameter in `Get-PnPListItem` accepts an array of **internal field names** (not display names). If you don't specify fields, all fields are loaded by default.
 
@@ -16,6 +29,8 @@ Get-PnPListItem -List "Documents" -Fields "Title","FileRef","Modified"
 ```
 
 ## Complete Reference: SharePoint Internal Field Names
+
+[[#Table of Contents|Back to TOC]]
 
 ### Common Document Library Fields
 
@@ -94,12 +109,14 @@ Based on the official Microsoft documentation, here are the internal field names
 
 ### Custom List Fields (Additional)
 
-|Display Name|Internal Name|Type|
-|---|---|---|
-|Title|`LinkTitle`|Computed|
-|Title|`LinkTitleNoMenu`|Computed|
+| Display Name | Internal Name     | Type     |
+| ------------ | ----------------- | -------- |
+| Title        | `LinkTitle`       | Computed |
+| Title        | `LinkTitleNoMenu` | Computed |
 
 ## How to Discover Fields in Your Specific List
+
+[[#Table of Contents|Back to TOC]]
 
 Since SharePoint lists can have custom columns, use this PowerShell command to discover all available fields:
 
@@ -111,81 +128,83 @@ Connect-PnPOnline -Url "https://yourtenant.sharepoint.com/sites/yoursite" -Inter
 $fields = Get-PnPField -List "YourLibraryName"
 
 # Display internal names and types
-$fields | Select-Object Title, InternalName, TypeAsString, Hidden | 
-    Where-Object { $_.Hidden -eq $false } | 
+$fields | Select-Object Title, InternalName, TypeAsString, Hidden |
+    Where-Object { $_.Hidden -eq $false } |
     Format-Table -AutoSize
 
 # Export to CSV for reference
-$fields | Select-Object Title, InternalName, TypeAsString, Required, ReadOnlyField | 
+$fields | Select-Object Title, InternalName, TypeAsString, Required, ReadOnlyField |
     Export-Csv -Path "fields.csv" -NoTypeInformation
 ```
 
 ## Important Notes
 
-1. **Internal Names vs Display Names**: Always use internal names (case-sensitive) in the `-Fields` parameter
-2. **Spaces in Names**: Spaces are encoded as `_x0020_` (e.g., "File Size" → `File_x0020_Size`)
+[[#Table of Contents|Back to TOC]]
+
+1. **Internal Names vs Display Names**: Always use internal names (case-sensitive) in the `-Fields` parameter
+2. **Spaces in Names**: Spaces are encoded as `_x0020_` (e.g., "File Size" → `File_x0020_Size`)
 3. **Performance**: Only request the fields you need to improve performance
-4. **Access via FieldValues**: Access field data using `$item.FieldValues.InternalName`
-5. **Cannot Use with -Query**: When using `-Query` parameter, specify fields in CAML `<ViewFields>` instead
-
-
-
-
-
-Let me explain the main field types you'll encounter:
+4. **Access via FieldValues**: Access field data using `$item.FieldValues.InternalName`
+5. **Cannot Use with -Query**: When using `-Query` parameter, specify fields in CAML `<ViewFields>` instead
 
 ## SharePoint Field Types
+
+[[#Table of Contents|Back to TOC]]
+
+Let me explain the main field types you'll encounter:
 
 ### **Lookup**
 
 - **Purpose**: References data from another list or calculates values from the current item
 - **Characteristics**: Read-only for most fields, computed by SharePoint
 - **Examples**:
-    - `FileRef` - URL path (looks up file location)
-    - `File_x0020_Size` - File size (looks up from file system)
-    - `UniqueId` - Unique identifier (system-generated)
-    - `CheckedOutUserId` - User who checked out (references user list)
+    - `FileRef` - URL path (looks up file location)
+    - `File_x0020_Size` - File size (looks up from file system)
+    - `UniqueId` - Unique identifier (system-generated)
+    - `CheckedOutUserId` - User who checked out (references user list)
 
 ### **Computed**
 
 - **Purpose**: Dynamically calculated/generated values, often for display purposes
 - **Characteristics**: Always read-only, calculated on-the-fly
 - **Examples**:
-    - `DocIcon` - Document type icon
-    - `ServerUrl` - Full server-relative URL
-    - `FileSizeDisplay` - Formatted file size (e.g., "2.5 MB")
-    - `LinkFilename` - Clickable filename link
-    - `Edit` - Edit button/link in list views
+    - `DocIcon` - Document type icon
+    - `ServerUrl` - Full server-relative URL
+    - `FileSizeDisplay` - Formatted file size (e.g., "2.5 MB")
+    - `LinkFilename` - Clickable filename link
+    - `Edit` - Edit button/link in list views
 
 ### **Text**
 
 - **Purpose**: Simple text strings
 - **Characteristics**: Editable, stores plain text (up to 255 characters)
 - **Examples**:
-    - `Title` - Item title
-    - `File_x0020_Type` - File extension (e.g., "docx", "pdf")
-    - `_UIVersionString` - Version as text (e.g., "1.0")
-    - `Created_x0020_By` - Creator name as text
+    - `Title` - Item title
+    - `File_x0020_Type` - File extension (e.g., "docx", "pdf")
+    - `_UIVersionString` - Version as text (e.g., "1.0")
+    - `Created_x0020_By` - Creator name as text
 
-## Other Common Field Types
+### Other Common Field Types
 
-|Type|Description|Examples|
-|---|---|---|
-|**DateTime**|Date and time values|`Created`, `Modified`|
-|**User**|Reference to SharePoint user|`Author`, `Editor`, `CheckoutUser`|
-|**Integer**|Whole numbers|`_UIVersion`, `_Level`|
-|**Number**|Decimal numbers|`Order`|
-|**Boolean**|True/False values|`_IsCurrentVersion`, `IsCheckedoutToLocal`|
-|**Counter**|Auto-incrementing ID|`ID`|
-|**Guid**|Globally unique identifier|`GUID`, `WorkflowInstanceID`|
-|**File**|File reference|`FileLeafRef`|
-|**Note**|Multi-line text|`_ModerationComments`|
-|**Attachments**|Has attachments flag|`Attachments`|
-|**Choice**|Dropdown selection|Custom fields|
-|**ModStat**|Moderation status|`_ModerationStatus` (Approved/Pending/Rejected)|
-|**ContentTypeId**|Content type identifier|`ContentTypeId`|
+| Type            | Description                | Examples                             |
+| --------------- | -------------------------- | ------------------------------------ |
+| **DateTime**    | Date and time values       | `Created`, `Modified`                |
+| **User**        | Reference to SharePoint user | `Author`, `Editor`, `CheckoutUser` |
+| **Integer**     | Whole numbers              | `_UIVersion`, `_Level`               |
+| **Number**      | Decimal numbers            | `Order`                              |
+| **Boolean**     | True/False values          | `_IsCurrentVersion`, `IsCheckedoutToLocal` |
+| **Counter**     | Auto-incrementing ID       | `ID`                                 |
+| **Guid**        | Globally unique identifier | `GUID`, `WorkflowInstanceID`         |
+| **File**        | File reference             | `FileLeafRef`                        |
+| **Note**        | Multi-line text            | `_ModerationComments`                |
+| **Attachments** | Has attachments flag       | `Attachments`                        |
+| **Choice**      | Dropdown selection         | Custom fields                        |
+| **ModStat**     | Moderation status          | `_ModerationStatus` (Approved/Pending/Rejected) |
+| **ContentTypeId** | Content type identifier  | `ContentTypeId`                      |
 
 ## Practical Implications
+
+[[#Table of Contents|Back to TOC]]
 
 ### When Using Get-PnPListItem:
 
@@ -195,10 +214,10 @@ $items = Get-PnPListItem -List "Documents" -Fields "FileRef","Title","File_x0020
 foreach ($item in $items) {
     # Lookup type - read-only, system-calculated
     $path = $item.FieldValues.FileRef  # e.g., "/sites/mysite/Documents/file.pdf"
-    
+
     # Text type - editable by users
     $title = $item.FieldValues.Title  # e.g., "My Document"
-    
+
     # Lookup type - system-calculated from file system
     $size = $item.FieldValues.File_x0020_Size  # e.g., 2048576 (bytes)
 }
@@ -207,21 +226,22 @@ foreach ($item in $items) {
 ### Why It Matters:
 
 1. **Read-Only vs Editable**:
-    
-    - **Text** fields can be updated with `Set-PnPListItem`
-    - **Lookup/Computed** fields are read-only, calculated by SharePoint
+    - **Text** fields can be updated with `Set-PnPListItem`
+    - **Lookup/Computed** fields are read-only, calculated by SharePoint
+
 2. **Performance**:
-    
-    - **Computed** fields are calculated on-demand (may be slower)
-    - **Lookup** fields reference stored data
-    - **Text** fields are directly stored
+    - **Computed** fields are calculated on-demand (may be slower)
+    - **Lookup** fields reference stored data
+    - **Text** fields are directly stored
+
 3. **Data Access**:
-    
-    - **User** types require `.LookupValue` to get the name: `$item.FieldValues.Author.LookupValue`
-    - **Lookup** user fields work similarly
-    - **Text/DateTime/Integer** can be accessed directly
+    - **User** types require `.LookupValue` to get the name: `$item.FieldValues.Author.LookupValue`
+    - **Lookup** user fields work similarly
+    - **Text/DateTime/Integer** can be accessed directly
 
 ## Example from Your Codebase
+
+[[#Table of Contents|Back to TOC]]
 
 In [export-sharepoint-files-to-sqlite.ps1:65-85](vscode-webview://16rkfkgf77vh70hu4jofnr27e51ln002l5acl0go7ha0520h7nt4/src/export-sharepoint-files-to-sqlite.ps1#L65-L85):
 
@@ -232,11 +252,11 @@ Get-PnPListItem -List $params.libraryName -PageSize 500 `
 
 Field types being used:
 
-- `FileLeafRef` - **File** type (filename)
-- `FileRef` - **Lookup** type (file path)
-- `File_x0020_Size` - **Lookup** type (file size in bytes)
-- `Created`, `Modified` - **DateTime** type (dates)
-- `Author`, `Editor` - **User** type (people)
+- `FileLeafRef` - **File** type (filename)
+- `FileRef` - **Lookup** type (file path)
+- `File_x0020_Size` - **Lookup** type (file size in bytes)
+- `Created`, `Modified` - **DateTime** type (dates)
+- `Author`, `Editor` - **User** type (people)
 
 The User fields require special handling:
 

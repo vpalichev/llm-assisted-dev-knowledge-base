@@ -1,8 +1,21 @@
-Companion guide for running PowerShell scripts as Windows services using WinSW, integrated with the Clojure orchestration layer.
+# Table of Contents
+
+- [[#1. When to Use WinSW]]
+- [[#2. Architecture Overview]]
+- [[#3. WinSW Configuration]]
+- [[#4. PowerShell 7 Script Adaptations]]
+- [[#5. Clojure Service Management]]
+- [[#6. Deployment]]
+- [[#7. Monitoring]]
+- [[#8. Comparison: Direct vs Service Execution]]
 
 ---
 
+Companion guide for running PowerShell scripts as Windows services using WinSW, integrated with the Clojure orchestration layer.
+
 ## 1. When to Use WinSW
+
+[[#Table of Contents|Back to TOC]]
 
 Use WinSW instead of direct process invocation for:
 
@@ -13,9 +26,9 @@ Use WinSW instead of direct process invocation for:
 
 Direct `clojure.java.process` invocation remains appropriate for short, request-response style operations.
 
----
-
 ## 2. Architecture Overview
+
+[[#Table of Contents|Back to TOC]]
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -41,16 +54,16 @@ Direct `clojure.java.process` invocation remains appropriate for short, request-
 
 Communication shifts from stdout to file-based:
 
-|Concern|Direct Invocation|WinSW Service|
-|---|---|---|
-|Result envelope|stdout|`{work-dir}/result.json`|
-|Progress|progress.json (optional)|progress.json (required)|
-|Completion signal|Process exit|`.complete` marker file|
-|Errors|stderr + exit code|`result.json` + Windows Event Log|
-
----
+| Concern           | Direct Invocation         | WinSW Service                      |
+| ----------------- | ------------------------- | ---------------------------------- |
+| Result envelope   | stdout                    | `{work-dir}/result.json`           |
+| Progress          | progress.json (optional)  | progress.json (required)           |
+| Completion signal | Process exit              | `.complete` marker file            |
+| Errors            | stderr + exit code        | `result.json` + Windows Event Log  |
 
 ## 3. WinSW Configuration
+
+[[#Table of Contents|Back to TOC]]
 
 ### 3.1 Service Definition
 
@@ -62,46 +75,46 @@ Each long-running script gets a WinSW XML configuration:
   <id>app-export-customers</id>
   <name>AppName - Customer Export Service</name>
   <description>Runs customer data export operations</description>
-  
+
   <executable>pwsh.exe</executable>
   <arguments>-NoProfile -NonInteractive -ExecutionPolicy Bypass -File "%BASE%\Export-Customers.ps1"</arguments>
-  
+
   <workingdirectory>%BASE%</workingdirectory>
-  
+
   <log mode="roll-by-size">
     <sizeThreshold>10240</sizeThreshold>
     <keepFiles>5</keepFiles>
   </log>
-  
+
   <onfailure action="restart" delay="10 sec"/>
   <onfailure action="restart" delay="30 sec"/>
   <onfailure action="none"/>
-  
+
   <resetfailure>1 hour</resetfailure>
-  
+
   <env name="APP_ROOT" value="%LOCALAPPDATA%\AppName"/>
   <env name="WORK_DIR" value="%LOCALAPPDATA%\AppName\work\%SERVICE_ID%"/>
   <env name="OUTPUT_DIR" value="%LOCALAPPDATA%\AppName\output"/>
-  
+
   <serviceaccount>
     <username>.\ServiceAccount</username>
     <password>MANAGED_SERVICE_ACCOUNT</password>
     <allowservicelogon>true</allowservicelogon>
   </serviceaccount>
-  
+
   <securitydescriptor>D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;RPWPCR;;;IU)</securitydescriptor>
 </service>
 ```
 
 ### 3.2 Key Configuration Options
 
-|Element|Purpose|
-|---|---|
-|`<onfailure>`|Restart policy on script crash|
-|`<resetfailure>`|Time before failure counter resets|
-|`<log>`|Captures stdout/stderr to rotating files|
-|`<env>`|Pass environment variables matching spec conventions|
-|`<serviceaccount>`|Run with specific credentials for DB/network access|
+| Element            | Purpose                                          |
+| ------------------ | ------------------------------------------------ |
+| `<onfailure>`      | Restart policy on script crash                   |
+| `<resetfailure>`   | Time before failure counter resets               |
+| `<log>`            | Captures stdout/stderr to rotating files         |
+| `<env>`            | Pass environment variables matching spec conventions |
+| `<serviceaccount>` | Run with specific credentials for DB/network access |
 
 ### 3.3 Directory Structure
 
@@ -124,9 +137,9 @@ Each long-running script gets a WinSW XML configuration:
 └── output/
 ```
 
----
-
 ## 4. PowerShell 7 Script Adaptations
+
+[[#Table of Contents|Back to TOC]]
 
 ### 4.1 Service-Aware Script Template
 
@@ -162,25 +175,25 @@ function Update-Progress {
 
 try {
     Update-Progress -Percent 0 -Status 'Starting'
-    
+
     # Script logic here...
     Update-Progress -Percent 50 -Status 'Processing records'
-    
+
     # More logic...
     Update-Progress -Percent 100 -Status 'Complete'
-    
+
     $result.Status = 'success'
 } catch {
     $result | Add-Error -Code 'ERR_INTERNAL' -Message $_.Exception.Message
     $result.Status = 'error'
-    
+
     # Log to Windows Event Log for service visibility
     Write-EventLog -LogName Application -Source 'AppName' -EventId 1001 `
         -EntryType Error -Message $_.Exception.Message
 } finally {
     # Write result to file (not stdout)
     $result | Write-ResultEnvelopeToFile -Path (Join-Path $workDir 'result.json')
-    
+
     # Signal completion
     New-Item -ItemType File -Force -Path (Join-Path $workDir '.complete') | Out-Null
 }
@@ -209,9 +222,9 @@ Get-Data || Write-Error "Failed to get data" && exit 2
 Get-Content $inputFile | ConvertFrom-Json -AsHashtable | ForEach-Object { ... }
 ```
 
----
-
 ## 5. Clojure Service Management
+
+[[#Table of Contents|Back to TOC]]
 
 ### 5.1 WinSW Control Functions
 
@@ -220,7 +233,7 @@ Get-Content $inputFile | ConvertFrom-Json -AsHashtable | ForEach-Object { ... }
   (:require [clojure.java.process :as proc]
             [clojure.java.io :as io]))
 
-(def services-dir 
+(def services-dir
   (io/file (System/getenv "LOCALAPPDATA") "AppName" "services"))
 
 (defn- winsw-exec [service-id command]
@@ -258,7 +271,7 @@ Get-Content $inputFile | ConvertFrom-Json -AsHashtable | ForEach-Object { ... }
             [cheshire.core :as json]
             [app.powershell.result :as result]))
 
-(def work-base 
+(def work-base
   (io/file (System/getenv "LOCALAPPDATA") "AppName" "work"))
 
 (defn work-dir [service-id]
@@ -277,7 +290,7 @@ Get-Content $inputFile | ConvertFrom-Json -AsHashtable | ForEach-Object { ... }
     (when (.exists f)
       (result/parse-result (slurp f)))))
 
-(defn poll-until-complete 
+(defn poll-until-complete
   [service-id {:keys [timeout-ms poll-interval-ms on-progress]
                :or {timeout-ms 300000 poll-interval-ms 1000}}]
   (let [deadline (+ (System/currentTimeMillis) timeout-ms)]
@@ -285,10 +298,10 @@ Get-Content $inputFile | ConvertFrom-Json -AsHashtable | ForEach-Object { ... }
       (cond
         (complete? service-id)
         (read-result service-id)
-        
+
         (> (System/currentTimeMillis) deadline)
         {:error :timeout}
-        
+
         :else
         (do
           (when on-progress
@@ -321,22 +334,22 @@ Corresponding PowerShell watches for triggers:
 # Service main loop
 while ($true) {
     $triggerFile = Join-Path $env:WORK_DIR 'trigger.json'
-    
+
     if (Test-Path $triggerFile) {
         $params = Get-Content $triggerFile | ConvertFrom-Json -AsHashtable
         Remove-Item $triggerFile
-        
+
         # Execute task with params
         Invoke-ExportTask -Params $params
     }
-    
+
     Start-Sleep -Seconds 1
 }
 ```
 
----
-
 ## 6. Deployment
+
+[[#Table of Contents|Back to TOC]]
 
 ### 6.1 Service Installation Script
 
@@ -362,15 +375,15 @@ if (-not (Test-Path $winswMaster)) {
 Get-ChildItem -Path $servicesDir -Filter '*.xml' | ForEach-Object {
     $serviceId = $_.BaseName
     $serviceExe = Join-Path $servicesDir "$serviceId.exe"
-    
+
     # Copy WinSW as service executable
     if (-not (Test-Path $serviceExe)) {
         Copy-Item $winswMaster $serviceExe
     }
-    
+
     # Install service
     & $serviceExe install
-    
+
     # Create work directory
     $workDir = Join-Path $AppRoot "work\$serviceId"
     New-Item -ItemType Directory -Force -Path $workDir | Out-Null
@@ -400,9 +413,9 @@ Add WinSW metadata to script manifests:
 }
 ```
 
----
-
 ## 7. Monitoring
+
+[[#Table of Contents|Back to TOC]]
 
 ### 7.1 Service Health Check
 
@@ -431,26 +444,26 @@ Query service errors from Clojure:
 
 ```clojure
 (defn recent-service-errors [service-id hours]
-  (let [{:keys [out]} 
-        (proc/exec {} 
+  (let [{:keys [out]}
+        (proc/exec {}
           ["pwsh.exe" "-NoProfile" "-Command"
-           (format "Get-EventLog -LogName Application -Source 'AppName' -EntryType Error -After (Get-Date).AddHours(-%d) | ConvertTo-Json" 
+           (format "Get-EventLog -LogName Application -Source 'AppName' -EntryType Error -After (Get-Date).AddHours(-%d) | ConvertTo-Json"
                    hours)])]
     (json/parse-string out true)))
 ```
 
----
-
 ## 8. Comparison: Direct vs Service Execution
 
-|Aspect|Direct (`proc/exec`)|WinSW Service|
-|---|---|---|
-|Startup time|Fast|Slower (service overhead)|
-|Max duration|Minutes|Hours/days|
-|User session|Required|Independent|
-|Result delivery|Immediate (stdout)|Polled (file)|
-|Failure recovery|Manual retry|Auto-restart|
-|Credential scope|User context|Service account|
-|Logging|Application captures|WinSW + Event Log|
+[[#Table of Contents|Back to TOC]]
+
+| Aspect           | Direct (`proc/exec`)   | WinSW Service           |
+| ---------------- | ---------------------- | ----------------------- |
+| Startup time     | Fast                   | Slower (service overhead) |
+| Max duration     | Minutes                | Hours/days              |
+| User session     | Required               | Independent             |
+| Result delivery  | Immediate (stdout)     | Polled (file)           |
+| Failure recovery | Manual retry           | Auto-restart            |
+| Credential scope | User context           | Service account         |
+| Logging          | Application captures   | WinSW + Event Log       |
 
 Choose direct invocation for interactive, short operations. Choose WinSW for background, long-running, or scheduled tasks.

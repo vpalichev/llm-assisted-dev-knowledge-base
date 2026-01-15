@@ -1,10 +1,17 @@
+# Table of Contents
 
+- [[#Global Config]]
+- [[#Project Config]]
+- [[#Run]]
+- [[#Usage]]
+
+---
 
 ## Global Config
 
-**`~/.clojure/deps.edn`:**
+[[#Table of Contents|Back to TOC]]
 
-clojure
+**`~/.clojure/deps.edn`:**
 
 ```clojure
 {:aliases
@@ -20,9 +27,9 @@ clojure
 
 ## Project Config
 
-**`deps.edn`:**
+[[#Table of Contents|Back to TOC]]
 
-clojure
+**`deps.edn`:**
 
 ```clojure
 {:aliases
@@ -32,16 +39,12 @@ clojure
 
 **`shadow-cljs.edn`:**
 
-clojure
-
 ```clojure
 {:nrepl {:port 9000}
  :builds {:app {...}}}
 ```
 
 **`.mcp.json`:**
-
-json
 
 ```json
 {
@@ -56,7 +59,7 @@ json
 
 ## Run
 
-bash
+[[#Table of Contents|Back to TOC]]
 
 ```bash
 # Terminal 1
@@ -70,6 +73,8 @@ claude
 ```
 
 ## Usage
+
+[[#Table of Contents|Back to TOC]]
 
 - "Evaluate in clojure: `(+ 1 2)`"
 - "Evaluate in clojurescript: `(js/alert \"hi\")`"

@@ -1,10 +1,29 @@
+# Table of Contents
+
+- [[#Module Overview]]
+- [[#Connection Management]]
+- [[#Get-PnPList]]
+- [[#Get-PnPListItem]]
+- [[#CAML Query Reference]]
+- [[#Query Examples]]
+- [[#Other Essential Cmdlets]]
+- [[#Performance Optimization]]
+- [[#Common Patterns]]
+- [[#URL Path Format]]
+- [[#Permissions]]
+
+---
+
 # PnP PowerShell Core Cmdlets for SharePoint Online
 
 ## Module Overview
 
+[[#Table of Contents|Back to TOC]]
+
 **PnP PowerShell** (formerly SharePointPnPPowerShellOnline) is a cross-platform PowerShell module for managing SharePoint Online environments. It wraps the SharePoint REST API and CSOM (Client-Side Object Model) into PowerShell cmdlets.
 
 **Installation:**
+
 ```powershell
 Install-Module -Name PnP.PowerShell -Scope CurrentUser
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -13,6 +32,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ---
 
 ## Connection Management
+
+[[#Table of Contents|Back to TOC]]
 
 ### Connect-PnPOnline
 
@@ -23,6 +44,7 @@ Connect-PnPOnline -Url "https://tenant.sharepoint.com/sites/sitename" -Interacti
 ```
 
 **Parameters:**
+
 - `-Url`: Target site collection URL (mandatory)
 - `-Interactive`: Browser-based modern authentication
 - `-ClientId` / `-ClientSecret`: Application-based authentication
@@ -34,26 +56,32 @@ The connection persists for the PowerShell session duration. Multiple connection
 
 ## Get-PnPList
 
+[[#Table of Contents|Back to TOC]]
+
 Retrieves list object instances from the current SharePoint site collection context. Returns **`Microsoft.SharePoint.Client.List`** objects representing SharePoint list containers (document libraries, custom lists, system lists, hidden lists).
 
 ### Parameter Sets
 
 **Identity Parameter Set:**
+
 ```powershell
 Get-PnPList -Identity <ListPipeBind>
 ```
 
 The `-Identity` parameter accepts:
+
 - **List Title** (string): Display name (e.g., "Documents")
 - **List URL** (string): Server-relative URL (e.g., "Shared Documents")
 - **List GUID** (Guid): `{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}`
 
 **Retrieval Without Parameters:**
+
 ```powershell
 Get-PnPList  # Returns all lists including hidden system lists
 ```
 
 **Includes Parameter:**
+
 ```powershell
 Get-PnPList -Identity "Documents" -Includes RootFolder,Fields,ContentTypes
 ```
@@ -61,6 +89,7 @@ Get-PnPList -Identity "Documents" -Includes RootFolder,Fields,ContentTypes
 Pre-loads related objects not retrieved by default due to CSOM's demand-loading architecture.
 
 Common include targets:
+
 - `RootFolder`: Folder object reference with path information
 - `Fields`: Complete field (column) schema collection
 - `ContentTypes`: Content type definitions
@@ -72,7 +101,7 @@ Common include targets:
 **Identification:**
 
 | Property | Type | Description |
-|----------|------|-------------|
+| --- | --- | --- |
 | `Id` | Guid | Immutable unique identifier |
 | `Title` | String | Display name (mutable) |
 | `RootFolder.ServerRelativeUrl` | String | Server-relative path (requires `-Includes RootFolder`) |
@@ -80,11 +109,12 @@ Common include targets:
 **Template and Type:**
 
 | Property | Type | Description |
-|----------|------|-------------|
+| --- | --- | --- |
 | `BaseTemplate` | Integer | List template type identifier |
 | `BaseType` | Enum | Fundamental list classification |
 
 **BaseTemplate Values:**
+
 - `100`: Generic List
 - `101`: Document Library
 - `106`: Events List
@@ -95,6 +125,7 @@ Common include targets:
 - `171`: Tasks List with Timeline
 
 **BaseType Values:**
+
 - `GenericList` (0): Standard list
 - `DocumentLibrary` (1): File storage container
 - `Survey` (4): Survey list
@@ -103,7 +134,7 @@ Common include targets:
 **Content Properties:**
 
 | Property | Type | Description |
-|----------|------|-------------|
+| --- | --- | --- |
 | `ItemCount` | Integer | Item count (files for document libraries, excluding folders) |
 | `Hidden` | Boolean | Hidden from SharePoint navigation |
 | `NoCrawl` | Boolean | Prevents search indexing |
@@ -111,7 +142,7 @@ Common include targets:
 **Versioning Properties:**
 
 | Property | Type | Description |
-|----------|------|-------------|
+| --- | --- | --- |
 | `EnableVersioning` | Boolean | Version history enabled |
 | `MajorVersionLimit` | Integer | Max major versions (0 = unlimited) |
 | `EnableMinorVersions` | Boolean | Draft versions enabled |
@@ -164,6 +195,8 @@ foreach ($list in Get-PnPList -Includes RootFolder) {
 
 ## Get-PnPListItem
 
+[[#Table of Contents|Back to TOC]]
+
 Retrieves list item instances from a SharePoint list or document library. Returns **`Microsoft.SharePoint.Client.ListItem`** objects.
 
 ### List Items vs. Files
@@ -172,6 +205,7 @@ Retrieves list item instances from a SharePoint list or document library. Return
 - **File** = Binary content referenced by a list item
 
 For document libraries:
+
 - Every file has an underlying ListItem storing metadata
 - ListItem contains `.File` property reference to file content
 - `Get-PnPListItem` retrieves metadata, not file binary
@@ -180,42 +214,52 @@ For document libraries:
 ### Parameter Sets
 
 **Basic Retrieval:**
+
 ```powershell
 Get-PnPListItem -List <ListPipeBind>
 ```
 
 **List Parameter Types:**
+
 - List Title: "Documents"
 - List URL: "Shared Documents"
 - List GUID: `{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}`
 - List Object: Result from `Get-PnPList`
 
 **Single Item by ID:**
+
 ```powershell
 Get-PnPListItem -List <ListPipeBind> -Id <Int32>
 ```
+
 Most efficient retrieval method (direct index lookup).
 
 **Single Item by GUID:**
+
 ```powershell
 Get-PnPListItem -List <ListPipeBind> -UniqueId <Guid>
 ```
 
 **CAML Query:**
+
 ```powershell
 Get-PnPListItem -List <ListPipeBind> -Query <String>
 ```
 
 **Field Projection:**
+
 ```powershell
 Get-PnPListItem -List <ListPipeBind> -Fields <String[]>
 ```
+
 Server-side column filtering reduces payload size.
 
 **Pagination:**
+
 ```powershell
 Get-PnPListItem -List <ListPipeBind> -PageSize <Int32>
 ```
+
 - Default: 100 items
 - Maximum: 5000 (list view threshold)
 - Continuation tokens handled automatically
@@ -223,7 +267,7 @@ Get-PnPListItem -List <ListPipeBind> -PageSize <Int32>
 ### System Properties
 
 | Property | Type | Description |
-|----------|------|-------------|
+| --- | --- | --- |
 | `Id` | Int32 | Auto-incrementing integer (1 to 2,147,483,647) |
 | `GUID` | Guid | Globally unique identifier |
 | `ContentTypeId` | String | Hierarchical content type ID (e.g., `0x0101` = Document) |
@@ -234,18 +278,21 @@ Get-PnPListItem -List <ListPipeBind> -PageSize <Int32>
 ### Field Value Access
 
 **Indexer Syntax (Primary):**
+
 ```powershell
 $title = $item["Title"]
 $customField = $item["CustomColumnName"]
 ```
 
 **FieldValues Collection:**
+
 ```powershell
 $title = $item.FieldValues["Title"]
 $allFields = $item.FieldValues  # Hashtable
 ```
 
 **Internal Name vs. Display Name:**
+
 ```powershell
 # Get internal names
 $list = Get-PnPList -Identity "Documents"
@@ -255,7 +302,7 @@ Get-PnPField -List $list | Select-Object Title, InternalName
 ### Document Library Fields
 
 | Field | Description |
-|-------|-------------|
+| --- | --- |
 | `FileRef` | Server-relative URL (`/sites/sitename/Documents/file.docx`) |
 | `FileLeafRef` | File name with extension (`file.docx`) |
 | `FileDirRef` | Parent folder path |
@@ -264,6 +311,7 @@ Get-PnPField -List $list | Select-Object Title, InternalName
 ### Lookup and User Fields
 
 **Lookup:**
+
 ```powershell
 $lookupValue = $item["ProjectLookup"]
 $lookupValue.LookupId      # Integer ID
@@ -271,6 +319,7 @@ $lookupValue.LookupValue   # Display text
 ```
 
 **Multi-Value Lookup:**
+
 ```powershell
 $multiLookup = $item["RelatedProjects"]
 foreach ($lookup in $multiLookup) {
@@ -280,6 +329,7 @@ foreach ($lookup in $multiLookup) {
 ```
 
 **User/Person:**
+
 ```powershell
 $user = $item["AssignedTo"]
 $user.LookupId      # User ID
@@ -290,6 +340,8 @@ $user.Email         # Email (when available)
 ---
 
 ## CAML Query Reference
+
+[[#Table of Contents|Back to TOC]]
 
 CAML (Collaborative Application Markup Language) is XML-based query syntax for SharePoint list data.
 
@@ -315,7 +367,7 @@ CAML (Collaborative Application Markup Language) is XML-based query syntax for S
 ### Comparison Operators
 
 | Operator | Description |
-|----------|-------------|
+| --- | --- |
 | `<Eq>` | Equal |
 | `<Neq>` | Not Equal |
 | `<Gt>` / `<Lt>` | Greater Than / Less Than |
@@ -349,7 +401,7 @@ CAML (Collaborative Application Markup Language) is XML-based query syntax for S
 ### Field Types
 
 | Type | Usage |
-|------|-------|
+| --- | --- |
 | `Text` | Single line text, choice fields |
 | `Note` | Multiple lines of text |
 | `Number` | Numeric (integer or decimal) |
@@ -364,19 +416,23 @@ CAML (Collaborative Application Markup Language) is XML-based query syntax for S
 ### DateTime Queries
 
 **UTC Format:**
+
 ```xml
 <Value Type='DateTime'>2024-01-15T14:30:00Z</Value>
 ```
 
 **Date-Only:**
+
 ```xml
 <Value Type='DateTime' IncludeTimeValue='FALSE'>2024-01-15</Value>
 ```
 
 **Relative Tokens:**
+
 ```xml
 <Value Type='DateTime'><Today /></Value>
 ```
+
 Available: `<Today />`, `<Now />`, `<Month />`, `<Year />`
 
 ### OrderBy
@@ -391,6 +447,8 @@ Available: `<Today />`, `<Now />`, `<Month />`, `<Year />`
 ---
 
 ## Query Examples
+
+[[#Table of Contents|Back to TOC]]
 
 ### Basic Equality Filter
 
@@ -590,6 +648,8 @@ $items = Get-PnPListItem -List "Tasks" -Query $query
 
 ## Other Essential Cmdlets
 
+[[#Table of Contents|Back to TOC]]
+
 ### Get-PnPFolder
 
 ```powershell
@@ -660,6 +720,8 @@ Invoke-PnPBatch -Batch $batch
 
 ## Performance Optimization
 
+[[#Table of Contents|Back to TOC]]
+
 ### Field Projection
 
 ```powershell
@@ -693,6 +755,7 @@ Always prefer CAML queries for filtering.
 SharePoint Online enforces a **5000-item threshold** for non-indexed columns.
 
 **Mitigation:**
+
 1. Index columns used in WHERE clauses
 2. Use time-based filtering to reduce result sets
 3. Use pagination with `-PageSize`
@@ -700,6 +763,8 @@ SharePoint Online enforces a **5000-item threshold** for non-indexed columns.
 ---
 
 ## Common Patterns
+
+[[#Table of Contents|Back to TOC]]
 
 ### Pipeline Processing
 
@@ -767,10 +832,14 @@ foreach ($item in $items) {
 
 ## URL Path Format
 
+[[#Table of Contents|Back to TOC]]
+
 SharePoint PnP cmdlets require **server-relative URLs**: `/sites/sitename/library/file.docx`
 
 ---
 
 ## Permissions
+
+[[#Table of Contents|Back to TOC]]
 
 File operations require **Contribute** or higher permission levels on target libraries.

@@ -1,4 +1,22 @@
+# Table of Contents
+
+- [[#The Basic Function]]
+- [[#What Happens Step-by-Step]]
+- [[#Why Two .then Calls?]]
+- [[#Using It]]
+- [[#Why Headers Come Separately]]
+- [[#How Promises Work]]
+- [[#HTTP Errors]]
+- [[#Alternative: core.async]]
+- [[#Why Everything Is Async in Browsers]]
+- [[#Promise Chaining]]
+
+---
+
 ## The Basic Function
+
+[[#Table of Contents|Back to TOC]]
+
 ```clojure
 (defn fetch-json [url]
   (-> (js/fetch url)
@@ -8,19 +26,25 @@
 
 ## What Happens Step-by-Step
 
+[[#Table of Contents|Back to TOC]]
+
 ### 1. Start the Request
+
 ```clojure
 (js/fetch url)
 ```
+
 - Opens network connection to server
 - Sends HTTP GET request
 - Returns a Promise immediately
 - Doesn't wait—your code keeps running
 
 ### 2. Headers Arrive
+
 ```clojure
 (.then #(.json %))
 ```
+
 - Server sends back status code and headers first
 - Promise resolves with Response object
 - Response has `.status`, `.headers`, but body isn't read yet
@@ -28,9 +52,11 @@
 - Returns another Promise
 
 ### 3. Body Arrives
+
 ```clojure
 (.then #(js->clj % :keywordize-keys true))
 ```
+
 - Browser finishes downloading body data
 - JSON parser converts it to JavaScript object
 - Promise resolves with parsed data
@@ -38,6 +64,8 @@
 - String keys become keywords: `"name"` → `:name`
 
 ## Why Two .then Calls?
+
+[[#Table of Contents|Back to TOC]]
 
 Because two separate async operations happen:
 
@@ -47,6 +75,9 @@ Because two separate async operations happen:
 Each `.then` waits for one operation to complete.
 
 ## Using It
+
+[[#Table of Contents|Back to TOC]]
+
 ```clojure
 (-> (fetch-json "https://api.example.com/users")
     (.then (fn [users] (prn users)))
@@ -57,7 +88,10 @@ Your callback in `.then` runs when all data arrives. Could be instant or take se
 
 ## Why Headers Come Separately
 
+[[#Table of Contents|Back to TOC]]
+
 HTTP sends response in two parts:
+
 ```
 HTTP/1.1 200 OK              ← Headers (arrive first, small)
 Content-Type: application/json
@@ -69,6 +103,8 @@ Content-Length: 5000
 Fetch API lets you check the status code before downloading a potentially huge body. Older APIs (XMLHttpRequest) forced you to wait for everything.
 
 ## How Promises Work
+
+[[#Table of Contents|Back to TOC]]
 
 A Promise is a placeholder for data that doesn't exist yet:
 
@@ -83,7 +119,10 @@ Your code doesn't stop and wait—the browser runs your callbacks later when rea
 
 ## HTTP Errors
 
+[[#Table of Contents|Back to TOC]]
+
 Important: HTTP status 404 or 500 don't trigger `.catch` automatically. Check manually:
+
 ```clojure
 (defn fetch-json [url]
   (-> (js/fetch url)
@@ -98,7 +137,10 @@ Important: HTTP status 404 or 500 don't trigger `.catch` automatically. Check ma
 
 ## Alternative: core.async
 
+[[#Table of Contents|Back to TOC]]
+
 Makes async code look synchronous:
+
 ```clojure
 (require '[cljs.core.async :refer [go]]
          '[cljs.core.async.interop :refer [<p!]])
@@ -118,9 +160,12 @@ Makes async code look synchronous:
 
 ## Why Everything Is Async in Browsers
 
+[[#Table of Contents|Back to TOC]]
+
 JavaScript runs in a single thread. If network requests blocked (stopped and waited), the entire browser tab would freeze—no clicking, scrolling, or typing. Async operations let the browser stay responsive while waiting for network data.
 
 Server-side Clojure (JVM) uses threads, so blocking is fine:
+
 ```clojure
 (require '[clj-http.client :as http])
 
@@ -130,7 +175,10 @@ Server-side Clojure (JVM) uses threads, so blocking is fine:
 
 ## Promise Chaining
 
+[[#Table of Contents|Back to TOC]]
+
 Each `.then` returns a new Promise. Values flow through the chain:
+
 ```clojure
 (-> promise-1
     (.then fn-a)  ; Returns promise-2

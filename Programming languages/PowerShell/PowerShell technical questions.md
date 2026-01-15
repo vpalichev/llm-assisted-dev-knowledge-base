@@ -1,8 +1,19 @@
+# Table of Contents
+
+- [[#Variable Type Inspection]]
+- [[#Array Operations]]
+- [[#Field Value Extraction]]
+- [[#Data Transformation and Export]]
+
+---
+
 # PowerShell Array and Object Operations
 
 Techniques for inspecting, manipulating, and transforming arrays and objects, with SharePoint Client Object Model patterns.
 
 ## Variable Type Inspection
+
+[[#Table of Contents|Back to TOC]]
 
 PowerShell methods for examining variable types:
 
@@ -66,6 +77,8 @@ $var[0] | Get-Member | Select-Object -First 1 -ExpandProperty TypeName
 
 ## Array Operations
 
+[[#Table of Contents|Back to TOC]]
+
 ### Length vs Count Properties
 
 Differences between Length and Count properties by object type:
@@ -122,6 +135,8 @@ $var | Select-Object -Skip 100 -First 101
 **Note:** Array slicing with `[100..200]` is efficient and direct, while `Select-Object -Skip/-First` provides more pipeline flexibility.
 
 ## Field Value Extraction
+
+[[#Table of Contents|Back to TOC]]
 
 ### Basic Field Access
 
@@ -234,6 +249,8 @@ if ($var[0]["FieldName"] -ne $null) {
 
 ## Data Transformation and Export
 
+[[#Table of Contents|Back to TOC]]
+
 ### Converting to Structured Tables
 
 Transform SharePoint ListItem arrays into tabular data with specific columns:
@@ -279,14 +296,17 @@ $var | ForEach-Object {
 The SharePoint object transformation follows this data flow:
 
 #### Step 1: Pipeline Input
+
 ```powershell
 $var | ForEach-Object {
 ```
+
 - `$var` contains array of SharePoint ListItem objects
 - `|` (pipeline operator) passes each ListItem to `ForEach-Object`
 - `ForEach-Object` processes one item at a time
 
 #### Step 2: Object Creation
+
 ```powershell
     [PSCustomObject]@{
         FileLeafRef = $_["FileLeafRef"]      # File name
@@ -295,15 +315,18 @@ $var | ForEach-Object {
         FSObjType = $_["FSObjType"]          # File/folder indicator
     }
 ```
+
 - `[PSCustomObject]` creates structured object with named properties
 - `$_` represents current ListItem in pipeline
 - `$_["FieldName"]` accesses SharePoint field values via indexer
 - Each property extracts specific field data from the ListItem
 
 #### Step 3: Pipeline Output
+
 ```powershell
 } | Format-Table
 ```
+
 - `ForEach-Object` outputs PSCustomObject for each input item
 - Result: Array of structured objects with consistent property names
 - `Format-Table` displays results in readable tabular format
@@ -311,6 +334,7 @@ $var | ForEach-Object {
 #### Key Components Explained
 
 **Pipeline Flow:**
+
 ```
 SharePoint ListItem[] → ForEach-Object → PSCustomObject[] → Format-Table → Display
 ```
@@ -339,3 +363,4 @@ $var[0] | Get-Member
 
 # Get unique members across all elements
 $var | ForEach-Object { $_ | Get-Member } | Select-Object -Unique
+```

@@ -1,4 +1,22 @@
+# Table of Contents
 
+- [[#Executive Summary]]
+- [[#1. Design Principles]]
+- [[#2. Artifact Contracts]]
+- [[#3. Output Locations]]
+- [[#4. Data Exchange Format]]
+- [[#5. Completion Signaling]]
+- [[#6. Invocation Patterns]]
+- [[#7. Error Handling & Recovery]]
+- [[#8. Type Mapping]]
+- [[#9. Script Organization]]
+- [[#10. Database Coordination]]
+- [[#11. Security Considerations]]
+- [[#12. Testing Strategy]]
+- [[#Appendix A: Error Codes Reference]]
+- [[#Appendix B: Version History]]
+
+---
 
 **Version 1.0 — Technical Specification Document**
 
@@ -6,11 +24,15 @@
 
 ## Executive Summary
 
+[[#Table of Contents|Back to TOC]]
+
 This specification establishes patterns and conventions for integrating Clojure applications with PowerShell scripts on Windows platforms. It addresses the challenge of orchestrating PowerShell operations that produce diverse artifacts including files, database mutations, and system state changes, while ensuring the Clojure application maintains reliable knowledge of what was produced and whether operations succeeded.
 
 ---
 
 ## 1. Design Principles
+
+[[#Table of Contents|Back to TOC]]
 
 The integration layer adheres to the following core principles:
 
@@ -24,16 +46,18 @@ The integration layer adheres to the following core principles:
 
 ## 2. Artifact Contracts
 
+[[#Table of Contents|Back to TOC]]
+
 ### 2.1 Artifact Categories
 
 Scripts produce artifacts in four categories, each with distinct handling requirements:
 
-|Category|Examples|Discovery Method|
-|---|---|---|
-|File Output|CSV, XLSX, PDF, reports|Manifest file listing paths|
-|Directory Structure|Downloaded files, extracted archives|Manifest with root path + file list|
-|Database Mutation|INSERT/UPDATE operations|Batch ID in result, query by Clojure|
-|System State|Registry, services, config files|Before/after state in result object|
+| Category | Examples | Discovery Method |
+| --- | --- | --- |
+| File Output | CSV, XLSX, PDF, reports | Manifest file listing paths |
+| Directory Structure | Downloaded files, extracted archives | Manifest with root path + file list |
+| Database Mutation | INSERT/UPDATE operations | Batch ID in result, query by Clojure |
+| System State | Registry, services, config files | Before/after state in result object |
 
 ### 2.2 Script Manifest Structure
 
@@ -73,6 +97,8 @@ Clojure discovers artifacts through a three-phase process:
 
 ## 3. Output Locations
 
+[[#Table of Contents|Back to TOC]]
+
 ### 3.1 Directory Hierarchy
 
 All script operations use a standardized directory structure rooted at the application data folder:
@@ -103,6 +129,8 @@ Scripts distinguish between work directories (automatically cleaned after config
 ---
 
 ## 4. Data Exchange Format
+
+[[#Table of Contents|Back to TOC]]
 
 ### 4.1 Result Envelope Schema
 
@@ -155,18 +183,20 @@ Scripts must write the result envelope as the final line of stdout, prefixed wit
 
 ## 5. Completion Signaling
 
+[[#Table of Contents|Back to TOC]]
+
 ### 5.1 Exit Codes
 
 PowerShell scripts use standardized exit codes:
 
-|Code|Status|Description|
-|---|---|---|
-|0|Success|All artifacts produced successfully|
-|1|Partial Success|Some artifacts produced; see result envelope|
-|2|Error|Operation failed; result envelope contains errors|
-|3|Invalid Parameters|Script invoked with invalid arguments|
-|4|Timeout|Operation exceeded time limit|
-|5|Permission Denied|Insufficient privileges for operation|
+| Code | Status | Description |
+| --- | --- | --- |
+| 0 | Success | All artifacts produced successfully |
+| 1 | Partial Success | Some artifacts produced; see result envelope |
+| 2 | Error | Operation failed; result envelope contains errors |
+| 3 | Invalid Parameters | Script invoked with invalid arguments |
+| 4 | Timeout | Operation exceeded time limit |
+| 5 | Permission Denied | Insufficient privileges for operation |
 
 ### 5.2 Multi-Phase Signal Protocol
 
@@ -179,6 +209,8 @@ For long-running operations, scripts implement a heartbeat protocol:
 ---
 
 ## 6. Invocation Patterns
+
+[[#Table of Contents|Back to TOC]]
 
 ### 6.1 Process Invocation
 
@@ -223,16 +255,18 @@ Parameters are passed as a single JSON-encoded argument to avoid shell escaping 
 
 ## 7. Error Handling & Recovery
 
+[[#Table of Contents|Back to TOC]]
+
 ### 7.1 Error Classification
 
 Errors are classified into categories that determine handling strategy:
 
-|Category|Example Codes|Recovery Strategy|
-|---|---|---|
-|Transient|ERR_NETWORK, ERR_TIMEOUT|Automatic retry with backoff|
-|Validation|ERR_INVALID_PARAM, ERR_SCHEMA|Report to user; do not retry|
-|Resource|ERR_DISK_FULL, ERR_PERMISSION|Alert user; require intervention|
-|Fatal|ERR_CORRUPT_DATA, ERR_INTERNAL|Log details; escalate to support|
+| Category | Example Codes | Recovery Strategy |
+| --- | --- | --- |
+| Transient | ERR_NETWORK, ERR_TIMEOUT | Automatic retry with backoff |
+| Validation | ERR_INVALID_PARAM, ERR_SCHEMA | Report to user; do not retry |
+| Resource | ERR_DISK_FULL, ERR_PERMISSION | Alert user; require intervention |
+| Fatal | ERR_CORRUPT_DATA, ERR_INTERNAL | Log details; escalate to support |
 
 ### 7.2 Partial Failure Handling
 
@@ -254,19 +288,21 @@ On failure, scripts must clean up incomplete artifacts:
 
 ## 8. Type Mapping
 
+[[#Table of Contents|Back to TOC]]
+
 ### 8.1 JSON to Clojure Mappings
 
-|PowerShell/JSON|Clojure|Notes|
-|---|---|---|
-|string|String|Direct mapping|
-|number (int)|Long|Cheshire default|
-|number (decimal)|Double or BigDecimal|Use `:bigdec true` for money|
-|boolean|Boolean|Direct mapping|
-|null|nil|Direct mapping|
-|array|Vector|Default Cheshire behavior|
-|object|Map (keyword keys)|Via `parse-string true` flag|
-|ISO-8601 string|java.time.Instant|Custom decoder for dates|
-|UUID string|java.util.UUID|Custom decoder|
+| PowerShell/JSON | Clojure | Notes |
+| --- | --- | --- |
+| string | String | Direct mapping |
+| number (int) | Long | Cheshire default |
+| number (decimal) | Double or BigDecimal | Use `:bigdec true` for money |
+| boolean | Boolean | Direct mapping |
+| null | nil | Direct mapping |
+| array | Vector | Default Cheshire behavior |
+| object | Map (keyword keys) | Via `parse-string true` flag |
+| ISO-8601 string | java.time.Instant | Custom decoder for dates |
+| UUID string | java.util.UUID | Custom decoder |
 
 ### 8.2 File Artifact Mapping
 
@@ -285,6 +321,8 @@ File artifacts are represented as Clojure records with associated operations:
 ---
 
 ## 9. Script Organization
+
+[[#Table of Contents|Back to TOC]]
 
 ### 9.1 Directory Structure
 
@@ -343,6 +381,8 @@ try {
 
 ## 10. Database Coordination
 
+[[#Table of Contents|Back to TOC]]
+
 ### 10.1 Transaction Boundaries
 
 Database operations follow these principles:
@@ -378,6 +418,8 @@ Clojure queries database results using the batch ID from the result envelope:
 ---
 
 ## 11. Security Considerations
+
+[[#Table of Contents|Back to TOC]]
 
 ### 11.1 Execution Policy
 
@@ -417,6 +459,8 @@ Scripts declare privilege requirements in their manifests. The Clojure applicati
 
 ## 12. Testing Strategy
 
+[[#Table of Contents|Back to TOC]]
+
 ### 12.1 Integration Test Architecture
 
 Tests verify the complete integration path:
@@ -448,23 +492,27 @@ Database tests use transaction rollback or dedicated test schemas. Each test gen
 
 ## Appendix A: Error Codes Reference
 
-|Error Code|Description|
-|---|---|
-|ERR_INVALID_PARAM|Parameter validation failed|
-|ERR_NETWORK|Network connectivity issue (transient)|
-|ERR_TIMEOUT|Operation exceeded time limit|
-|ERR_DISK_FULL|Insufficient disk space for output|
-|ERR_PERMISSION|Access denied to resource|
-|ERR_DB_CONNECTION|Database connection failed|
-|ERR_DB_CONSTRAINT|Database constraint violation|
-|ERR_FILE_NOT_FOUND|Required input file missing|
-|ERR_PARSE|Failed to parse input data|
-|ERR_INTERNAL|Unexpected internal error|
+[[#Table of Contents|Back to TOC]]
+
+| Error Code | Description |
+| --- | --- |
+| ERR_INVALID_PARAM | Parameter validation failed |
+| ERR_NETWORK | Network connectivity issue (transient) |
+| ERR_TIMEOUT | Operation exceeded time limit |
+| ERR_DISK_FULL | Insufficient disk space for output |
+| ERR_PERMISSION | Access denied to resource |
+| ERR_DB_CONNECTION | Database connection failed |
+| ERR_DB_CONSTRAINT | Database constraint violation |
+| ERR_FILE_NOT_FOUND | Required input file missing |
+| ERR_PARSE | Failed to parse input data |
+| ERR_INTERNAL | Unexpected internal error |
 
 ---
 
 ## Appendix B: Version History
 
-|Version|Date|Changes|
-|---|---|---|
-|1.0|2025-01|Initial specification release|
+[[#Table of Contents|Back to TOC]]
+
+| Version | Date | Changes |
+| --- | --- | --- |
+| 1.0 | 2025-01 | Initial specification release |

@@ -1,7 +1,19 @@
+# Table of Contents
+
+- [[#Understanding Datomic's Architecture]]
+- [[#Setting Up Datomic Pro on Windows]]
+- [[#Windows-Specific Pitfalls and Solutions]]
+- [[#Quick Reference]]
+- [[#Next Steps]]
+- [[#Troubleshooting Checklist]]
+
+---
 
 This guide is for developers comfortable with JVM tooling who are new to Datomic. We'll start by clarifying Datomic's architecture, then walk through getting a working setup on Windows.
 
 ## Understanding Datomic's Architecture
+
+[[#Table of Contents|Back to TOC]]
 
 Before touching configuration files, let's get the mental model straight. Datomic's terminology trips up nearly everyone at first.
 
@@ -74,13 +86,13 @@ They all refer to the same thing. The "Pro" just distinguishes it from the (now-
 
 Datomic has two different APIs:
 
-|Peer API|Client API|
-|---|---|
-|Library runs in your process|Connects to a Peer Server|
-|Has local data cache|No local cache|
-|Queries run in-process|Queries run on Peer Server|
-|Lower latency for reads|Simpler deployment|
-|`datomic.api` namespace|`datomic.client.api` namespace|
+| Peer API                  | Client API                 |
+| ------------------------- | -------------------------- |
+| Library runs in your process | Connects to a Peer Server |
+| Has local data cache      | No local cache             |
+| Queries run in-process    | Queries run on Peer Server |
+| Lower latency for reads   | Simpler deployment         |
+| `datomic.api` namespace   | `datomic.client.api` namespace |
 
 This guide covers the **Peer API**, which is what most on-premise Datomic Pro setups use.
 
@@ -94,6 +106,8 @@ The magic is that reads never hit the Transactor. Your application has the data 
 ---
 
 ## Setting Up Datomic Pro on Windows
+
+[[#Table of Contents|Back to TOC]]
 
 Now that the concepts are clear, let's get it running.
 
@@ -204,7 +218,7 @@ Create or edit `~/.m2/settings.xml` (typically `C:\Users\YourName\.m2\settings.x
 
 ```clojure
 {:deps {com.datomic/datomic-pro {:mvn/version "1.0.7187"}}
- 
+
  :mvn/repos {"my.datomic.com" {:url "https://my.datomic.com/repo"}}}
 ```
 
@@ -247,7 +261,7 @@ Create or edit `~/.m2/settings.xml` (typically `C:\Users\YourName\.m2\settings.x
     :db/valueType   :db.type/string
     :db/cardinality :db.cardinality/one
     :db/doc         "A person's name"}
-   
+
    {:db/ident       :person/email
     :db/valueType   :db.type/string
     :db/cardinality :db.cardinality/one
@@ -277,6 +291,8 @@ Create or edit `~/.m2/settings.xml` (typically `C:\Users\YourName\.m2\settings.x
 
 ## Windows-Specific Pitfalls and Solutions
 
+[[#Table of Contents|Back to TOC]]
+
 ### Memory Configuration
 
 The default memory settings in `transactor.bat` may not suit your system. Edit the batch file or set environment variables:
@@ -298,15 +314,14 @@ set JAVA_OPTS=-Xms1g -Xmx2g -XX:+UseG1GC
 Windows has a 260-character path limit by default. Datomic's storage can create deep directory structures. Solutions:
 
 1. **Enable long paths** (Windows 10 1607+):
-    
+
     ```powershell
     # Run as Administrator
     New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
         -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
     ```
-    
+
 2. **Use a short base path** like `C:\d\` instead of `C:\Users\YourName\Documents\Projects\Datomic\`
-    
 
 ### Line Ending Problems
 
@@ -317,7 +332,7 @@ If you edit config files on Windows and they stop working:
 (Get-Content config\dev-transactor.properties -Raw) -match "`r`n"
 
 # Convert to Unix line endings if needed
-(Get-Content config\dev-transactor.properties -Raw) -replace "`r`n", "`n" | 
+(Get-Content config\dev-transactor.properties -Raw) -replace "`r`n", "`n" |
     Set-Content config\dev-transactor.properties -NoNewline
 ```
 
@@ -333,13 +348,13 @@ chcp 65001
 
 ### Transactor Won't Start: Common Causes
 
-|Symptom|Likely Cause|Fix|
-|---|---|---|
-|"Address already in use"|Port 4334 occupied|Change port in properties or kill other process|
-|Hangs with no output|Wrong Java version|Ensure JAVA_HOME points to JDK 11+|
-|"License key invalid"|Copy/paste error|Check for invisible characters in license key|
-|"Could not find artifact"|Maven credentials wrong|Verify `settings.xml` credentials|
-|Silent failure|BOM in properties file|Re-save as UTF-8 without BOM|
+| Symptom                     | Likely Cause              | Fix                                         |
+| --------------------------- | ------------------------- | ------------------------------------------- |
+| "Address already in use"    | Port 4334 occupied        | Change port in properties or kill other process |
+| Hangs with no output        | Wrong Java version        | Ensure JAVA_HOME points to JDK 11+          |
+| "License key invalid"       | Copy/paste error          | Check for invisible characters in license key |
+| "Could not find artifact"   | Maven credentials wrong   | Verify `settings.xml` credentials           |
+| Silent failure              | BOM in properties file    | Re-save as UTF-8 without BOM                |
 
 ### Running as a Windows Service
 
@@ -355,6 +370,8 @@ nssm start DatomicTransactor
 ---
 
 ## Quick Reference
+
+[[#Table of Contents|Back to TOC]]
 
 ### Connection URI Formats
 
@@ -402,20 +419,23 @@ nssm stop DatomicTransactor
 
 ## Next Steps
 
+[[#Table of Contents|Back to TOC]]
+
 Once you have a working setup:
 
 1. **Learn Datalog**: The query language is Datomic's superpower. Start with [Learn Datalog Today](http://www.learndatalogtoday.org/).
-    
+
 2. **Understand the schema**: Datomic's schema is itself data. Explore `:db/ident`, `:db/valueType`, `:db/cardinality`.
-    
+
 3. **Explore time-travel**: `d/history`, `d/as-of`, and `d/since` let you query past states. This is built-in—no extra setup.
-    
+
 4. **Consider storage backends**: Dev protocol is fine for development. For production on Windows, PostgreSQL is a solid choice that avoids cloud dependencies.
-    
 
 ---
 
 ## Troubleshooting Checklist
+
+[[#Table of Contents|Back to TOC]]
 
 When something isn't working:
 

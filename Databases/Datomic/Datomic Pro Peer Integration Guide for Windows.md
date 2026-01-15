@@ -1,6 +1,31 @@
+# Table of Contents
+
+- [[#Overview]]
+- [[#Prerequisites]]
+- [[#Storage Backend Options]]
+- [[#Installation]]
+- [[#Option 1: Dev Storage (Development)]]
+- [[#Option 2: Memory Storage (Testing & CI/CD)]]
+- [[#Option 3: PostgreSQL Storage (Production)]]
+- [[#Starting the Application]]
+- [[#Migration from Datomic Free or EDN]]
+- [[#Database Schema]]
+- [[#Querying the Database]]
+- [[#Backup and Restore]]
+- [[#Performance Tuning]]
+- [[#Troubleshooting]]
+- [[#Production Deployment]]
+- [[#Storage Comparison]]
+- [[#Quick Start Cheat Sheet]]
+- [[#License]]
+
+---
+
 This guide explains how to set up and use **Datomic Pro** (Peer library) for the reporting planner application on **Windows**.
 
 ## Overview
+
+[[#Table of Contents|Back to TOC]]
 
 The reporting planner uses **Datomic Pro** for report storage. Datomic Pro offers multiple storage backends, production-ready features, and enterprise capabilities beyond Datomic Free.
 
@@ -19,17 +44,21 @@ The reporting planner uses **Datomic Pro** for report storage. Datomic Pro offer
 
 ## Prerequisites
 
+[[#Table of Contents|Back to TOC]]
+
 1. **Java 8 or higher** - Required by Datomic
 2. **Datomic Pro license** - Free Apache 2.0 license (no cost)
 3. **Storage backend** - Choose based on your requirements
 
 ## Storage Backend Options
 
-|Backend|URI Format|Use Case|Persistence|Transactor Required|
-|---|---|---|---|---|
-|**Dev**|`datomic:dev://`|Development, testing|File-based, local|Yes|
-|**Memory**|`datomic:mem://`|Testing, CI/CD|In-memory only|No|
-|**PostgreSQL**|`datomic:sql://`|Production|PostgreSQL database|Yes|
+[[#Table of Contents|Back to TOC]]
+
+| Backend | URI Format | Use Case | Persistence | Transactor Required |
+| --- | --- | --- | --- | --- |
+| **Dev** | `datomic:dev://` | Development, testing | File-based, local | Yes |
+| **Memory** | `datomic:mem://` | Testing, CI/CD | In-memory only | No |
+| **PostgreSQL** | `datomic:sql://` | Production | PostgreSQL database | Yes |
 
 **Recommended Choices:**
 
@@ -38,6 +67,8 @@ The reporting planner uses **Datomic Pro** for report storage. Datomic Pro offer
 - **Production**: PostgreSQL - reliable, ACID-compliant persistence
 
 ## Installation
+
+[[#Table of Contents|Back to TOC]]
 
 ### Step 1: Install Datomic Pro
 
@@ -74,6 +105,8 @@ Get your download key from [my.datomic.com](https://my.datomic.com/) → Account
 ---
 
 ## Option 1: Dev Storage (Development)
+
+[[#Table of Contents|Back to TOC]]
 
 ### Overview
 
@@ -136,6 +169,8 @@ object-cache-max=1g
 ---
 
 ## Option 2: Memory Storage (Testing & CI/CD)
+
+[[#Table of Contents|Back to TOC]]
 
 ### Overview
 
@@ -234,6 +269,8 @@ Create independent in-memory databases with different names:
 ---
 
 ## Option 3: PostgreSQL Storage (Production)
+
+[[#Table of Contents|Back to TOC]]
 
 ### Overview
 
@@ -389,6 +426,8 @@ Start-Service postgresql-x64-17
 
 ## Starting the Application
 
+[[#Table of Contents|Back to TOC]]
+
 ### Step 1: Start Transactor (if needed)
 
 **Memory storage**: Skip this step
@@ -430,6 +469,8 @@ The application automatically:
 ---
 
 ## Migration from Datomic Free or EDN
+
+[[#Table of Contents|Back to TOC]]
 
 ### Migrate from `data/reports.edn`
 
@@ -490,23 +531,27 @@ Migration complete:
 
 ## Database Schema
 
-|Attribute|Type|Unique?|Description|
-|---|---|---|---|
-|`:report/code`|String|Yes|Unique report code (REP-001, REP-002, ...)|
-|`:report/form-type`|String|No|Type of form|
-|`:report/period-type`|String|No|Period type (day, week, month, quarter, year)|
-|`:report/period-value`|String|No|Period value (format depends on period-type)|
-|`:report/reporting-period`|String|No|Combined period string (backward compatibility)|
-|`:report/current-date`|String|No|Current date (YYYY-MM-DD)|
-|`:report/submission-date`|String|No|Submission date (YYYY-MM-DD)|
-|`:report/submitted-by`|String|No|Username of submitter|
-|`:report/status`|String|No|Report status (default: "На рассмотрении")|
-|`:report/data`|String|No|Form data (serialized EDN map)|
-|`:report/created-at`|Long|No|Creation timestamp (milliseconds)|
+[[#Table of Contents|Back to TOC]]
+
+| Attribute | Type | Unique? | Description |
+| --- | --- | --- | --- |
+| `:report/code` | String | Yes | Unique report code (REP-001, REP-002, ...) |
+| `:report/form-type` | String | No | Type of form |
+| `:report/period-type` | String | No | Period type (day, week, month, quarter, year) |
+| `:report/period-value` | String | No | Period value (format depends on period-type) |
+| `:report/reporting-period` | String | No | Combined period string (backward compatibility) |
+| `:report/current-date` | String | No | Current date (YYYY-MM-DD) |
+| `:report/submission-date` | String | No | Submission date (YYYY-MM-DD) |
+| `:report/submitted-by` | String | No | Username of submitter |
+| `:report/status` | String | No | Report status (default: "На рассмотрении") |
+| `:report/data` | String | No | Form data (serialized EDN map) |
+| `:report/created-at` | Long | No | Creation timestamp (milliseconds) |
 
 ---
 
 ## Querying the Database
+
+[[#Table of Contents|Back to TOC]]
 
 ### Basic Queries
 
@@ -529,7 +574,7 @@ Migration complete:
 
 ;; Find reports by status
 (d/q '[:find ?code ?status
-       :where 
+       :where
        [?e :report/code ?code]
        [?e :report/status ?status]
        [?e :report/status "Одобрено"]]
@@ -552,7 +597,7 @@ Migration complete:
 
 (d/q '[:find ?code ?date
        :in $ ?since
-       :where 
+       :where
        [?e :report/code ?code]
        [?e :report/submission-date ?date]
        [?e :report/created-at ?timestamp]
@@ -573,6 +618,8 @@ Migration complete:
 ---
 
 ## Backup and Restore
+
+[[#Table of Contents|Back to TOC]]
 
 ### PostgreSQL Backups
 
@@ -640,6 +687,8 @@ Copy-Item -Path "C:\datomic-backups\data-backup-20241231" -Destination "C:\datom
 
 ## Performance Tuning
 
+[[#Table of Contents|Back to TOC]]
+
 ### Memory Settings
 
 Edit transactor properties:
@@ -679,6 +728,8 @@ object-cache-max=2g
 ---
 
 ## Troubleshooting
+
+[[#Table of Contents|Back to TOC]]
 
 ### "Unable to connect to Datomic"
 
@@ -739,6 +790,8 @@ type C:\datomic-pro-1.0.7187\log\transactor.log
 
 ## Production Deployment
 
+[[#Table of Contents|Back to TOC]]
+
 ### Architecture
 
 ```
@@ -796,20 +849,24 @@ Start-Service DatomicTransactor
 
 ## Storage Comparison
 
-|Feature|Dev Storage|Memory Storage|PostgreSQL|
-|---|---|---|---|
-|**Setup**|Simple|None|Medium|
-|**Dependencies**|None|None|PostgreSQL|
-|**Persistence**|Yes|No|Yes|
-|**Transactor**|Yes|No|Yes|
-|**Performance**|Fast|Fastest|Fast|
-|**Backup**|File copy|N/A|pg_dump|
-|**Production**|No|No|Yes|
-|**Best For**|Development|Testing/CI|Production|
+[[#Table of Contents|Back to TOC]]
+
+| Feature | Dev Storage | Memory Storage | PostgreSQL |
+| --- | --- | --- | --- |
+| **Setup** | Simple | None | Medium |
+| **Dependencies** | None | None | PostgreSQL |
+| **Persistence** | Yes | No | Yes |
+| **Transactor** | Yes | No | Yes |
+| **Performance** | Fast | Fastest | Fast |
+| **Backup** | File copy | N/A | pg_dump |
+| **Production** | No | No | Yes |
+| **Best For** | Development | Testing/CI | Production |
 
 ---
 
 ## Quick Start Cheat Sheet
+
+[[#Table of Contents|Back to TOC]]
 
 ### Development (Dev Storage)
 
@@ -852,5 +909,7 @@ clj -M:run
 ---
 
 ## License
+
+[[#Table of Contents|Back to TOC]]
 
 Datomic Pro binaries are available under the Apache 2.0 license at no cost. Visit [my.datomic.com](https://my.datomic.com/) for more information.

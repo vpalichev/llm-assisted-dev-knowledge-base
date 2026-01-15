@@ -1,4 +1,22 @@
-#  Overview
+# Table of Contents
+
+- [[#Overview]]
+- [[#Prerequisites]]
+- [[#Installation]]
+- [[#Database Schema]]
+- [[#API Endpoints]]
+- [[#Troubleshooting]]
+- [[#Development Workflow]]
+- [[#REPL Examples]]
+- [[#Reset Database]]
+- [[#File Locations]]
+- [[#Resources]]
+
+---
+
+# Overview
+
+[[#Table of Contents|Back to TOC]]
 
 The reporting planner uses **Datomic Pro** for report storage. User and session data use EDN files.
 
@@ -8,10 +26,14 @@ The reporting planner uses **Datomic Pro** for report storage. User and session 
 
 ## Prerequisites
 
+[[#Table of Contents|Back to TOC]]
+
 1. **Java 11+**
 2. **Datomic Pro 1.0.7469**
 
 ## Installation
+
+[[#Table of Contents|Back to TOC]]
 
 ### Step 1: Download Datomic Pro
 
@@ -111,27 +133,33 @@ clj -M:run
 
 ## Database Schema
 
-|Attribute|Type|Description|
-|---|---|---|
-|`:report/code`|string, unique|Report code (REP-001)|
-|`:report/form-type`|string|Form type|
-|`:report/period-type`|string|day, week, month, quarter, year|
-|`:report/period-value`|string|Period value|
-|`:report/reporting-period`|string|Combined period string|
-|`:report/current-date`|string|YYYY-MM-DD|
-|`:report/submission-date`|string|YYYY-MM-DD|
-|`:report/submitted-by`|string|Username|
-|`:report/status`|string|Default: "На рассмотрении"|
-|`:report/data`|string|Serialized EDN map|
-|`:report/created-at`|long|Timestamp (ms)|
+[[#Table of Contents|Back to TOC]]
+
+| Attribute                 | Type           | Description                  |
+| ------------------------- | -------------- | ---------------------------- |
+| `:report/code`            | string, unique | Report code (REP-001)        |
+| `:report/form-type`       | string         | Form type                    |
+| `:report/period-type`     | string         | day, week, month, quarter, year |
+| `:report/period-value`    | string         | Period value                 |
+| `:report/reporting-period`| string         | Combined period string       |
+| `:report/current-date`    | string         | YYYY-MM-DD                   |
+| `:report/submission-date` | string         | YYYY-MM-DD                   |
+| `:report/submitted-by`    | string         | Username                     |
+| `:report/status`          | string         | Default: "На рассмотрении"   |
+| `:report/data`            | string         | Serialized EDN map           |
+| `:report/created-at`      | long           | Timestamp (ms)               |
 
 ## API Endpoints
+
+[[#Table of Contents|Back to TOC]]
 
 - `GET /api/reports` - List all reports
 - `POST /api/reports` - Create report
 - `GET /api/reports/export/:code` - Export to Excel
 
 ## Troubleshooting
+
+[[#Table of Contents|Back to TOC]]
 
 ### ":db.error/not-enough-memory"
 
@@ -170,6 +198,8 @@ com.datomic/datomic-pro {:mvn/version "1.0.7469"}
 
 ## Development Workflow
 
+[[#Table of Contents|Back to TOC]]
+
 **Terminal 1 - Transactor:**
 
 ```powershell
@@ -190,6 +220,8 @@ npx shadow-cljs watch app
 ```
 
 ## REPL Examples
+
+[[#Table of Contents|Back to TOC]]
 
 ```clojure
 (require '[datomic.api :as d])
@@ -214,28 +246,34 @@ npx shadow-cljs watch app
 
 ## Reset Database
 
+[[#Table of Contents|Back to TOC]]
+
 1. Stop application
 2. Stop transactor (Ctrl+C)
 3. Delete data directory:
-    
+
     ```powershell
     rm -r C:\datomic-data
     ```
-    
+
 4. Restart transactor
 5. Restart application (recreates database)
 
 ## File Locations
 
-|File|Path|
-|---|---|
-|Datomic installation|`D:\bin\datomic\datomic-pro-1.0.7469`|
-|Transactor config|`D:\bin\datomic\datomic-pro-1.0.7469\config\development-transactor.properties`|
-|Datomic data|`C:\datomic-data`|
-|Application config|`config.edn`|
-|Dependencies|`deps.edn`|
+[[#Table of Contents|Back to TOC]]
+
+| File                | Path                                                                       |
+| ------------------- | -------------------------------------------------------------------------- |
+| Datomic installation| `D:\bin\datomic\datomic-pro-1.0.7469`                                      |
+| Transactor config   | `D:\bin\datomic\datomic-pro-1.0.7469\config\development-transactor.properties` |
+| Datomic data        | `C:\datomic-data`                                                          |
+| Application config  | `config.edn`                                                               |
+| Dependencies        | `deps.edn`                                                                 |
 
 ## Resources
+
+[[#Table of Contents|Back to TOC]]
 
 - [Datomic Documentation](https://docs.datomic.com/)
 - [Datomic Pro Downloads](https://my.datomic.com/downloads/pro)

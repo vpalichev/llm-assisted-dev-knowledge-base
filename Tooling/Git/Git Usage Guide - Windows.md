@@ -1,11 +1,28 @@
+# Table of Contents
+
+- [[#Core Concepts]]
+- [[#Essential Commands]]
+- [[#GitHub Integration]]
+- [[#Windows-Specific Considerations]]
+- [[#Optimal Reconnection Protocol]]
+- [[#Reconciliation Decision Tree]]
+- [[#Windows Command Line Consideration]]
+- [[#Minimal Command Sequence - Common Case]]
+
+---
+
 ## Core Concepts
 
-**Repository**: A data structure containing project files and complete version history.  
-**Commit**: A snapshot of repository state at a specific point in time, identified by a SHA-1 hash.  
-**Branch**: A movable pointer to a commit, enabling parallel development streams.  
+[[#Table of Contents|Back to TOC]]
+
+**Repository**: A data structure containing project files and complete version history.
+**Commit**: A snapshot of repository state at a specific point in time, identified by a SHA-1 hash.
+**Branch**: A movable pointer to a commit, enabling parallel development streams.
 **Remote**: A reference to a repository hosted on an external server (e.g., GitHub).
 
 ## Essential Commands
+
+[[#Table of Contents|Back to TOC]]
 
 ### Repository Initialization
 
@@ -48,6 +65,8 @@ Creates, switches between, and merges branches.
 
 ## GitHub Integration
 
+[[#Table of Contents|Back to TOC]]
+
 ### 1. Link Local Repository to GitHub Remote
 
 ```cmd
@@ -87,6 +106,8 @@ For HTTPS URLs, Windows Credential Manager stores access tokens after first auth
 
 ## Windows-Specific Considerations
 
+[[#Table of Contents|Back to TOC]]
+
 **Path Separators**: Git internally uses forward slashes (`/`) regardless of Windows backslash convention.
 
 **Line Endings**: Configure `core.autocrlf` to handle CRLF/LF conversion:
@@ -99,10 +120,9 @@ Value `true` converts LF to CRLF on checkout, CRLF to LF on commit.
 
 **Shell Quoting**: Windows Command Prompt requires double quotes for arguments containing spaces. PowerShell follows similar conventions but may interpret certain characters differently. Git Bash (bundled with Git for Windows) provides Unix-like shell behavior and is recommended for cross-platform consistency.
 
-
-
-
 ## Optimal Reconnection Protocol
+
+[[#Table of Contents|Back to TOC]]
 
 ### Step 1: Remote Reference Removal
 
@@ -131,6 +151,8 @@ git fetch origin
 **Output Analysis**: Examine fetch output to determine reconciliation strategy.
 
 ## Reconciliation Decision Tree
+
+[[#Table of Contents|Back to TOC]]
 
 ### Scenario A: Identical History (Zero Divergence)
 
@@ -220,9 +242,13 @@ git push --force origin main
 
 ## Windows Command Line Consideration
 
+[[#Table of Contents|Back to TOC]]
+
 **Quoting Convention**: PowerShell and Command Prompt handle argument parsing identically for Git commands containing standard alphanumeric characters and common symbols. Complex commit messages containing special characters (`$`, `` ` ``, `&`, `|`) require double-quote encapsulation in Command Prompt or backtick escaping in PowerShell. Git Bash provides POSIX-compliant shell behavior eliminating platform-specific quoting variations.
 
 ## Minimal Command Sequence - Common Case
+
+[[#Table of Contents|Back to TOC]]
 
 ```powershell
 git remote remove origin
