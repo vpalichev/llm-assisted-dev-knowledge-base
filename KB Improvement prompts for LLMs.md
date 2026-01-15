@@ -50,8 +50,8 @@ Here's a generic prompt for cleaning any LLM chat transcript:
 
 **Extraneous Elements to Remove:**
 
-1. **Dates/Timestamps**
-   - All date formats: "Jan 14", "2024-01-15", "9:07 AM", "12:30 PM", etc.
+1. **Dates/Timestamps that look like LLM UI dialogue timestamps**
+   - Look for date formats at places where it looks irrelevant: "Jan 14", "2024-01-15", "9:07 AM", "12:30 PM", etc.
 
 2. **LLM Internal Processing Notes**
    - Meta-commentary: "Analyzed user requirements...", "Deconstructed the approach..."
@@ -93,6 +93,10 @@ Here's a generic prompt for cleaning any LLM chat transcript:
 - **Remove Duplication:** Eliminate redundant explanations
 - **Maintain Technical Accuracy:** Preserve all technical details and examples
 - **Create Flow:** Ensure content reads as continuous documentation
+- **Be technical**: Avoid vacuous statements and pleasantries like "Sorting a list is crucial for having list organized"
+
+------------
+
 
 **Generic Example Transformation:**
 

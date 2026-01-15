@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "KB Improvement prompts for LLMs.md",
+                "file": "Programming languages/PowerShell/PowerShell technical questions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "KB Improvement prompts for LLMs"
+              "title": "PowerShell technical questions"
             }
           }
         ],
@@ -228,14 +228,15 @@
   },
   "active": "92e94d32ca81f4de",
   "lastOpenFiles": [
+    "Programming languages/Untitled.md",
     "Programming languages/PowerShell/PowerShell technical questions.md",
+    "KB Improvement prompts for LLMs.md",
+    "Databases/PostgreSQL/PostgreSQL usage.md",
     "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
     "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
-    "Programming languages/Untitled.md",
     "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
     "Programming languages/PowerShell",
-    "KB Improvement prompts for LLMs.md",
     "Tooling/Claude Code & Desktop/Claude User settings.md",
     "Tooling/Claude Code & Desktop/Anthropic Claude Product Taxonomy.md",
     "Tooling/Claude Code & Desktop/Claude prompt improvers etc/Windows preference.md",
@@ -260,7 +261,6 @@
     "Tooling/IDEs/VS Code",
     "Tooling/IDEs",
     "Tooling/Claude Code & Desktop/Claude prompt improvers etc",
-    "Service-runner (first version, bad)/Deployment folder.md",
     "Databases",
     "Web-related",
     "Sharepoint PnP"
