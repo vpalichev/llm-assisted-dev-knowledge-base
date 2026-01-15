@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Web-related/Fetch and async/Fetch timeline.md",
+                "file": "Sharepoint PnP/Practicalities.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fetch timeline"
+              "title": "Practicalities"
             }
           }
         ],
@@ -226,10 +226,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "92e94d32ca81f4de",
+  "active": "54ca0a8b7e32b1fe",
   "lastOpenFiles": [
-    "Web-related/Fetch and async/ClojureScript Fetch Guide.md",
+    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
+    "Sharepoint PnP/Practicalities.md",
+    "Small but important notes.md",
     "Web-related/Fetch and async/Fetch timeline.md",
+    "Web-related/Fetch and async/ClojureScript Fetch Guide.md",
     "Web-related/Sessions, cookies, promises/Stale token - maybe remove.md",
     "Web-related/Sessions, cookies, promises/Session timeout issue.md",
     "Web-related/Reagent and React/Manual (almost) Reagent + React 18 Setup Guide.md",
@@ -248,7 +251,6 @@
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476980287",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476974912",
-    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
     "Programming languages/PowerShell/PowerShell technical questions.md",
     "KB Improvement prompts for LLMs.md",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.12584.1768476786599",
@@ -261,8 +263,6 @@
     "Programming languages/Untitled.md",
     "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.21048.1768475068927",
     "Databases/PostgreSQL/PostgreSQL usage.md",
-    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
-    "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
-    "Tooling/Claude Code & Desktop/Claude User settings.md"
+    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md"
   ]
 }
