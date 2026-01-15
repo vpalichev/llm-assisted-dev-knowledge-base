@@ -228,10 +228,16 @@
   },
   "active": "92e94d32ca81f4de",
   "lastOpenFiles": [
+    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md.tmp.21048.1768475161327",
+    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md.tmp.21048.1768475147013",
+    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md.tmp.21048.1768475133106",
+    "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md.tmp.21048.1768475113058",
+    "Programming languages/PowerShell/PowerShell technical questions.md.tmp.21048.1768475088108",
     "Programming languages/Untitled.md",
     "Programming languages/PowerShell/PowerShell technical questions.md",
-    "KB Improvement prompts for LLMs.md",
+    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.21048.1768475068927",
     "Databases/PostgreSQL/PostgreSQL usage.md",
+    "KB Improvement prompts for LLMs.md",
     "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
     "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
     "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
@@ -257,12 +263,6 @@
     "Welcome.md",
     "Tooling/IDEs/VS Code/File Navigation in VS Code.md",
     "create a link.md",
-    "Change - remove.md",
-    "Tooling/IDEs/VS Code",
-    "Tooling/IDEs",
-    "Tooling/Claude Code & Desktop/Claude prompt improvers etc",
-    "Databases",
-    "Web-related",
-    "Sharepoint PnP"
+    "Tooling/IDEs/VS Code"
   ]
 }

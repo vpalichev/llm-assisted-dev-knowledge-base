@@ -251,8 +251,9 @@ $var | ForEach-Object {
 
 # Dynamic conversion using all available fields
 $var | ForEach-Object {
+    $item = $_
     $props = @{}
-    $_.FieldValues.Keys | ForEach-Object { $props[$_] = $_.FieldValues[$_] }
+    $item.FieldValues.Keys | ForEach-Object { $props[$_] = $item.FieldValues[$_] }
     [PSCustomObject]$props
 } | Format-Table
 ```

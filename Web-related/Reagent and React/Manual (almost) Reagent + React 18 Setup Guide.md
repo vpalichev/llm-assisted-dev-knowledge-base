@@ -52,15 +52,21 @@ my-reagent-app/
 ## 6. Create `src/my_app/core.cljs`
 ```clojure
 (ns my-app.core
-  (:require [reagent.dom :as rdom]))
+  (:require [reagent.dom.client :as rdom]))
+
+(defonce root (atom nil))
 
 (defn app []
   [:div
    [:h1 "Hello Reagent!"]])
 
 (defn init []
-  (rdom/render [app]
-               (.getElementById js/document "app")))
+  (let [container (.getElementById js/document "app")]
+    (if-let [r @root]
+      (rdom/render r [app])
+      (let [r (rdom/create-root container)]
+        (reset! root r)
+        (rdom/render r [app])))))
 ```
 
 ## 7. Development

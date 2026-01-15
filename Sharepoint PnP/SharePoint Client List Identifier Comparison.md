@@ -40,9 +40,7 @@ Store `GUID` (list item) only if you need to track metadata history separately f
 
 **Access Pattern:**
 
-powershell
-
-````powershell
+```powershell
 $item = Get-PnPListItem -List "Documents" -Id 42
 $item.Id                      # Returns Int32
 $item.FieldValues["ID"]       # Returns Int32
@@ -51,7 +49,7 @@ $item.FieldValues["ID"]       # Returns Int32
 **API Usage:**
 ```
 GET _api/web/lists/getbytitle('Documents')/items(42)
-````
+```
 
 ---
 
@@ -77,8 +75,6 @@ GET _api/web/lists/getbytitle('Documents')/items(42)
 - Content database operations
 
 **Access Pattern:**
-
-powershell
 
 ```powershell
 $item.FieldValues["GUID"]     # Returns System.Guid
@@ -113,9 +109,7 @@ $item.FieldValues["GUID"]     # Returns System.Guid
 
 **Access Pattern:**
 
-powershell
-
-````powershell
+```powershell
 # Via list item
 $item.FieldValues["UniqueId"]    # Returns System.Guid
 
@@ -127,7 +121,7 @@ $file.UniqueId                   # Returns System.Guid
 **API Usage:**
 ```
 GET _api/web/GetFileById('01234567-89ab-cdef-0123-456789abcdef')
-````
+```
 
 ---
 
@@ -148,9 +142,7 @@ GET _api/web/GetFileById('01234567-89ab-cdef-0123-456789abcdef')
 
 ## Practical Demonstration
 
-powershell
-
-````powershell
+```powershell
 $item = Get-PnPListItem -List "Documents" -Id 5
 
 [PSCustomObject]@{
@@ -165,7 +157,7 @@ $item = Get-PnPListItem -List "Documents" -Id 5
 ID (List Item Position) : 5
 GUID (List Item Entity) : a1b2c3d4-e5f6-7890-abcd-ef1234567890
 UniqueId (File Entity)  : 98765432-10fe-dcba-0987-654321fedcba
-````
+```
 
 ---
 

@@ -39,7 +39,7 @@ The Transactor is a **standalone process** you run separately from your applicat
 Key points:
 
 - Only **one** Transactor can run per database at a time
-- It does NOT serve reads—your application reads data directly (TODO from where?)
+- It does NOT serve reads—your application reads data directly from the storage layer via the Peer library's local cache
 - It broadcasts changes to connected Peers so they can update their caches
 - You start it with a batch script (`bin\transactor.bat`) and a properties file
 

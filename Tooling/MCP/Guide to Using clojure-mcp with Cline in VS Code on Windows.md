@@ -9,7 +9,7 @@ These steps are tailored for **Windows**.
 #### Prerequisites
 
 1. Install **Java JDK 17 or later** (e.g., from Adoptium or Oracle).
-2. Install **Clojure CLI** (follow official instructions: download the installer from [https://clojure.org/guides/install_clojure](https://clojure.org/guides/install_clojure?referrer=grok.com) and run it).
+2. Install **Clojure CLI** (follow official instructions: download the installer from [https://clojure.org/guides/install_clojure](https://clojure.org/guides/install_clojure) and run it).
 3. Install **VS Code**.
 4. Install the **Cline** extension:
     - Open VS Code → Extensions → Search for "Cline" (publisher: saoudrizwan) → Install.
@@ -50,7 +50,7 @@ edn
 
 `{:aliases {:mcp {:deps {org.slf4j/slf4j-nop {:mvn/version "2.0.16"} com.bhauman/clojure-mcp {:git/url "https://github.com/bhauman/clojure-mcp.git" :git/tag "v0.2.0" :git/sha "978d3f1"}} :exec-fn clojure-mcp.main/start}}}`
 
-(Optional) Install **ripgrep** (rg.exe) for better file search performance: Download from [https://github.com/BurntSushi/ripgrep/releases](https://github.com/BurntSushi/ripgrep/releases?referrer=grok.com) and add to PATH.
+(Optional) Install **ripgrep** (rg.exe) for better file search performance: Download from [https://github.com/BurntSushi/ripgrep/releases](https://github.com/BurntSushi/ripgrep/releases) and add to PATH.
 
 #### Step 3: Configure clojure-mcp in Cline
 
