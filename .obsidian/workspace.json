@@ -41,16 +41,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
+                "file": "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PostgreSQL Guide for Complete Beginners (Windows)"
+              "title": "PostgreSQL Power User Guide for Windows"
+            }
+          },
+          {
+            "id": "92e94d32ca81f4de",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "KB Improvement prompts for LLMs.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "KB Improvement prompts for LLMs"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -212,10 +226,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "42f9e03ff0a20d0d",
+  "active": "92e94d32ca81f4de",
   "lastOpenFiles": [
+    "Programming languages/PowerShell/PowerShell technical questions.md",
     "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
     "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
+    "Programming languages/Untitled.md",
+    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
+    "Programming languages/PowerShell",
+    "KB Improvement prompts for LLMs.md",
+    "Tooling/Claude Code & Desktop/Claude User settings.md",
+    "Tooling/Claude Code & Desktop/Anthropic Claude Product Taxonomy.md",
+    "Tooling/Claude Code & Desktop/Claude prompt improvers etc/Windows preference.md",
+    "Small but important.md",
     "Databases/PostgreSQL",
     "Databases/Datomic/Datomic Pro Peer Integration Guide for Windows.md",
     "Programming languages",
@@ -232,23 +256,13 @@
     "Welcome.md",
     "Tooling/IDEs/VS Code/File Navigation in VS Code.md",
     "create a link.md",
-    "Small but important.md",
     "Change - remove.md",
     "Tooling/IDEs/VS Code",
     "Tooling/IDEs",
-    "Tooling/Claude Code & Desktop/Claude prompt improvers etc/Windows preference.md",
     "Tooling/Claude Code & Desktop/Claude prompt improvers etc",
-    "Tooling/Claude Code & Desktop/Claude User settings.md",
-    "Tooling/Claude Code & Desktop/Anthropic Claude Product Taxonomy.md",
     "Service-runner (first version, bad)/Deployment folder.md",
     "Databases",
-    "Service-runner (first version, bad)/What is build-and-package.bat.md",
-    "Service-runner (first version, bad)/Add java to system path.md",
-    "Sharepoint PnP/SharePoint Client List Identifier Comparison.md",
     "Web-related",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
-    "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md",
-    "Sharepoint PnP",
-    "Service-runner (first version, bad)"
+    "Sharepoint PnP"
   ]
 }

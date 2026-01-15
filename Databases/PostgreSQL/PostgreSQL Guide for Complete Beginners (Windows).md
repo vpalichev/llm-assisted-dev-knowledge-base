@@ -1,4 +1,37 @@
+# Table of Contents
+
+- [[#Table of Contents]]
+  - [[#What is a Database?]]
+  - [[#What is PostgreSQL?]]
+  - [[#Installation on Windows]]
+  - [[#Starting PostgreSQL]]
+  - [[#Connecting to PostgreSQL]]
+  - [[#Fundamental SQL Commands]]
+  - [[#Inserting Data]]
+  - [[#Retrieving Data]]
+  - [[#Updating Data]]
+  - [[#Deleting Data]]
+  - [[#Understanding Relationships Between Tables]]
+  - [[#Joining Tables]]
+  - [[#Aggregate Functions]]
+  - [[#Grouping Data]]
+  - [[#Transactions]]
+  - [[#Basic Indexes]]
+  - [[#Data Export and Import]]
+  - [[#User Management]]
+  - [[#Common psql Meta-Commands Reference]]
+  - [[#Error Handling]]
+  - [[#Auto-Increment Primary Keys]]
+  - [[#Connection Configuration Files]]
+  - [[#Data Integrity Concepts]]
+  - [[#Best Practices for Beginners]]
+  - [[#Next Steps for Learning]]
+
+---
+
 ## What is a Database?
+
+[[#Table of Contents|Back to TOC]]
 
 **Database**: A structured collection of data stored electronically in a computer system, designed for efficient retrieval, modification, and management of information.
 
@@ -18,6 +51,8 @@
 
 ## What is PostgreSQL?
 
+[[#Table of Contents|Back to TOC]]
+
 **PostgreSQL**: An open-source, object-relational database management system emphasizing extensibility and SQL standards compliance. Originally developed at the University of California, Berkeley in 1986.
 
 **SQL (Structured Query Language)**: The standardized programming language used to communicate with relational databases. SQL statements perform operations such as retrieving data, inserting records, updating values, and deleting entries.
@@ -30,6 +65,8 @@
 **Port**: A numbered communication endpoint on a computer. PostgreSQL's default port is 5432. When connecting to PostgreSQL, clients specify the port number to reach the database server.
 
 ## Installation on Windows
+
+[[#Table of Contents|Back to TOC]]
 
 **Installation Package**: Download the Windows installer from the official PostgreSQL website (postgresql.org). The installer includes:
 

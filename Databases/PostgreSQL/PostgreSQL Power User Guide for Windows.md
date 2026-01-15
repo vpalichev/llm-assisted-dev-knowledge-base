@@ -1,25 +1,26 @@
 # Table of Contents
 
-- [Table of Contents](#table-of-contents)
-  - [Core Architecture](#core-architecture)
-  - [Installation Paths (Windows)](#installation-paths-windows)
-  - [Command-Line Interface](#command-line-interface)
-  - [SQL Execution](#sql-execution)
-  - [Indexing](#indexing)
-  - [Advanced Data Types](#advanced-data-types)
-  - [Window Functions](#window-functions)
-  - [Performance Analysis](#performance-analysis)
-  - [Connection Pooling (Windows)](#connection-pooling-windows)
-  - [Backup and Recovery](#backup-and-recovery)
-  - [Replication](#replication)
-  - [Extensions](#extensions)
-  - [Configuration Management](#configuration-management)
-  - [Command-Line Utilities (Windows-Specific Notes)](#command-line-utilities-windows-specific-notes)
-  - [Monitoring Queries](#monitoring-queries)
+- [[#Table of Contents]]
+  - [[#Core Architecture]]
+  - [[#Installation Paths (Windows)]]
+  - [[#Command-Line Interface]]
+  - [[#SQL Execution]]
+  - [[#Indexing]]
+  - [[#Advanced Data Types]]
+  - [[#Window Functions]]
+  - [[#Performance Analysis]]
+  - [[#Connection Pooling (Windows)]]
+  - [[#Backup and Recovery]]
+  - [[#Replication]]
+  - [[#Extensions]]
+  - [[#Configuration Management]]
+  - [[#Command-Line Utilities (Windows-Specific Notes)]]
+  - [[#Monitoring Queries]]
 
 ---
-
 ## Core Architecture
+
+[[#Table of Contents|Back to TOC]]
 
 **PostgreSQL** is an object-relational database management system (ORDBMS) implementing ACID-compliant transactions and multi-version concurrency control (MVCC).
 
@@ -33,6 +34,8 @@
 
 ## Installation Paths (Windows)
 
+[[#Table of Contents|Back to TOC]]
+
 ```
 C:\Program Files\PostgreSQL\[version]\
 ├── bin\          # Executables (psql.exe, pg_dump.exe)
@@ -44,6 +47,8 @@ C:\Program Files\PostgreSQL\[version]\
 **PGDATA**: Environment variable or path specifying the database cluster location. Default: `C:\Program Files\PostgreSQL\[version]\data\`
 
 ## Command-Line Interface
+
+[[#Table of Contents|Back to TOC]]
 
 **psql**: Interactive terminal client for PostgreSQL.
 
@@ -74,6 +79,8 @@ Windows-specific considerations:
 **Note**: Windows command prompt uses `^` for line continuation, not backslash. PowerShell uses backtick `` ` ``.
 
 ## SQL Execution
+
+[[#Table of Contents|Back to TOC]]
 
 **Transaction isolation levels**:
 
@@ -125,6 +132,8 @@ CROSS JOIN LATERAL (
 
 ## Indexing
 
+[[#Table of Contents|Back to TOC]]
+
 **Index types**:
 
 1. **B-tree**: Default. Handles equality and range queries. Syntax: `CREATE INDEX idx_name ON table(column);`
@@ -157,6 +166,8 @@ CREATE INDEX idx_user_lookup ON users(email) INCLUDE (name, created_at);
 ```
 
 ## Advanced Data Types
+
+[[#Table of Contents|Back to TOC]]
 
 **JSONB**: Binary JSON storage with indexing support. Distinct from **JSON** type (text storage).
 
@@ -215,6 +226,8 @@ CREATE TABLE tasks (status status);
 
 ## Window Functions
 
+[[#Table of Contents|Back to TOC]]
+
 **Window function**: Performs calculation across row set related to current row without grouping.
 
 ```sql
@@ -247,6 +260,8 @@ Frame types:
 - `GROUPS`: Peer groups (rows with same ORDER BY values)
 
 ## Performance Analysis
+
+[[#Table of Contents|Back to TOC]]
 
 **pg_stat_statements**: Extension tracking execution statistics for SQL statements.
 
@@ -284,6 +299,8 @@ ANALYZE table_name;
 
 ## Connection Pooling (Windows)
 
+[[#Table of Contents|Back to TOC]]
+
 **pgBouncer**: Lightweight connection pooler. Windows binary available separately.
 
 **Pool modes**:
@@ -314,6 +331,8 @@ pgbouncer.exe -regservice config_file_path
 ```
 
 ## Backup and Recovery
+
+[[#Table of Contents|Back to TOC]]
 
 **pg_dump**: Logical backup utility creating SQL script or archive.
 
@@ -352,6 +371,8 @@ Requirements:
 
 ## Replication
 
+[[#Table of Contents|Back to TOC]]
+
 **Streaming replication**: Physical replication sending WAL records to standby servers.
 
 **Primary server configuration** (`postgresql.conf`):
@@ -382,6 +403,8 @@ PUBLICATION my_publication;
 
 ## Extensions
 
+[[#Table of Contents|Back to TOC]]
+
 **Installation**: Extensions must be compiled for Windows or available as binary packages.
 
 ```sql
@@ -397,6 +420,8 @@ Essential extensions:
 - **PostGIS**: Spatial database functionality (requires separate installer on Windows)
 
 ## Configuration Management
+
+[[#Table of Contents|Back to TOC]]
 
 **postgresql.conf**: Primary configuration file in PGDATA directory.
 
@@ -436,6 +461,8 @@ SELECT pg_reload_conf();
 ```
 
 ## Command-Line Utilities (Windows-Specific Notes)
+
+[[#Table of Contents|Back to TOC]]
 
 **pg_ctl**: Control PostgreSQL server.
 
@@ -479,6 +506,8 @@ psql -U username -d database -c "SELECT * FROM table WHERE name='O''Brien'"
 ```
 
 ## Monitoring Queries
+
+[[#Table of Contents|Back to TOC]]
 
 **Active connections**:
 

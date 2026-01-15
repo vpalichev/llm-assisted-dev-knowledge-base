@@ -2,7 +2,18 @@
 
 These three fields in `FieldValues` identify distinct entities within the SharePoint object model and have different scopes, persistence characteristics, and intended use cases.
 
-Microsoft.SharePoint.Client.ListItem
+Type returned by Get-PnPList  Microsoft.SharePoint.Client.ListItem
+
+## Recommendation for Datomic Integration
+
+For storing SharePoint file references in Datomic, **UniqueId** is the correct identifier because:
+
+1. It survives file renames and moves within the site collection
+2. It identifies the actual file content, not the metadata wrapper
+3. It aligns with the semantic meaning of "this document" rather than "this list entry"
+4. SharePoint provides direct file retrieval via `GetFileById(guid)`
+
+Store `GUID` (list item) only if you need to track metadata history separately from the file itself, such as when list column values and their change history are primary concerns.
 
 ---
 
@@ -158,13 +169,3 @@ UniqueId (File Entity)  : 98765432-10fe-dcba-0987-654321fedcba
 
 ---
 
-## Recommendation for Datomic Integration
-
-For storing SharePoint file references in Datomic, **UniqueId** is the correct identifier because:
-
-1. It survives file renames and moves within the site collection
-2. It identifies the actual file content, not the metadata wrapper
-3. It aligns with the semantic meaning of "this document" rather than "this list entry"
-4. SharePoint provides direct file retrieval via `GetFileById(guid)`
-
-Store `GUID` (list item) only if you need to track metadata history separately from the file itself, such as when list column values and their change history are primary concerns.
