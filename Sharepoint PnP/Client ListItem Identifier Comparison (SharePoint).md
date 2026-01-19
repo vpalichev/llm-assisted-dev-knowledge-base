@@ -16,7 +16,7 @@
 
 These three fields in `FieldValues` identify distinct entities within the SharePoint object model and have different scopes, persistence characteristics, and intended use cases.
 
-Type returned by Get-PnPList  Microsoft.SharePoint.Client.ListItem
+Remeber that type returned by Get-PnPList is Microsoft.SharePoint.Client.ListItem
 
 ## Recommendation for Datomic Integration
 

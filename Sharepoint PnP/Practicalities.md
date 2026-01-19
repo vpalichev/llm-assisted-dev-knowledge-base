@@ -23,7 +23,7 @@ Measure-Command {
 
 ```powershell
 $items = Get-PnPListItem -List $params.libraryName -PageSize 5000 `
-    -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor","FSObjType"
+    -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor","FSObjType","UniqueId"
 
 $csvData = $items | ForEach-Object {
     [PSCustomObject]@{
@@ -34,6 +34,8 @@ $csvData = $items | ForEach-Object {
         Modified       = $_.FieldValues.Modified.ToUniversalTime().ToString("o")
         Author         = $_.FieldValues.Author.Email
         Editor         = $_.FieldValues.Editor.Email
+        FSObjType = $_.FieldValues.FSObjType
+        UniqueId = if ($_.FieldValues.UniqueId) { $_.FieldValues.UniqueId.ToString() } else { $null }
     }
 }
 
@@ -102,3 +104,10 @@ Azure AD Application (Client) ID — a GUID from your app registration.
 Microsoft 365 tenant domain.
 
 **Example:** `exampledotorg.onmicrosoft.com`
+
+
+## Errors encountered:
+
+  + v2.0
+Failed to download: BOE_r3 & BOM_r2 - Based on 30%MR.xlsx - Exception calling "ExecuteQuery" with "0" argument(s): "Файл не найден."
+Downloaded: Status and Open Questions for TCM-SSEC as of November 2025.docx (v114.0)
