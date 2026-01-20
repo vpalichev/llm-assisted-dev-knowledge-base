@@ -1,2 +1,3 @@
 1. Don't forget to disable drag and drop, but.... 
-2. To refresh $PATH variables use refreshpathsomething.exe
+2. To refresh $PATH variables use refresenvsomething.exe
+3. 

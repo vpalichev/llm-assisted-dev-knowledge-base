@@ -5,7 +5,7 @@ Here's a concise, generic prompt template:
 
 ---
 
-## Task: Add Table of Contents with Back Links to Markdown File**
+# Task 1: Add Table of Contents with Back Links to Markdown File**
 
 For a given Markdown file with `##` headings:
 
@@ -43,7 +43,7 @@ Here's a generic prompt for cleaning any LLM chat transcript:
 
 ---
 
-## Task: Clean LLM Chat Transcript for Knowledge Base**
+# Task 2: Clean LLM Chat Transcript for Knowledge Base**
 
 **Input:** Verbatim copy of web-based chat with LLM containing valuable content mixed with conversational artifacts.
 

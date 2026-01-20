@@ -1,3 +1,21 @@
+Current folder for PS Modules: 
+c:\\Users\\USERNAME\\Documents\\WindowsPowerShell\\Modules\\
+
+### Force Reload Module After Update
+```powershell
+# Remove and reimport
+Remove-Module "PnP.CustomUtilities" -Force
+Import-Module "PnP.CustomUtilities" -Force
+
+# Or single command
+Import-Module "PnP.CustomUtilities" -Force
+```
+The `-Force` parameter removes the module if loaded, then imports the fresh version.
+**Verify reload:**
+```powershell
+Get-Command -Module "PnP.CustomUtilities"
+```
+
 # Creating a PowerShell Module Repository
 
 ## Conceptual Foundation
@@ -157,8 +175,9 @@ New-ModuleManifest -Path "$ModulePath\$ModuleName.psd1" `
     -ModuleVersion "1.0.0" `
     -Author "Your Name" `
     -Description "Collection of server administration utilities" `
-    -PowerShellVersion "5.1" `
+    -PowerShellVersion "7.2" `
     -FunctionsToExport @('Get-ServerStatus', 'Restart-ServerService')
+    #FunctionsToExport is wrong, should be all functions
 ```
 
 **Manifest Properties:**
@@ -520,3 +539,128 @@ Get-ExecutionPolicy
 # -Scope CurrentUser = Applies to current user only (no admin rights needed)
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
+
+------------------------
+# Check Module Functions
+
+## Primary Method
+
+```powershell
+# List all commands exported by module
+Get-Command -Module ModuleName
+
+# Filter to functions only
+Get-Command -Module ModuleName -CommandType Function
+```
+
+## Alternative Methods
+
+```powershell
+# View module object properties
+Get-Module ModuleName | Select-Object -ExpandProperty ExportedFunctions
+
+# Direct property access
+(Get-Module ModuleName).ExportedFunctions
+
+# See all exported commands (functions, cmdlets, aliases)
+(Get-Module ModuleName).ExportedCommands
+```
+
+## Detailed Information
+
+```powershell
+# Full function details including parameters
+Get-Command -Module ModuleName | Get-Help -Full
+
+# List with syntax
+Get-Command -Module ModuleName | Format-List Name, CommandType, Source
+```
+
+## Example
+
+```powershell
+Import-Module ServerUtilities
+
+# Quick list
+Get-Command -Module ServerUtilities
+
+# Output:
+# CommandType     Name                           Version    Source
+# -----------     ----                           -------    ------
+# Function        Get-ServerStatus               1.0.0      ServerUtilities
+# Function        Restart-ServerService          1.0.0      ServerUtilities
+```
+
+**Note**: Use `Get-Module -ListAvailable` to see module info _before_ importing.
+
+-------------
+
+# Troubleshooting Empty Module
+
+## Check if Module Actually Loaded
+
+```powershell
+# Verify module is loaded
+Get-Module "PnP.CustomUtilities"
+
+# If nothing shows, it didn't load. Check available modules:
+Get-Module -ListAvailable -Name "PnP.CustomUtilities"
+```
+
+If `Get-Module` (without `-ListAvailable`) shows nothing, the import failed silently.
+
+## Common Causes
+
+### 1. Module Has No Exported Functions
+
+```powershell
+# Check the .psm1 file for Export-ModuleMember
+Get-Content "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\PnP.CustomUtilities\PnP.CustomUtilities.psm1"
+```
+
+**Fix**: Add to end of `.psm1` file:
+
+```powershell
+Export-ModuleMember -Function * 
+# Or specify functions explicitly:
+Export-ModuleMember -Function Get-CustomData, Set-CustomConfig
+```
+
+### 2. Manifest Restricts Exports
+
+```powershell
+# Check manifest FunctionsToExport
+$Manifest = Import-PowerShellDataFile "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\PnP.CustomUtilities\PnP.CustomUtilities.psd1"
+$Manifest.FunctionsToExport
+```
+
+If it shows `@()` (empty array), no functions are exported.
+
+**Fix**: Edit `.psd1` file:
+
+```powershell
+FunctionsToExport = '*'  # Export all
+# Or list specific functions
+FunctionsToExport = @('Get-CustomData', 'Set-CustomConfig')
+```
+
+### 3. Functions Not Defined in Module
+
+```powershell
+# Check what's actually in the .psm1
+Select-String -Path "$env:USERPROFILE\Documents\WindowsPowerShell\Modules\PnP.CustomUtilities\PnP.CustomUtilities.psm1" -Pattern "^function "
+```
+
+If no matches, the `.psm1` contains no functions.
+
+## Quick Diagnostic
+
+```powershell
+# Import with verbose output
+Import-Module "PnP.CustomUtilities" -Verbose -Force
+
+# Check for errors
+Import-Module "PnP.CustomUtilities" -Force -ErrorAction Stop
+```
+
+**Most likely issue**: Missing `Export-ModuleMember` or `FunctionsToExport = @()` in manifest.

@@ -1,3 +1,5 @@
+Select all fields: 
+
 Convert date to ISO 8601 UTC:
 
 How to filter, normal and through indexer:

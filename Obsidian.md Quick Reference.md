@@ -178,3 +178,8 @@ This reference provides foundational understanding of Obsidian's technical archi
 **Tags vs Links**: Tags classify, links create relationships
 
 **Backlinks panel** shows all notes linking to current note (automatic).
+
+
+Gotchas:
+1 Windows paths -- backslashes should be doubled
+2 
