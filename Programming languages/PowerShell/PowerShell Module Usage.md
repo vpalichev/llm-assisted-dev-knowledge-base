@@ -16,6 +16,31 @@ The `-Force` parameter removes the module if loaded, then imports the fresh vers
 Get-Command -Module "PnP.CustomUtilities"
 ```
 
+## List All Available Modules
+
+powershell
+
+```powershell
+Get-Module -ListAvailable
+```
+
+This shows all modules PowerShell can find in its module path directories (both system and user locations).
+## Proper location for modules
+
+**Which PowerShell are you using?**
+
+- Type "powershell" → Windows PowerShell 5.1 → use `$HOME\Documents\Windows PowerShell\Modules`
+- Type "PowerShell 7" → PowerShell 7+ → use `$HOME\Documents\PowerShell\Modules`
+
+**Recommendation: Use PowerShell 7**
+
+- Windows PowerShell 5.1 is in maintenance mode (no new features)
+- PowerShell 7 is actively developed and cross-platform
+- Put new modules in `$HOME\Documents\PowerShell\Modules`
+
+**Quick check:** Run `$PSVersionTable.PSVersion` to see which version you're using.
+
+
 # Creating a PowerShell Module Repository
 
 ## Conceptual Foundation

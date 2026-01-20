@@ -1,6 +1,6 @@
-Select all fields: 
+#### Select all fields: 
 
-Convert date to ISO 8601 UTC:
+#### Convert date to ISO 8601 UTC:
 
 How to filter, normal and through indexer:
 
@@ -14,3 +14,5 @@ Select field or indexer values
 
 Wrap in count()
 
+#### Enter into PS 7
+pwsh.exe

@@ -4,67 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "9ef2999eb61479a4",
+        "id": "7233434370dc0ad4",
         "type": "tabs",
         "children": [
           {
-            "id": "a5998f7d65cc176c",
+            "id": "0bef8d736a20cee2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTTP/CORS preflight error.md",
+                "file": "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CORS preflight error"
-            }
-          },
-          {
-            "id": "dc31bd172213b436",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Tooling/MCP/MCP-light setup.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "MCP-light setup"
-            }
-          },
-          {
-            "id": "42f9e03ff0a20d0d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "PostgreSQL Power User Guide for Windows"
-            }
-          },
-          {
-            "id": "92e94d32ca81f4de",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "TOC.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "TOC"
+              "title": "Microsoft.SharePoint.Client.ListItem"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -226,43 +183,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "92e94d32ca81f4de",
+  "active": "0bef8d736a20cee2",
   "lastOpenFiles": [
-    "KB Improvement prompts for LLMs.md",
-    "Obsidian.md Quick Reference.md",
-    "Small but important notes.md",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901408362",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
-    "Sharepoint PnP/CAML Queries/Making CAML DateTime Queries Deterministic.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901215279",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901151066",
     "Sharepoint PnP/SharePoint Timezone Management with PnP PowerShell.md",
-    "Sharepoint PnP/Deep into woods/Encountered errors.md",
-    "Sharepoint PnP/Deep into woods/SharePoint Online special character handling.md",
-    "Sharepoint PnP/Practicalities.md",
-    "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
-    "Sharepoint PnP/CAML Queries/SharePoint CAML queries and the 5000-item threshold.md",
-    "Sharepoint PnP/Main download script from Opus - as of 2026-01-16.md",
-    "Sharepoint PnP/CAML Queries",
-    "Programming languages/PowerShell/Advanced spaghetti reducing techniques.md",
     "Keyboard shortcuts at top.md",
-    "Programming languages/PowerShell/PowerShell Module Structure.md",
-    "Tooling/IDEs/VS Code/Useful shortcuts.md",
-    "Tooling/IDEs/VS Code/Main VS Code Reference (with focus on Clojure ClojureScript PowerShell on Windows).md",
-    "Tooling/IDEs/VS Code/File Navigation in VS Code.md",
-    "TOC.md",
-    "Databases/PostgreSQL/PostgreSQL Guide for Complete Beginners (Windows).md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768900821984",
+    "Sharepoint PnP/Practicalities.md",
+    "Programming languages/PowerShell/PowerShell Module Usage.md",
+    "Programming languages/PowerShell/Advanced spaghetti reducing techniques.md",
     "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md",
-    "Programming languages/PowerShell/PowerShell technical questions.md",
+    "Untitled.base",
+    "Programming languages/Remove this.md",
     "Programming languages/PowerShell/One-liners, tips and tricks.md",
     "Programming languages/PowerShell/PowerShell Function Structure.md",
-    "Programming languages/Untitled.md",
+    "Programming languages/PowerShell/PowerShell technical questions.md",
+    "2026-01-20.md",
+    "Index.md",
+    "KB Improvement prompts for LLMs.md",
+    "Obsidian.md Quick Reference.md",
+    "Sharepoint.md",
+    "Tooling/MCP/MCP-light setup.md",
+    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
+    "Small but important notes.md",
+    "Sharepoint PnP/CAML Queries/Making CAML DateTime Queries Deterministic.md",
+    "Sharepoint PnP/CAML Queries/SharePoint CAML queries and the 5000-item threshold.md",
+    "Sharepoint PnP/Deep into woods/Encountered errors.md",
+    "TOC.md",
+    "Sharepoint PnP/Deep into woods/SharePoint Online special character handling.md",
+    "Sharepoint PnP/CAML Queries",
     "Sharepoint PnP/Deep into woods",
     "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.57052.1768486852856",
     "Sharepoint PnP/Practicalities.md.tmp.57052.1768486746505",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.57052.1768485506069",
-    "Running Powershell and service monitoring/WinSW + PowerShell 7 Integration Guide.md.tmp.57052.1768485234135",
-    "Databases/PostgreSQL/PostgreSQL usage.md.tmp.57052.1768485044350",
-    "Web-related/Fetch and async/ClojureScript Fetch Guide.md.tmp.57052.1768485031256",
-    "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md.tmp.57052.1768484783439",
-    "Databases/Datomic/Datomic for Clojure Developers - A Practical Guide.md.tmp.57052.1768484778147"
+    "Running Powershell and service monitoring/WinSW + PowerShell 7 Integration Guide.md.tmp.57052.1768485234135"
   ]
 }

@@ -212,3 +212,91 @@ Set-PnPWeb -TimeZone 47
 
 
 
+
+---------------------------
+
+### PowerShell DateTimeKind Values
+
+- `Unspecified` - No timezone info (default for parsed strings)
+- `Utc` - Explicitly UTC time
+- `Local` - Local computer's timezone
+
+### What Happens Without SpecifyKind()
+
+```powershell
+# SharePoint returns: 2025-02-01 14:30:00 (Kind=Unspecified, actually UTC)
+$spDate = $item.FieldValues.Modified
+
+# PowerShell assumes it's local time!
+$spDate.ToLocalTime()  # Converts Unspecified→Local (WRONG!)
+# Result: 2025-02-01 16:30:00 (adds 2 hours on UTC+2 system)
+
+# With SpecifyKind
+$utcDate = [DateTime]::SpecifyKind($spDate, [DateTimeKind]::Utc)
+$utcDate.ToLocalTime()  # Converts UTC→Local (CORRECT!)
+# Result: 2025-02-01 16:30:00 (correct conversion)
+```
+
+---
+
+## Sources
+
+- [Get-PnPListItem returns wrong value for DateTime properties · Issue #934](https://github.com/SharePoint/PnP-PowerShell/issues/934)
+- [SharePoint Online: PowerShell to Get-Set Date Field Value](https://www.sharepointdiary.com/2018/01/sharepoint-online-powershell-to-get-set-date-field-value.html)
+- [How to work with SharePoint datetime localization/timezones](https://julieturner.net/post/sharepoint-datetime/)
+- [Convert DateTime Field's UTC Value To The Correct Time Zone](https://www.c-sharpcorner.com/article/convert-datetime-fields-utc-value-to-the-correct-time-zone-in-an-spfx-webpart/)
+
+---
+
+## Summary
+
+**Your current implementation in `ConvertTo-ReadablePnPListItem.ps1` is CORRECT!**
+
+- SharePoint Online **does return UTC** in FieldValues
+- The issue is that PowerShell doesn't always know it's UTC
+- Use `[DateTime]::SpecifyKind($dateTime, [DateTimeKind]::Utc)` to mark it
+- This prevents incorrect timezone conversions
+- Your codebase already follows this best practice
+
+User approved the plan
+
+Perfect! I've completed my research on SharePoint Online DateTime handling. Here's the comprehensive answer to your question:
+
+## Answer: Yes, SharePoint Online Returns UTC ✅
+
+**SharePoint Online DOES return DateTime values in UTC** when you use `Get-PnPListItem`, but there's an important catch: the `DateTimeKind` property is often not explicitly set, which can cause PowerShell to misinterpret the values.
+
+## Your Current Implementation is CORRECT!
+
+The code you already have in [ConvertTo-ReadablePnPListItem.ps1:70-75](vscode-webview://16rkfkgf77vh70hu4jofnr27e51ln002l5acl0go7ha0520h7nt4/index.html?id=ec230be1-ef29-4158-97bf-1a0b3af0efd6&parentId=3&origin=15d247ee-ad8c-4607-a11b-ebe4a0aa9930&swVersion=4&extensionId=Anthropic.claude-code&platform=electron&vscode-resource-base-authority=vscode-resource.vscode-cdn.net&parentOrigin=vscode-file%3A%2F%2Fvscode-app&session=cf4c8a0d-b7ad-47a3-9834-a554a1e2a27c) is the **best practice**:
+
+```powershell
+Created  = if ($item.FieldValues.Created) {
+    [DateTime]::SpecifyKind($item.FieldValues.Created, [DateTimeKind]::Utc)
+} else { $null }
+```
+
+## Why Use `SpecifyKind()` Instead of `ToUniversalTime()`?
+
+This is the key insight:
+
+- **SharePoint values are ALREADY in UTC** - no conversion needed
+- `SpecifyKind()` just **marks** the existing value as UTC
+- `ToUniversalTime()` would try to **convert** from local → UTC (which would be incorrect!)
+
+## The Problem Without It
+
+When SharePoint returns a DateTime like `2025-02-01 14:30:00` with `Kind=Unspecified`:
+
+- PowerShell might assume it's local time
+- Converting to local time would add hours again (double conversion!)
+- On a UTC+2 system, you'd see `16:30:00` instead of `14:30:00`
+
+## Summary
+
+Your implementation is already following best practices. I've created a detailed research document in the plan file that includes:
+
+- Evidence from GitHub issues and community sources
+- Comparison of different DateTime handling patterns in your codebase
+- Best practice examples for different scenarios
+- Technical explanation of why this matters

@@ -9,10 +9,8 @@
 
 # SharePoint PnP Connection
 
-## Connect with Certificate Authentication
-
+#### Connect with Certificate Authentication
 [[#Table of Contents|Back to TOC]]
-
 ```powershell
 Connect-PnPOnline `
     -Url $params.siteUrl `
@@ -23,19 +21,13 @@ Connect-PnPOnline `
 ```
 
 ## Parameters
-
 [[#Table of Contents|Back to TOC]]
 
-### `siteUrl`
-
+#### `siteUrl`
 SharePoint site URL.
-
 **Example:** `https://exampledotorg.sharepoint.com/sites/TheSiteLikeProjectControl`
-
-### `clientId`
-
+#### `clientId`
 Azure AD Application (Client) ID — a GUID from your app registration.
-
 **How to obtain:**
 - **Azure Portal:** App registrations → your app → Overview → Application (client) ID
 - **PowerShell:**
@@ -43,30 +35,20 @@ Azure AD Application (Client) ID — a GUID from your app registration.
   Connect-AzAccount
   Get-AzADApplication | Select-Object DisplayName, AppId
   ```
-
 **Example:** `a1b2c3d4-e5f6-7890-abcd-ef1234567890`
-
-### `tenant`
-
+#### `tenant`
 Microsoft 365 tenant domain.
-
 **Example:** `exampledotorg.onmicrosoft.com`
 
-
-## How to get list of all list items for library, folders, files, etc
-
+#### How to get list of all list items for library, folders, files, etc
 [[#Table of Contents|Back to TOC]]
-
 ```powershell
 Measure-Command {
   $all_list_items_for_library =  Get-PnPListItem -List $params.libraryName -PageSize 5000 -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor"
 }
 ```
-
-## Export to CSV
-
+#### Export to CSV
 [[#Table of Contents|Back to TOC]]
-
 ```powershell
 $items = Get-PnPListItem -List $params.libraryName -PageSize 5000 `
     -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor","FSObjType","UniqueId"
