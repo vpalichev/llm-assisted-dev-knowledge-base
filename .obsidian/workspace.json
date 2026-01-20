@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -185,15 +185,19 @@
   },
   "active": "0bef8d736a20cee2",
   "lastOpenFiles": [
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901408362",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
+    "2026-01-20.md",
+    "Databases/PostgreSQL/Left anti-join.md",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md",
+    "Sharepoint PnP/Deep into woods/Encountered errors.md",
+    "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
+    "Sharepoint PnP/Practicalities.md",
+    "Sharepoint PnP/SharePoint Timezone Management with PnP PowerShell.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901408362",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901215279",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901151066",
-    "Sharepoint PnP/SharePoint Timezone Management with PnP PowerShell.md",
     "Keyboard shortcuts at top.md",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768900821984",
-    "Sharepoint PnP/Practicalities.md",
     "Programming languages/PowerShell/PowerShell Module Usage.md",
     "Programming languages/PowerShell/Advanced spaghetti reducing techniques.md",
     "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md",
@@ -202,7 +206,6 @@
     "Programming languages/PowerShell/One-liners, tips and tricks.md",
     "Programming languages/PowerShell/PowerShell Function Structure.md",
     "Programming languages/PowerShell/PowerShell technical questions.md",
-    "2026-01-20.md",
     "Index.md",
     "KB Improvement prompts for LLMs.md",
     "Obsidian.md Quick Reference.md",
@@ -212,14 +215,11 @@
     "Small but important notes.md",
     "Sharepoint PnP/CAML Queries/Making CAML DateTime Queries Deterministic.md",
     "Sharepoint PnP/CAML Queries/SharePoint CAML queries and the 5000-item threshold.md",
-    "Sharepoint PnP/Deep into woods/Encountered errors.md",
     "TOC.md",
-    "Sharepoint PnP/Deep into woods/SharePoint Online special character handling.md",
     "Sharepoint PnP/CAML Queries",
     "Sharepoint PnP/Deep into woods",
     "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.57052.1768486852856",
     "Sharepoint PnP/Practicalities.md.tmp.57052.1768486746505",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.57052.1768485506069",
-    "Running Powershell and service monitoring/WinSW + PowerShell 7 Integration Guide.md.tmp.57052.1768485234135"
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.57052.1768485506069"
   ]
 }

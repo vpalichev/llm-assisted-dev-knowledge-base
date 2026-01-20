@@ -27,3 +27,16 @@ Failed to download: /sites/SillenoProjectControl/Shared Documents/02_Contracts/0
 
 ```
 
+```
+
+Get-SharePointAllListItems: D:\projects\Silleno-SharePoint-PnP-Tools-v02\src\Sync-SPOVersions-v02.ps1:72:27
+Line |
+  72 |  … ointItems = Get-SharePointAllListItems -ListName $sharePointLibraryNa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Failed to retrieve list items after retries: Not well formatted JSON stream.
+Get-PnPListItem: C:\Users\v.palichev\Documents\PowerShell\Modules\PnP.CustomUtilities\Public\Get-SharePointAllListItems.ps1:95:13
+Line |
+  95 |              Get-PnPListItem @params
+     |              ~~~~~~~~~~~~~~~~~~~~~~~
+     | Not well formatted JSON stream.
+```
