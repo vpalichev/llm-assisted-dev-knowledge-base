@@ -9,13 +9,10 @@
 - [[#Example from Your Codebase]]
 
 ---
-
 ```powershell
 Get-PnPListItem -List $params.libraryName -PageSize 5000 -Fields "FileLeafRef","FileRef","File_x0020_Size","Created","Modified","Author","Editor"
 ```
-
 Based on my research, I've compiled comprehensive information about the fields that `Get-PnPListItem` can accept in the `-Fields` parameter.
-
 ### How the -Fields Parameter Works
 
 [[#Table of Contents|Back to TOC]]
