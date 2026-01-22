@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem FieldValues.md",
+                "file": "Sharepoint PnP/Deep into woods/Encountered errors.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Microsoft.SharePoint.Client.ListItem FieldValues"
+              "title": "Encountered errors"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "encoun",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -185,41 +185,41 @@
   },
   "active": "0bef8d736a20cee2",
   "lastOpenFiles": [
-    "Tooling/IDEs/VS Code/Useful shortcuts.md",
-    "Keyboard shortcuts at top.md",
-    "Obsidian.md Quick Reference.md",
-    "Small but important notes.md",
-    "Sharepoint.md",
-    "Sharepoint PnP/File mirror storage specification/SharePoint Online Local Mirror Specification.md",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem FieldValues.md",
-    "Sharepoint PnP/File mirror storage specification",
-    "Programming languages/PowerShell/PowerShell Function Structure.md",
-    "Programming languages/PowerShell/PowerShell technical questions.md",
-    "Programming languages/PowerShell/PowerShell Module Usage.md",
-    "2026-01-20.md",
-    "Databases/PostgreSQL/Left anti-join.md",
+    "Sharepoint PnP/Tracking changes!!!/Monitor File Changes in SharePoint Online Library.md",
+    "Sharepoint PnP/Main download script from Opus - as of 2026-01-16.md",
+    "Sharepoint PnP/File mirror storage specification/Specification SharePoint Sync Folder Structure and YAML Metadata.md",
+    "Sharepoint PnP/Tracking changes!!!",
+    "Sharepoint PnP/File mirror storage specification/SharePoint Online Local Mirror Specification v02.md",
+    "Sharepoint PnP/File mirror storage specification/SharePoint Online Local Mirror Specification v01.md",
+    "Sharepoint PnP/File mirror storage specification/Notes on synchronization.md",
+    "Sharepoint PnP/Cmdlets Reference/Invoke-PnPSPRestMethod Comprehensive Reference Guide.md",
+    "Sharepoint PnP/Deep into woods/SharePoint Online special character handling.md",
     "Sharepoint PnP/Deep into woods/Encountered errors.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem FieldValues.md",
+    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
+    "Sharepoint PnP/PowerShell PnP Object Model - File Library Processing Reference.md",
     "Sharepoint PnP/Practicalities.md",
     "Sharepoint PnP/SharePoint Timezone Management with PnP PowerShell.md",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
+    "Sharepoint PnP/Cmdlets Reference",
+    "Tooling/IDEs/VS Code/Useful shortcuts.md",
+    "Tooling/IDEs/VS Code/Main VS Code Reference (with focus on Clojure ClojureScript PowerShell on Windows).md",
+    "Tooling/IDEs/VS Code/File Navigation in VS Code.md",
+    "Keyboard shortcuts at top.md",
+    "Obsidian.md Quick Reference.md",
+    "Programming languages/Remove this.md",
+    "Programming languages/PowerShell/PowerShell Function Structure.md",
+    "Programming languages/PowerShell/PowerShell Variable Inspection Functions.md",
+    "KB Improvement prompts for LLMs.md",
+    "Small but important notes.md",
+    "Sharepoint.md",
+    "Sharepoint PnP/File mirror storage specification",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901408362",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901215279",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768901151066",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem.md.tmp.109260.1768900821984",
-    "Programming languages/PowerShell/Advanced spaghetti reducing techniques.md",
-    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md",
     "Untitled.base",
-    "Programming languages/Remove this.md",
-    "Programming languages/PowerShell/One-liners, tips and tricks.md",
-    "Index.md",
-    "KB Improvement prompts for LLMs.md",
-    "Tooling/MCP/MCP-light setup.md",
-    "Databases/PostgreSQL/PostgreSQL Power User Guide for Windows.md",
-    "Sharepoint PnP/CAML Queries/Making CAML DateTime Queries Deterministic.md",
     "Sharepoint PnP/CAML Queries",
-    "Sharepoint PnP/Deep into woods",
-    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md.tmp.57052.1768486852856",
-    "Sharepoint PnP/Practicalities.md.tmp.57052.1768486746505"
+    "Sharepoint PnP/Deep into woods"
   ]
 }
