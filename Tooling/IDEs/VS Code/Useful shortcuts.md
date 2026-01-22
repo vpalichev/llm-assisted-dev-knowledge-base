@@ -9,6 +9,11 @@
 |Fold all regions|`Ctrl+K` then `Ctrl+8`|
 |Unfold all regions|`Ctrl+K` then `Ctrl+9`|
 
+#### Quick filter in Go to Symbol (most people do this)
+
+- Press **Ctrl+Shift+O**
+- Immediately type a colon **:** (or sometimes people write @: in docs — just type :)
+
 
 **Custom Keybinding Configuration:**
 
