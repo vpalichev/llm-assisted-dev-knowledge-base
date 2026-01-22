@@ -1,5 +1,6 @@
 1. Don't forget to disable drag and drop, but.... 
 2. To refresh $PATH variables use refresenvsomething.exe
+3. Fix the specification for Converting Office Files to Web: it wrongly takes Basename for output file name, not full name
 
 
 
