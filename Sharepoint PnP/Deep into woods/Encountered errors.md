@@ -1,5 +1,31 @@
 # SharePoint Download Errors - Categorized
 
+
+
+
+## URL Encoding Issues
+
+### Fullwidth Parentheses (U+FF08, U+FF09)
+```
+Download current version to d:\files-datastore\SillenoProjectControl-Mirror\06_Project Control General\02_General Meetings\Supervisory Board (НС)\Вехи и КПД\2025 2п-е Исполнение\КПД\4. Финансовый директор\5. Получение предложений (RFP) по долгосрочному финансированию\Project Karabatan - Bank Responses to Financing Structure_2025 September%09 vF.xlsx failed (attempt 1/3): Файл /sites/SillenoProjectControl/Shared Documents/06_Project Control General/02_General Meetings/Supervisory Board (НС)/Вехи и КПД/2025 2п-е Исполнение/КПД/4. Финансовый директор/5. Получение предложений (RFP) по долгосрочному финансированию/Project Karabatan - Bank Responses to Financing Structure_2025 September  vF.xlsx не существует.
+```
+
+### Percent-Encoded Spaces in Filename
+```
+Download current version to d:\files-datastore\SillenoProjectControl-Mirror\04_Periodic Reporting\06_Рабочие файлы\Жанузак\COMMON%20PERSONNEL%20HISTORGAMM%20new (version 1).xlsb.xlsx failed (attempt 3/3): Файл /sites/SillenoProjectControl/Shared Documents/04_Periodic Reporting/06_Рабочие файлы/Жанузак/COMMON PERSONNEL HISTORGAMM new (version 1).xlsb.xlsx не существует.
+```
+
+[38/405] 01_Cost Estimation and Control\20. Contract Cost Control\1. ECU\05. Calculations\5. Проверка PO\PO Procurement (7 files)
+  2025-11-03 Placement PO.xlsx: NEW hist v 1 dl v2 yaml OK
+  2025-11-03 Placement PO_1.xlsx: NEW hist v 1 dl v2 yaml OK                                                            
+  2025-11-03 1057103250 discrepancies.xlsx: NEW hist dl v1 yaml OK                                                      
+  2025-11-03 Discrepancies PO 01.10.2025_Contrator reply.xlsx: NEW hist v 1 dl v2 yaml OK                               
+  2025-11-03 Discrepancies%20PO%2001.xlsx: NEW hist   Download current version to d:\files-datastore\SillenoProjectControl-Mirror\01_Cost Estimation and Control\20. Contract Cost Control\1. ECU\05. Calculations\5. Проверка PO\PO Procurement\Discrepancies%20PO%2001.xlsx failed (attempt 1/3): Файл /sites/SillenoProjectControl/Shared Documents/01_Cost Estimation and Control/20. Contract Cost Control/1. ECU/05. Calculations/5. Проверка PO/PO Procurement/Discrepancies PO 01.xlsx не существует.
+  Waiting 3 seconds before retry...
+  Retry attempt 2/3...
+  Download current version to d:\files-datastore\SillenoProjectControl-Mirror\01_Cost Estimation and Control\20. Contract Cost Control\1. ECU\05. Calculations\5. Проверка PO\PO Procurement\Discrepancies%20PO%2001.xlsx failed (attempt 2/3): Файл /sites/SillenoProjectControl/Shared Documents/01_Cost Estimation and Control/20. Contract Cost Control/1. ECU/05. Calculations/5. Проверка PO/PO Procurement/Discrepancies PO 01.xlsx не существует.
+
+
 ## Large File Timeout Issues
 
 ### Response Ended Prematurely (50+ MB)
@@ -41,17 +67,6 @@ Download current version to d:\files-datastore\SillenoProjectControl-Mirror\02_C
 Download current version to d:\files-datastore\SillenoProjectControl-Mirror\02_Contracts\03_Other Contracts\01_Site Preparation\06_Reporting\02_Weekly report\02_2025\48_Weekly report #48\Site Preparation - Weekly report 28.11.25.xlsx failed (attempt 3/3): Exception calling "ExecuteQuery" with "0" argument(s): "Файл не найден."
 ```
 
-## URL Encoding Issues
-
-### Fullwidth Parentheses (U+FF08, U+FF09)
-```
-Download current version to d:\files-datastore\SillenoProjectControl-Mirror\06_Project Control General\02_General Meetings\Supervisory Board (НС)\Вехи и КПД\2025 2п-е Исполнение\КПД\4. Финансовый директор\5. Получение предложений (RFP) по долгосрочному финансированию\Project Karabatan - Bank Responses to Financing Structure_2025 September%09 vF.xlsx failed (attempt 1/3): Файл /sites/SillenoProjectControl/Shared Documents/06_Project Control General/02_General Meetings/Supervisory Board (НС)/Вехи и КПД/2025 2п-е Исполнение/КПД/4. Финансовый директор/5. Получение предложений (RFP) по долгосрочному финансированию/Project Karabatan - Bank Responses to Financing Structure_2025 September  vF.xlsx не существует.
-```
-
-### Percent-Encoded Spaces in Filename
-```
-Download current version to d:\files-datastore\SillenoProjectControl-Mirror\04_Periodic Reporting\06_Рабочие файлы\Жанузак\COMMON%20PERSONNEL%20HISTORGAMM%20new (version 1).xlsb.xlsx failed (attempt 3/3): Файл /sites/SillenoProjectControl/Shared Documents/04_Periodic Reporting/06_Рабочие файлы/Жанузак/COMMON PERSONNEL HISTORGAMM new (version 1).xlsb.xlsx не существует.
-```
 
 ## JSON Parsing Errors
 
@@ -86,3 +101,5 @@ Line |
 "Version": "",
 "Message": "No such host is known. (sillenokz.sharepoint.com:443)"
 ```
+
+
