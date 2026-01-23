@@ -1,4 +1,16 @@
+
+
+#### Enter into PS 7
+pwsh.exe
+
+
+
+
+# This info not acquired yet
+
+
 #### Select all fields: 
+
 
 #### Convert date to ISO 8601 UTC:
 
@@ -13,6 +25,3 @@ Select field or indexer values
 
 
 Wrap in count()
-
-#### Enter into PS 7
-pwsh.exe
