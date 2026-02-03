@@ -5,10 +5,12 @@
 - **Format document** – `Shift+Alt+F`
 F1 command pallete?
 
+**Reveal in explorer:** `Shift+Alt+R` (order!)
+**Copy full path:** `Alt+Shift+C`
 **Clear screen PS**  Clear-Host
 
 
-
+**Search all project files** `Ctrl+Shift+F`
 
 
 

@@ -1,3 +1,6 @@
+#### Notes support standard Markdown syntax plus Obsidian-specific extensions for internal linking and embedding.
+
+
 How to add link to another file? 
 
 **Type `[[` and start typing the note name** - autocomplete appears, press `Enter` to select.

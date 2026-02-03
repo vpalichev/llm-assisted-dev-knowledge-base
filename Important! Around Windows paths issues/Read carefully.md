@@ -6,6 +6,7 @@ For simplicity and time saving, do not use regexes (in production)
 
 Two tier fallback used in pptx conversion:
 
+Also: paths are case insensitive, while JAVA is case sensitive
 
 
 --------------------------------------------------

@@ -214,7 +214,7 @@ foreach ($list in Get-PnPList -Includes RootFolder) {
 
 [[#Table of Contents|Back to TOC]]
 
-Retrieves list item instances from a SharePoint list or document library. Returns **`Microsoft.SharePoint.Client.ListItem`** objects.
+Retrieves list item instances from a SharePoint list or document library. Returns **`Microsoft.SharePoint.Client.ListItem`** objects. TODO: specify is it an ARRAY of ListItem objects
 
 ### List Items vs. Files
 

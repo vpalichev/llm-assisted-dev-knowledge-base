@@ -25,6 +25,23 @@ The `-Fields` parameter in `Get-PnPListItem` accepts an array of **internal fiel
 Get-PnPListItem -List "Documents" -Fields "Title","FileRef","Modified"
 ```
 
+
+## Common Field Examples
+
+[[#Table of Contents|Back to TOC]]
+
+| Field Name      | Example Value                                                                                          | Notes                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| `FileLeafRef`   | `Quarterly Report Q4.docx`                                                                             | Filename only; = BaseName + extension              |
+| `FileRef`       | `/sites/Finance/Shared Documents/Reports/Quarterly Report Q4.docx`                                     | **Prefer this**; server-relative; = FileDirRef + FileLeafRef |
+| `FileDirRef`    | `/sites/Finance/Shared Documents/Reports`                                                              | Folder path only; no filename                      |
+| `ServerUrl`     | `/sites/Finance/Shared Documents/Reports/Quarterly Report Q4.docx`                                     | Computed; same as FileRef for docs; use for list items |
+| `EncodedAbsUrl` | `https://contoso.sharepoint.com/sites/Finance/Shared%20Documents/Reports/Quarterly%20Report%20Q4.docx` | **Use for external links/sharing**; full absolute URL |
+| `BaseName`      | `Quarterly Report Q4`                                                                                  | Filename without extension                         |
+| `ID`            | `42`                                                                                                   | List-scoped integer; resets per list               |
+| `GUID`          | `{8a7b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d}`                                                               | List item ID; changes on copy                      |
+| `UniqueId`      | `f1e2d3c4-b5a6-9788-7c6d-5e4f3a2b1c0d`                                                                 | Document ID; persists across moves in site collection |
+
 ### Complete Reference: SharePoint Internal Field Names
 [[#Table of Contents|Back to TOC]]
 #### Common Document Library Fields
@@ -259,19 +276,3 @@ created_by = if ($_.FieldValues.Author) { $_.FieldValues.Author.LookupValue } el
 ```
 
 ---
-
-## Common Field Examples
-
-[[#Table of Contents|Back to TOC]]
-
-| Field Name      | Example Value                                                                                          | Notes                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
-| `FileLeafRef`   | `Quarterly Report Q4.docx`                                                                             | Filename only; = BaseName + extension              |
-| `FileRef`       | `/sites/Finance/Shared Documents/Reports/Quarterly Report Q4.docx`                                     | **Prefer this**; server-relative; = FileDirRef + FileLeafRef |
-| `FileDirRef`    | `/sites/Finance/Shared Documents/Reports`                                                              | Folder path only; no filename                      |
-| `ServerUrl`     | `/sites/Finance/Shared Documents/Reports/Quarterly Report Q4.docx`                                     | Computed; same as FileRef for docs; use for list items |
-| `EncodedAbsUrl` | `https://contoso.sharepoint.com/sites/Finance/Shared%20Documents/Reports/Quarterly%20Report%20Q4.docx` | **Use for external links/sharing**; full absolute URL |
-| `BaseName`      | `Quarterly Report Q4`                                                                                  | Filename without extension                         |
-| `ID`            | `42`                                                                                                   | List-scoped integer; resets per list               |
-| `GUID`          | `{8a7b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d}`                                                               | List item ID; changes on copy                      |
-| `UniqueId`      | `f1e2d3c4-b5a6-9788-7c6d-5e4f3a2b1c0d`                                                                 | Document ID; persists across moves in site collection |

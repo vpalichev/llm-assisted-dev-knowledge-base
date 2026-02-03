@@ -1,3 +1,40 @@
+```
+For clojure MCP:
+bb nrepl-server 1667
+claude
+/mcp
+
+
+Update `.mcp.json` in current folder to use it:
+{
+
+  "mcpServers": {
+    "clojure-mcp": {
+      "command": "cmd",
+      "args": ["/c", "clojure", "-X:mcp-bb"]
+    }
+  }
+}
+
+
+
+Add to `%USERPROFILE%\.clojure\deps.edn`:
+
+{:aliases
+ {
+  :mcp-bb {:deps {org.slf4j/slf4j-nop {:mvn/version "2.0.16"}
+                  com.bhauman/clojure-mcp {:git/url "https://github.com/bhauman/clojure-mcp.git"
+                                           :git/tag "v0.1.12"
+                                           :git/sha "79b9d5a"}}
+           :exec-fn clojure-mcp.main/start-mcp-server
+           :exec-args {:port 1667 :nrepl-env-type :bb}}}}
+```
+
+
+
+bb.edn is required in folder also with this for utils to load:
+{:paths ["C:/Users/v.palichev/.babashka/src"]}
+
 # EXECUTION MODES
 ```powershell
 # EXECUTION MODES
@@ -176,3 +213,7 @@ bb --time script.clj             # Show execution time
 bb script.clj
 echo $LASTEXITCODE              # Check exit code (0 = success)
 ```
+
+
+
+

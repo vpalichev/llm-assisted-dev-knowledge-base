@@ -33,3 +33,10 @@ Modify keybindings through File → Preferences → Keyboard Shortcuts or edit `
 ```
 
 This configuration remaps fold/unfold to `Ctrl+Alt+[` and `Ctrl+Alt+]` if preferred.
+
+
+
+**Move Editor Group:**
+
+- `Ctrl+K ←` — left
+- `Ctrl+K →` — right
