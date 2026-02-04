@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
+                "file": "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PnP PowerShell Core Cmdlets Reference"
+              "title": "Best way to test Clojure MCP light on backend and frontend (run in each session maybe)"
             }
           }
         ],
@@ -200,32 +200,33 @@
   },
   "active": "39806e5ade850d72",
   "lastOpenFiles": [
-    "Sharepoint PnP/PowerShell PnP Object Model - File Library Processing Reference.md",
+    "text_4.txt",
+    "Tooling/MCP/TODO - add good Claude.md with.md",
+    "Tooling/MCP/Post-Installation Fixes for clojure-mcp-light on Windows.md",
+    "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
+    "Tooling/MCP/Clojure-MCP Quick Setup (grok).md",
+    "Tooling/MCP/Dual Backend Frontend Setup (Corrected).md",
+    "Tooling/MCP/Good example Claude.md for MCP light.md",
+    "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md",
+    "Tooling/MCP/MCP-light setup.md",
+    "Windows related/Diagnostic Algorithm - Excel Hang with GTB DLP + SharePoint AutoSave.md",
+    "Untitled.md",
+    "Windows related",
+    "Reporting general design ideas/Dialogue from mcp.md",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
+    "Sharepoint PnP/PowerShell PnP Object Model - File Library Processing Reference.md",
     "Sharepoint PnP/Practicalities.md",
     "Sharepoint PnP/SharePoint Timezone Management with PnP PowerShell.md",
     "Sharepoint PnP/Deep into woods/UniqueId Behavior on Replacement.md",
     "Sharepoint PnP/Deep into woods/SharePoint Online special character handling.md",
     "Sharepoint PnP/Deep into woods/Encountered errors.md",
     "Sharepoint PnP/Cmdlets Reference/REST API - Invoke-PnPSPRestMethod Comprehensive Reference Guide.md",
-    "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
-    "Tooling/MCP/Clojure-MCP Quick Setup (grok).md",
-    "Tooling/MCP/MCP-light setup.md",
-    "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md",
-    "Tooling/MCP/Good example Claude.md for MCP light.md",
-    "Tooling/MCP/Post-Installation Fixes for clojure-mcp-light on Windows.md",
     "Tooling/IDEs/VS Code/Useful shortcuts.md",
     "Keyboard shortcuts and useful commands at top.md",
     "Tooling/IDEs/VS Code/Inserting windows paths into Clojure and Java code (this does not work, to be fixed).md",
     "Tooling/IDEs/VS Code/File Navigation in VS Code.md",
     "Tooling/IDEs/VS Code/Main VS Code Reference (with focus on Clojure ClojureScript PowerShell on Windows).md",
     "Tooling/babashka/bb reference.md",
-    "Databases/Datomic/Datomic for Clojure Developers - A Practical Guide.md",
-    "Databases/Datomic/Datomic Pro on Windows - A Practical Guide.md",
-    "Databases/Datomic/Datomic Pro concrete instructions.md",
-    "Databases/Datomic/Datomic Pro Peer Integration Guide for Windows.md",
-    "Databases/Datomic/Diagrams - How It Interacts with PostgreSQL.md",
-    "Databases/Datomic/Notes - connecting datomic.md",
     "Databases/Datomic/Datomic administrator-related info",
     "Tooling/babashka",
     "Sharepoint PnP/File mirror storage specification/Derived Files Specification for SharePoint Mirror.md.tmp.15092.1769099871474",
@@ -234,7 +235,6 @@
     "Untitled.base",
     "Important! Around Windows paths issues",
     "Sharepoint PnP/Tracking library changes!!!",
-    "Sharepoint PnP/Cmdlets Reference",
-    "Sharepoint PnP/File mirror storage specification"
+    "Sharepoint PnP/Cmdlets Reference"
   ]
 }
