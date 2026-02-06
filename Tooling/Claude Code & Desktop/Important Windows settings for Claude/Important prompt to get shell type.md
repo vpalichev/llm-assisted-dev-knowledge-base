@@ -1,0 +1,1 @@
+``What shell are you using? Run `echo $SHELL` or `echo %COMSPEC%` or command that you deem necessary and show me the result.``

@@ -1,0 +1,23 @@
+Bash(clj-nrepl-eval -p 9000 "(shadow.cljs.devtools.api/cljs-eval :app \"(api/transact! [{:schedule/name \\\"REPL Test\\\" :schedule/every :week :schedule/on-day 1 :s…)                                                                                    
+  ⎿  ;; shadow-cljs repl is NOT in CLJS mode                                                                                                                                                                                                                 
+     ;; use (shadow/active-builds) to list builds available                                                                                                                                                                                                  
+     ;; use (shadow/repl <build-id>) to jack into a CLJS repl
+     … +2 lines (ctrl+o to expand)                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                             
+● Bash(clj-nrepl-eval -p 9000 "(shadow.cljs.devtools.api/cljs-eval :app \"(api/transact! [{:schedule/name \\\"test123\\\"}] #(js/console.log \\\"OK\\\" %) #(js/console…)                                                                                    
+  ⎿  ;; shadow-cljs repl is NOT in CLJS mode                                                                                                                                                                                                                 
+     ;; use (shadow/active-builds) to list builds available                                                                                                                                                                                                  
+     ;; use (shadow/repl <build-id>) to jack into a CLJS repl
+     … +2 lines (ctrl+o to expand)                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                             
+● Bash(clj-nrepl-eval -p 9000 "(shadow.cljs.devtools.api/cljs-eval :app \"(sched/fetch-schedules!)\" {})")
+  ⎿  ;; shadow-cljs repl is NOT in CLJS mode                                                                                                                                                                                                                 
+     ;; use (shadow/active-builds) to list builds available                                                                                                                                                                                                  
+     ;; use (shadow/repl <build-id>) to jack into a CLJS repl
+     … +2 lines (ctrl+o to expand)                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                             
+● Bash(clj-nrepl-eval -p 9000 "(shadow.cljs.devtools.api/cljs-eval :app \"reporting-planner.config/API-BASE-URL\" {})")                                                                                                                                      
+  ⎿  ;; shadow-cljs repl is NOT in CLJS mode                                                                                                                                                                                                                 
+     ;; use (shadow/active-builds) to list builds available                                                                                                                                                                                                  
+     ;; use (shadow/repl <build-id>) to jack into a CLJS repl
+     … +2 lines (ctrl+o to expand)                                                 
