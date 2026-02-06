@@ -1,7 +1,10 @@
 ## Environment — MANDATORY RULES
 
 This is Windows 10/11 with Git Bash (MSYS2) and PowerShell available.
-The VS Code terminal is set to Git Bash.
+The VS Code terminal is set to Git Bash (to my knowledge, don't fail to recheck that).
+
+## Clojure MCP Light notice
+- We frequently use a tool named Clojure MCP Light, it's usage is usually described in project's CLAUDE.md file, in case of Clojure(script) projects.
 
 ### Shell context
 - The active shell is Git Bash. Use bash syntax directly.
@@ -17,6 +20,18 @@ The VS Code terminal is set to Git Bash.
 - Do not reference `/tmp/`. Use `$TEMP` or `$TMP`.
 - Git Bash home is `/c/Users/<username>`, not `/home/<username>`.
 - Quote all paths containing spaces.
+
+### Pre-flight check — EVERY command
+- Bash paths (cd, cat, cp, rg, source, etc.): always forward slashes, /c/Users/... style
+- PowerShell invoked via `powershell -Command "..."`: Windows backslash paths INSIDE the quotes are correct
+- Native .exe arguments: use backslashes OR prefix with MSYS_NO_PATHCONV=1 if forward-slash args get mangled
+- Clojure MCP tool calls: paths need either escaped backslashes (C:\\Users\\...) or forward slashes (C:/Users/...). Single backslashes WILL be eaten as escape characters.
+- If unsure, use `cygpath -w` or `cygpath -u` to convert explicitly.
+
+### Clojure MCP path gotcha
+❌ C:\Users\me\project\src\core.clj     → backslashes eaten, path mangled
+✅ C:\\Users\\me\\project\\src\\core.clj → escaped, works
+✅ C:/Users/me/project/src/core.clj      → forward slashes, works
 
 ### Search operations — use ripgrep (`rg`), not `grep`
 `rg` is a native Windows binary. No MSYS2 path translation issues, no codepage

@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Claude.md for Windows and rg.md",
+                "file": "Tooling/MCP/Must be fixed - Frontend error/Or must it..md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Claude.md for Windows and rg"
+              "title": "Or must it."
             }
           }
         ],
@@ -214,16 +214,20 @@
   },
   "active": "6aab8928ba43860b",
   "lastOpenFiles": [
-    "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Important prompt to get shell type.md",
-    "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Claude.md for Windows and rg.md",
-    "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Quoting prompt.md",
+    "Tooling/MCP/Claude md for individual Clojure(Script) projects.md",
+    "Tooling/MCP/Must be fixed - Frontend error/Or must it..md",
+    "Tooling/MCP/Must be fixed - Frontend error/shadow-cljs repl is NOT in CLJS mode.md",
+    "Tooling/Claude Code & Desktop/Important Windows settings for Claude/CLAUDE.md for Windows and rg.md",
+    "Tooling/Claude Code & Desktop/Claude User settings.md",
+    "Tooling/Claude Code & Desktop/Anthropic Claude Product Taxonomy.md",
     "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Why more quoting rules won't work answer to quoting prompt.md",
     "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Windows preference (old).md",
+    "Untitled.base",
+    "Untitled.canvas",
+    "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Important prompt to get shell type.md",
+    "Tooling/Claude Code & Desktop/Important Windows settings for Claude/Quoting prompt.md",
     "Tooling/Claude Code & Desktop/Important Windows settings for Claude/How Git Bash actually works on Windows.md",
-    "Tooling/Claude Code & Desktop/Anthropic Claude Product Taxonomy.md",
-    "Tooling/Claude Code & Desktop/Claude User settings.md",
     "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
-    "Tooling/MCP/Must be fixed - Frontend error/shadow-cljs repl is NOT in CLJS mode.md",
     "Tooling/MCP/Must be fixed - Frontend error",
     "Tooling/MCP/TODO - add good Claude.md with.md",
     "Databases/Datomic/Datomic's data model for developers coming from SQL.md",
@@ -239,8 +243,6 @@
     "Tooling/MCP/Dual Backend Frontend Setup (Corrected).md",
     "Tooling/MCP/GitHub issue.md",
     "Tooling/MCP/Good example Claude.md for MCP light.md",
-    "Tooling/MCP/Guide to Using clojure-mcp with Cline in VS Code on Windows.md",
-    "Tooling/MCP/MCP-light setup.md",
     "text_4.txt",
     "Windows related",
     "Databases/Datomic/Datomic administrator-related info",
@@ -248,7 +250,6 @@
     "Sharepoint PnP/File mirror storage specification/Derived Files Specification for SharePoint Mirror.md.tmp.15092.1769099871474",
     "Sharepoint PnP/File mirror storage specification/Derived Files Specification for SharePoint Mirror.md.tmp.15092.1769099651132",
     "Sharepoint PnP/File mirror storage specification/Derived Files Specification for SharePoint Mirror.md.tmp.15092.1769099624272",
-    "Untitled.base",
     "Important! Around Windows paths issues"
   ]
 }
