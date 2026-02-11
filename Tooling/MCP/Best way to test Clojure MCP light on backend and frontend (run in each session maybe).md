@@ -1,9 +1,9 @@
 ### Given that:
 #### Local TCP Port Numbers:
 
-- BACKEND_REPL = 7888 (be careful, can be different)
-- FRONTEND_REPL = 9000 (be careful, can be different)
-- SHADOW_BUILD = :app (be careful, can be different)
+- BACKEND_REPL = 7888 (be careful, recheck in deps.edn)
+- FRONTEND_REPL = 9000 (be careful, recheck in shadow-cljs)
+- SHADOW_BUILD = :app (be careful, recheck in shadow-cljs)
 
 #### Task context:
 I are using Claude Code configured with hooks from Clojure MCP Light (be careful, it's "Light" version, not regular version) tooling for Clojure development. I need to verify that that Clojure MCP Light hooks are working correctly.
@@ -13,7 +13,7 @@ I are using Claude Code configured with hooks from Clojure MCP Light (be careful
 - clj-nrepl-eval CLI tool for REPL evaluation (ports defined in CLAUDE.md: <BACKEND_REPL>, <FRONTEND_REPL>)
 - clj-paren-repair-claude-hook --cljfmt runs on PreToolUse, PostToolUse (for Write/Edit), and SessionEnd
 
-**Important:** `clj-nrepl-eval` does NOT persist REPL session state between calls. For ClojureScript, use `shadow.cljs.devtools.api/cljs-eval` directly instead of `(shadow/repl :app)`.
+**Important:** `clj-nrepl-eval` does NOT persist REPL session state between calls. For ClojureScript, use `shadow.cljs.devtools.api/cljs-eval` directly instead of `(shadow/repl <SHADOW_BUILD>)`.
 
 In order to test browser connectivity, user has to open the app in a browser (http://localhost:80 - be careful, can be different) and keep that tab open for the CLJS REPL to connect, so first of all ask him user if he launched the app in browser 
 
@@ -29,4 +29,4 @@ In order to test browser connectivity, user has to open the app in a browser (ht
   The `--cljfmt` option requires project context (deps.edn or project.clj in parent directories) to run formatting.
   This is a conservative design choice in the tool, not a technical requirement of cljfmt rules.
 
-Let me know what works and what doesn't.
+Let me know what works and what doesn't. Use green / red emojis in final result  for visibility.
