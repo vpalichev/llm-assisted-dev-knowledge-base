@@ -1,9 +1,9 @@
 ### Given that:
 #### Local TCP Port Numbers:
 
-- BACKEND_REPL = 7888 (be careful, recheck in deps.edn)
-- FRONTEND_REPL = 9000 (be careful, recheck in shadow-cljs)
-- SHADOW_BUILD = :app (be careful, recheck in shadow-cljs)
+- BACKEND_REPL = 7888 (be careful, could be different,  recheck in deps.edn)
+- FRONTEND_REPL = 9000 (be careful, could be different,  recheck in shadow-cljs)
+- SHADOW_BUILD = :app (be careful, could be different,  recheck in shadow-cljs)
 
 #### Task context:
 I are using Claude Code configured with hooks from Clojure MCP Light (be careful, it's "Light" version, not regular version) tooling for Clojure development. I need to verify that that Clojure MCP Light hooks are working correctly.
@@ -17,6 +17,7 @@ I are using Claude Code configured with hooks from Clojure MCP Light (be careful
 
 In order to test browser connectivity, user has to open the app in a browser (http://localhost:80 - be careful, can be different) and keep that tab open for the CLJS REPL to connect, so first of all ask him user if he launched the app in browser 
 
+If frontend is not available, check backend only
 #### Please help me verify:
 
 1. **Backend REPL:** `clj-nrepl-eval -p <BACKEND_REPL> "(+ 1 2 3)"` → should return 6
