@@ -31,3 +31,37 @@ If frontend is not available, check backend only
   This is a conservative design choice in the tool, not a technical requirement of cljfmt rules.
 
 Let me know what works and what doesn't. Use green / red emojis in final result  for visibility.
+
+
+### LLM Pre-flight Check
+
+**Context:** On Windows with Git Bash (MINGW64), Clojure expressions containing Unix-style path strings get silently corrupted when passed as command-line arguments to `clj-nrepl-eval`. For example, `"/api/health"` becomes `"C:/Program Files/Git/api/health"`, causing cryptic Java exceptions at runtime. The fix is a pair of bash wrapper functions in `~/.bashrc` that suppress this conversion. Without the fix active, `clj-nrepl-eval` calls with path strings will fail.
+
+Before calling `clj-nrepl-eval` from Git Bash, please make sure that:
+
+- `~/.bashrc` exists and contains the wrapper functions for `clj-nrepl-eval` and `clj-paren-repair` (see Fix section above)
+
+- `~/.bash_profile` exists and sources `~/.bashrc`
+
+- The current shell has the wrappers active — verify with `type clj-nrepl-eval`, which should say `clj-nrepl-eval is a function`, not `clj-nrepl-eval is /c/Users/...`
+
+- If the wrappers are not active, run `source ~/.bashrc` before proceeding
+
+- If the error `NumberFormatException "8900C:"` (or similar with a drive letter) appears, the wrapper is not active
+
+  Sanity check — confirm the wrapper is active and protects clj-nrepl-eval:
+
+  #### Step 1: wrapper must be a shell function, not a binary path
+  type clj-nrepl-eval
+  #### Expected: clj-nrepl-eval is a function
+  #### Bad:      clj-nrepl-eval is /c/Users/...
+
+  If it shows a binary path, run source ~/.bashrc and re-check before proceeding.
+
+  #### Step 2: clj-nrepl-eval must not mangle Unix-style path strings
+  #### (requires nREPL running on <BACKEND_REPL>)      
+  clj-nrepl-eval -p <BACKEND_REPL> '(str "/foo/bar")'
+  #### Expected: => "/foo/bar"
+  #### Bad:      => "C:/Program Files/Git/foo/bar"  (wrapper not active)
+
+  Note: running bb -e '...' -- '(ns/fn "/foo/bar")' will show path mangling even on a correctly configured machine — that's expected. Only clj-nrepl-eval itself needs to be protected.
