@@ -1,8 +1,8 @@
 ### Given that:
 #### Local TCP Port Numbers:
 
-- BACKEND_REPL = 7888 (be careful, could be different,  recheck in deps.edn)
-- FRONTEND_REPL = 9000 (be careful, could be different,  recheck in shadow-cljs)
+- BACKEND_REPL = NNNN (recheck in deps.edn)
+- FRONTEND_REPL = NNNN (recheck in shadow-cljs)
 - SHADOW_BUILD = :app (be careful, could be different,  recheck in shadow-cljs)
 
 #### Task context:

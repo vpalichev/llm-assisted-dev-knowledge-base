@@ -1,22 +1,22 @@
 ---
-
 tags:
-
-- babashka
-- clj-nrepl-eval
-- windows
-- preflight
-- harness
-- sharepoint created: 2026-02-20
-
+  - babashka
+  - clj-nrepl-eval
+  - windows
+  - preflight
+  - harness
+  - sharepoint
+created: 2026-02-20
+updated: 2026-03-12
 ---
+
 # Harness Preflight Check
 
-> [!abstract] You are starting a session with the `sharepoint-pnp-pode-v01` project. Read this in full before doing anything.
+> [!abstract] You are starting a session with the `sharepoint-pnp-pode-v02` project. Read this in full before doing anything.
 
 ## What this project is
 
-A Clojure test harness (`src/harness/`) for a PowerShell Pode HTTP server (`pode/`) with SharePoint PnP integration. The harness connects to the server via nREPL on port 8950. All interactive testing goes through `clj-nrepl-eval`.
+A Clojure test harness (`src/harness/`) for a PowerShell Pode HTTP server (`pode/`) with SharePoint PnP integration. The harness connects to the server via nREPL. The port is defined in `config/main-config.edn` under `:backend-nrepl-port`. All interactive testing goes through `clj-nrepl-eval`.
 
 ---
 
@@ -30,15 +30,16 @@ A Clojure test harness (`src/harness/`) for a PowerShell Pode HTTP server (`pode
 
 ```bash
 # WRONG — calls ps, not ps!
-clj-nrepl-eval -p 8950 '(harness.shell/ps! "Get-Date")'
+clj-nrepl-eval -p $PORT '(harness.shell/ps! "Get-Date")'
 
 # CORRECT
-clj-nrepl-eval -p 8950 '(harness.shell/ps'\!' "Get-Date")'
+clj-nrepl-eval -p $PORT '(harness.shell/ps'\!' "Get-Date")'
 ```
 
 Applies to every symbol ending in `!`: `start!`, `stop!`, `ps!`, etc.
 
-> [!tip] How to tell if you called the wrong one `ps` returns a string, `ps!` returns a map `{:exit :out :err}`. If you expected a map and got a string (or `""`), the `!` was dropped.
+> [!tip] How to tell if you called the wrong one
+> `ps` returns a string, `ps!` returns a map `{:exit :out :err}`. If you expected a map and got a string (or `""`), the `!` was dropped.
 
 ### Problem 2 — MSYS2 converts string literals starting with `/` to Windows paths
 
@@ -49,11 +50,11 @@ The trigger: a namespace-qualified symbol like `harness.http/get-json` contains 
 **Rule**: Never use string literals starting with `/` in `clj-nrepl-eval` calls. Build the leading slash at runtime:
 
 ```bash
-# WRONG — /api/health gets converted to C:/Program Files/Git/api/health
-clj-nrepl-eval -p 8950 '(harness.http/get-json "/api/health")'
+# WRONG — /api/system/health gets converted to C:/Program Files/Git/api/system/health
+clj-nrepl-eval -p $PORT '(harness.http/get-json "/api/system/health")'
 
 # CORRECT — slash produced at runtime, invisible to MSYS2
-clj-nrepl-eval -p 8950 '(harness.http/get-json (str (char 47) "api/health"))'
+clj-nrepl-eval -p $PORT '(harness.http/get-json (str (char 47) "api/system/health"))'
 ```
 
 > [!note] This does not affect Calva. Only `clj-nrepl-eval` from Git Bash. See [[MSYS2 Path Conversion]] for full analysis.
@@ -74,10 +75,10 @@ When a bash command is issued through a JSON transport (such as an AI coding too
 
 ```bash
 # WRONG — \" becomes bare " after JSON decode, breaks bash quoting
-clj-nrepl-eval -p 8950 '(harness.shell/ps'\!' "Write-Output \"hello\"")'
+clj-nrepl-eval -p $PORT '(harness.shell/ps'\!' "Write-Output \"hello\"")'
 
 # CORRECT — quote character produced at runtime, invisible to JSON
-clj-nrepl-eval -p 8950 '(harness.shell/ps'\!' (str "Write-Output " (char 39) "hello" (char 39)))'
+clj-nrepl-eval -p $PORT '(harness.shell/ps'\!' (str "Write-Output " (char 39) "hello" (char 39)))'
 ```
 
 > [!note] This only affects commands issued via JSON-based tools (e.g. AI assistants). Commands typed directly in a terminal are unaffected — `\"` works fine there.
@@ -87,6 +88,8 @@ clj-nrepl-eval -p 8950 '(harness.shell/ps'\!' (str "Write-Output " (char 39) "he
 ## Preflight sequence
 
 Run these checks in order. Each must pass before proceeding.
+
+First, read the nREPL port from `config/main-config.edn` (key `:backend-nrepl-port`) and substitute it for `$PORT` below.
 
 ### Step 0 — Wrapper active
 
@@ -101,15 +104,15 @@ type clj-nrepl-eval
 ### Step 1 — nREPL reachable
 
 ```bash
-clj-nrepl-eval -p 8950 '(+ 1 2)'
+clj-nrepl-eval -p $PORT '(+ 1 2)'
 # Expected: => 3
 ```
 
 ### Step 2 — `!` splice works
 
 ```bash
-clj-nrepl-eval -p 8950 '(require (quote harness.shell) :reload)'
-clj-nrepl-eval -p 8950 '(str (var harness.shell/ps'\!'))'
+clj-nrepl-eval -p $PORT '(require (quote harness.shell) :reload)'
+clj-nrepl-eval -p $PORT '(str (var harness.shell/ps'\!'))'
 # Expected: => "#'harness.shell/ps!"
 ```
 
@@ -118,41 +121,40 @@ clj-nrepl-eval -p 8950 '(str (var harness.shell/ps'\!'))'
 ### Step 3 — Path mangling is avoided
 
 ```bash
-clj-nrepl-eval -p 8950 '(require (quote harness.http) :reload)'
-clj-nrepl-eval -p 8950 '(harness.http/get-json (str (char 47) "api/health"))'
+clj-nrepl-eval -p $PORT '(require (quote harness.http) :reload)'
+clj-nrepl-eval -p $PORT '(harness.http/get-json (str (char 47) "api/system/health"))'
 # Expected: => {:status "ok"}
 ```
 
 > [!warning] If you see `NumberFormatException` or `"8900C:"` — either the wrapper is not active (check Step 0) or you used a literal `/` string.
 
-### Step 4 — Unicode through HTTP (Cyrillic round-trip)
+> [!note] If the Pode server isn't running yet, this will return `Connection refused`. Start it first:
+>
+> ```bash
+> clj-nrepl-eval -p $PORT '(require (quote harness.server) :reload)'
+> clj-nrepl-eval -p $PORT '(harness.server/start'\!')'
+> # wait ~5s for server to bind, then retry
+> ```
+
+### Step 4 — Unicode through shell (full Unicode)
 
 ```bash
-clj-nrepl-eval -p 8950 '(map int (:text (harness.http/get-json (str (char 47) "api/sharepoint/encoding-test"))))'
-# Expected: => (1055 1088 1080 1074 1077 1090)
-```
-
-> [!note] `*1` does not persist between `clj-nrepl-eval` invocations — always combine the fetch and the codepoint check into a single call.
-
-### Step 5 — Unicode through shell (full Unicode)
-
-```bash
-clj-nrepl-eval -p 8950 '(require (quote harness.shell) :reload)'
-clj-nrepl-eval -p 8950 '(harness.shell/ps'\!' (str "Write-Output " (char 39) "\u3053\u3093\u306b\u3061\u306f \ud83d\ude0a" (char 39)))'
+clj-nrepl-eval -p $PORT '(require (quote harness.shell) :reload)'
+clj-nrepl-eval -p $PORT '(harness.shell/ps'\!' (str "Write-Output " (char 39) "\u3053\u3093\u306b\u3061\u306f \ud83d\ude0a" (char 39)))'
 # Expected: => {:exit 0, :out "こんにちは 😊\r\n", :err ""}
 ```
 
 > [!danger] If you see question marks — the UTF-8 prefix was not applied.
 
-### Step 6 — SharePoint Cyrillic via shell
+### Step 5 — SharePoint Cyrillic via shell
 
 ```bash
-clj-nrepl-eval -p 8950 '(let [r (harness.shell/ps'\!' "Import-Module PnP.CustomUtilities -ErrorAction Stop; $conn = Connect-SharePointWithConfig -ConfigPath D:/projects/sharepoint-pnp-pode-v01/config/sharepoint-config.json -SecretsPath D:/projects/sharepoint-pnp-pode-v01/config/sharepoint-secrets.json -CertificatePath D:/projects/sharepoint-pnp-pode-v01/config/certs/SillenoProjectControl.pfx -ReturnConnection; Get-PnPList -Connection $conn | Select-Object -ExpandProperty Title") titles (clojure.string/split-lines (:out r)) cyrillic (filter #(some (fn [c] (< 0x0400 (int c) 0x04FF)) %) titles)] (take 3 cyrillic))'
+clj-nrepl-eval -p $PORT '(let [r (harness.shell/ps'\!' "Import-Module PnP.CustomUtilities -ErrorAction Stop; $conn = Connect-SharePointWithConfig -ConfigPath D:/projects/sharepoint-pnp-pode-v02/config/sharepoint-config.json -SecretsPath D:/projects/sharepoint-pnp-pode-v02/config/sharepoint-secrets.json -CertificatePath D:/projects/sharepoint-pnp-pode-v02/config/certs/SillenoProjectControl.pfx -ReturnConnection; Get-PnPList -Connection $conn | Select-Object -ExpandProperty Title") titles (clojure.string/split-lines (:out r)) cyrillic (filter #(some (fn [c] (< 0x0400 (int c) 0x04FF)) %) titles)] (take 3 cyrillic))'
 # Expected: => ("Активы сайта" "Библиотека ..." "...")
 ```
 
-> [!danger] If Cyrillic appears as `???` — the UTF-8 `OutputEncoding` prefix is missing from `harness.shell`. See [[Fix - clj-nrepl-eval Cyrillic output on Windows]].
+> [!danger] If Cyrillic appears as `???` — the UTF-8 OutputEncoding prefix is missing from `harness.shell`. See [[Fix - clj-nrepl-eval Cyrillic output on Windows]].
 
 ---
 
-> [!success] All six pass. Harness is warm and all known edge cases are covered.
+> [!success] All five pass. Harness is warm and all known edge cases are covered.
