@@ -84,7 +84,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -96,7 +96,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "version",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -229,8 +229,10 @@
   "active": "5ba8213a02499166",
   "lastOpenFiles": [
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/!!! Harness Preflight Check.md",
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/Fix - clj-nrepl-eval outputs quesion for Cyrillic on Windows.md",
     "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
+    "Index.md",
+    "Web-related/Re-frame and Reagent and React/Reagent Hiccup Pitfalls — Laziness Meets React.md",
+    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/Fix - clj-nrepl-eval outputs quesion for Cyrillic on Windows.md",
     "Sharepoint PnP/PowerShell PnP Object Model - File Library Processing Reference.md",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem FieldValues.md",
@@ -254,8 +256,6 @@
     "Tooling/MCP/MCP-light setup.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)",
     "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
-    "Sharepoint PnP/Practicalities.md",
-    "Sharepoint PnP/SharePoint Timezone Management with PnP PowerShell.md",
     "Programming languages/ClojureScript",
     "Programming languages/Clojure",
     "Web-related/UI-UX",

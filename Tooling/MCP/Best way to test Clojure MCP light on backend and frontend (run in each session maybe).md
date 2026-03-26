@@ -25,6 +25,7 @@ If frontend is not available, check backend only
 3. **Frontend eval:** `clj-nrepl-eval -p <FRONTEND_REPL> "(shadow.cljs.devtools.api/cljs-eval <SHADOW_BUILD> \"(.-title js/document)\" {})"` → should return page title
 4. **Paren repair:** Create Clojure file with correct indentation but missing paren -> should auto-fix (Paren repair uses indentation to infer where missing parens belong)
 5. **Formatting hook:** Create separate Clojure file with bad indentation (balanced parens) -> should auto-format
+6. Also, an afterthought: sometimes user opens several browsers with page and forget which one to work on, write how many instances are open with something like (count (shadow.cljs.devtools.api/repl-runtimes :app))
 
   **Note:** Tests 4 and 5 must use files inside the project directory (e.g., `src/`), not temp directories.
   The `--cljfmt` option requires project context (deps.edn or project.clj in parent directories) to run formatting.
@@ -32,6 +33,27 @@ If frontend is not available, check backend only
 
 Let me know what works and what doesn't. Use green / red emojis in final result  for visibility.
 
+
+### Optional: Single-JVM setup (`:dev` alias)
+
+Some projects combine nREPL + backend server + test deps into one JVM process. This avoids the two-process split where the nREPL and backend have separate atoms, connections, and state.
+
+**How it works:** A `:dev` alias in `deps.edn` starts nREPL as usual, but also includes a `dev/user.clj` that auto-boots the backend (Datomic, Jetty, etc.) on REPL startup. Test deps (Etaoin, ring-mock) are also on the classpath.
+
+```
+clj -M:dev
+```
+
+**Benefits:**
+- Backend state (atoms, DB connections, request traces) is directly accessible from the REPL — no need for HTTP workarounds
+- One process to start/stop instead of two
+- `(user/restart!)` to reboot the backend without leaving the REPL
+
+**When to use it:** If your project has a `:dev` alias set up this way, you can use it instead of running `clj -M:run` + `clj -M:nrepl` separately. The MCP verification steps below work the same either way — the nREPL port doesn't change.
+
+**When NOT to use it:** If the project intentionally separates backend and REPL (e.g., different JVM flags, memory isolation), stick with the separate-process setup.
+
+---
 
 ### LLM Pre-flight Check
 
