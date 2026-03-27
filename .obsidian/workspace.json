@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
-                "mode": "preview",
+                "file": "Tooling/MCP/Warn-up for nrepl-bridge.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Best way to test Clojure MCP light on backend and frontend (run in each session maybe)"
+              "title": "Warn-up for nrepl-bridge"
             }
           }
         ],
@@ -228,8 +228,9 @@
   },
   "active": "5ba8213a02499166",
   "lastOpenFiles": [
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/!!! Harness Preflight Check.md",
     "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
+    "Tooling/MCP/Warn-up for nrepl-bridge.md",
+    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/!!! Harness Preflight Check.md",
     "Index.md",
     "Web-related/Re-frame and Reagent and React/Reagent Hiccup Pitfalls — Laziness Meets React.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/Fix - clj-nrepl-eval outputs quesion for Cyrillic on Windows.md",
@@ -255,7 +256,6 @@
     "Tooling/MCP/MCP Harness",
     "Tooling/MCP/MCP-light setup.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)",
-    "Sharepoint PnP/PnP PowerShell Core Cmdlets Reference.md",
     "Programming languages/ClojureScript",
     "Programming languages/Clojure",
     "Web-related/UI-UX",
