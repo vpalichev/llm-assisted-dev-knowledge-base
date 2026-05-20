@@ -55,16 +55,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tooling/MCP/Warn-up for nrepl-bridge.md",
+                "file": "Web-related/Re-frame and Reagent and React/Reagent Hiccup Pitfalls — Laziness Meets React.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Reagent Hiccup Pitfalls — Laziness Meets React"
+            }
+          },
+          {
+            "id": "5a6383e75deca177",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Hazard Shape Pattern.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Warn-up for nrepl-bridge"
+              "title": "Hazard Shape Pattern"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -226,9 +240,26 @@
       "bases:Create new base": false
     }
   },
-  "active": "5ba8213a02499166",
+  "active": "5a6383e75deca177",
   "lastOpenFiles": [
+    "VBA single didth.md",
+    "Hazard Shape Pattern.md",
+    "Important! Around Windows paths issues/Read carefully.md",
+    "LLM-related experience/todo -- put somewhere else.md",
+    "LLM-related experience/todo -- for future nrepl-bridge rewrite.md",
+    "LLM-related experience/Debugging.md",
     "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
+    "Tooling/MCP/(important) Post-Installation Fixes for clojure-mcp-light on Windows.md",
+    "Web-related/Browser Automation/Selecting a Stealth Toolchain Decision Framework.md",
+    "Web-related/Browser Automation/Browser Automation Glossary.md",
+    "Web-related/Browser Automation",
+    "Index.md.tmp.63552.1777379164777",
+    "Untitled.canvas",
+    "Dictionary of terms -- move to better place.md",
+    "LLM-related experience",
+    "Web-related/Re-frame and Reagent and React/re-frame — Function Overview.md",
+    "Web-related/Re-frame and Reagent and React/Re-frame.md",
+    "Web-related/Re-frame and Reagent and React/Manual (almost) Reagent + React 18 Setup Guide.md",
     "Tooling/MCP/Warn-up for nrepl-bridge.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/!!! Harness Preflight Check.md",
     "Index.md",
@@ -238,32 +269,15 @@
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
     "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem FieldValues.md",
     "Sharepoint PnP/(important!) How Excel bumps version.md",
-    "Tooling/MCP/(important) Post-Installation Fixes for clojure-mcp-light on Windows.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/bashrc file from Git Bash modified for Windows (MSYS2).md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/Fixed clj-nrepl-eval script file itself.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/MINGW64 Path Conversion Rules - What Triggers It.md",
-    "Sharepoint PnP/(important!) SharePoint Online File Change Tracking — `Modified` vs `_UIVersionString`.md",
-    "Sharepoint PnP/Main download script from Opus - as of 2026-01-16.md",
-    "Sharepoint PnP/Get file versions without round-tripping.md",
-    "Web-related/Re-frame and Reagent and React/re-frame — Function Overview.md",
-    "Web-related/Re-frame and Reagent and React/Re-frame.md",
-    "Web-related/Re-frame and Reagent and React/Manual (almost) Reagent + React 18 Setup Guide.md",
-    "Tooling/MCP/Must be fixed - Frontend error/Or must it..md",
-    "Tooling/MCP/Must be fixed - Frontend error/shadow-cljs repl is NOT in CLJS mode.md",
-    "Tooling/MCP/MCP Harness/MCP to Powershell harness.md",
-    "Tooling/MCP/MCP Harness/Using ! in symbol names with clj-nrepl-eval.md",
-    "Tooling/MCP/Untitled.md",
     "Tooling/MCP/MCP Harness",
-    "Tooling/MCP/MCP-light setup.md",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)",
     "Programming languages/ClojureScript",
     "Programming languages/Clojure",
     "Web-related/UI-UX",
     "Untitled.base",
-    "Untitled.canvas",
-    "Tooling/MCP/Must be fixed - Frontend error",
-    "text_4.txt",
-    "Windows related",
-    "Databases/Datomic/Datomic administrator-related info"
+    "Tooling/MCP/Must be fixed - Frontend error"
   ]
 }
