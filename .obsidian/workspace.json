@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Hazard Shape Pattern.md",
+                "file": "Browser automation/You appear to be stuck on the current task.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Hazard Shape Pattern"
+              "title": "You appear to be stuck on the current task"
             }
           }
         ],
@@ -110,7 +110,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "sql",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -242,42 +242,42 @@
   },
   "active": "5a6383e75deca177",
   "lastOpenFiles": [
-    "VBA single didth.md",
+    "Browser automation/# FSX Script (.fsx) as PowerShell Replacement LLM Reference.md",
+    "Browser automation/Camoufox feasibility.md",
+    "Browser automation/You appear to be stuck on the current task.md",
+    "Reporting general design ideas/Dialogue from mcp.md",
+    "Browser automation",
+    "Databases/Understanding SQL syntax silent struggles from the ground up.md",
+    "Databases/Datomic/_ From real project - Datomic PostgreSQL Connection Guide.md",
+    "Encoding issues.md",
+    "Index.md",
+    "Untitled",
+    "Untitled.canvas",
+    "Untitled.base",
+    "Databases/MS SQL/Clone database with timestamp.md",
+    "LLM-related experience/Some prompt findings.md",
+    "Databases/MS SQL",
+    "Programming languages/Remove this.md",
+    "LLM-related experience/Debugging.md",
     "Hazard Shape Pattern.md",
+    "VBA single didth.md",
     "Important! Around Windows paths issues/Read carefully.md",
     "LLM-related experience/todo -- put somewhere else.md",
     "LLM-related experience/todo -- for future nrepl-bridge rewrite.md",
-    "LLM-related experience/Debugging.md",
     "Tooling/MCP/Best way to test Clojure MCP light on backend and frontend (run in each session maybe).md",
     "Tooling/MCP/(important) Post-Installation Fixes for clojure-mcp-light on Windows.md",
     "Web-related/Browser Automation/Selecting a Stealth Toolchain Decision Framework.md",
     "Web-related/Browser Automation/Browser Automation Glossary.md",
     "Web-related/Browser Automation",
     "Index.md.tmp.63552.1777379164777",
-    "Untitled.canvas",
     "Dictionary of terms -- move to better place.md",
     "LLM-related experience",
     "Web-related/Re-frame and Reagent and React/re-frame — Function Overview.md",
     "Web-related/Re-frame and Reagent and React/Re-frame.md",
     "Web-related/Re-frame and Reagent and React/Manual (almost) Reagent + React 18 Setup Guide.md",
     "Tooling/MCP/Warn-up for nrepl-bridge.md",
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/!!! Harness Preflight Check.md",
-    "Index.md",
-    "Web-related/Re-frame and Reagent and React/Reagent Hiccup Pitfalls — Laziness Meets React.md",
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/Fix - clj-nrepl-eval outputs quesion for Cyrillic on Windows.md",
-    "Sharepoint PnP/PowerShell PnP Object Model - File Library Processing Reference.md",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem Identifier Comparison.md",
-    "Sharepoint PnP/Microsoft.SharePoint.Client.ListItem FieldValues.md",
-    "Sharepoint PnP/(important!) How Excel bumps version.md",
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/bashrc file from Git Bash modified for Windows (MSYS2).md",
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/Fixed clj-nrepl-eval script file itself.md",
-    "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)/MINGW64 Path Conversion Rules - What Triggers It.md",
     "Tooling/MCP/MCP Harness",
     "Tooling/MCP/Clojure MCP Light Modifications for Windows (important!)",
-    "Programming languages/ClojureScript",
-    "Programming languages/Clojure",
-    "Web-related/UI-UX",
-    "Untitled.base",
-    "Tooling/MCP/Must be fixed - Frontend error"
+    "Programming languages/ClojureScript"
   ]
 }
